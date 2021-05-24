@@ -13,7 +13,6 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: 14
-      - run: npm ci
       - run: npm run-script build
 
       - uses: wlixcc/SFTP-Deploy-Action@v1.0 
