@@ -12,18 +12,18 @@ export enum ButtonType {
     Default = 'default',
     Danger = 'danger',
     Link = 'link',
-    Disabled = 'disabled'
+    Disabled = 'disabled',
+    Secondary = 'secondary'
 }
-
-interface IButtonProps {
+export interface IButtonProps {
     className?: string,
     size?: ButtonSize,
     styleType?: ButtonType,
     disabled?: boolean,
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
-type NativeButtonProps = IButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
+export type NativeButtonProps = IButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
 const Button: React.FunctionComponent<NativeButtonProps> = (props) => {
     const { size, styleType, disabled, children, className, ...restProps } = props;
     const classes = classNames('btn', className, {

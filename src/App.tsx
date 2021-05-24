@@ -46,6 +46,13 @@ const App: React.FunctionComponent = () => {
         >
           test
         </Button>
+        <hr />
+        <Button
+          styleType={ButtonType.Secondary}
+        >
+          Second
+        </Button>
+        <hr />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
 $primary:       $blue !default;
-$secondary:     $gray-600 !default;
+$secondary:     $teal !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
@@ -76,7 +76,7 @@ $h6-font-size:                $font-size-base !default;
 // 链接
 $link-color:                              $primary !default;
 $link-decoration:                         none !default;
-$link-hover-color:                        darken($link-color, 8%) !default;
+$link-hover-color:                        $secondary !default;
 $link-hover-decoration:                   underline !default;
 
 // body

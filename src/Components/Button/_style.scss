@@ -42,21 +42,57 @@
     @include button-style($white, $gray-400, $black, $white ,$primary, $primary);
 }
 
+.btn-secondary {
+    background: transparent;
+    box-shadow: none;
+    color: $secondary;
+    &:hover,
+    &.hover {
+        color: $secondary;
+        border: 1px solid $secondary;
+    }
+    &:focus,
+    &.focus {
+        border: 1px solid $secondary;
+    }
+}
+
 .btn-link {
     font-weight: $font-weight-normal;
-    color: $primary;
+    color: $secondary;
     text-decoration: $link-decoration;
     border: none;
     background: none;
     box-shadow: none;
     &:hover,
     &.hover {
-      color: $btn-link-hover-color;
-      text-decoration: $link-hover-decoration; 
+        &::after {
+            height: 2px;
+            width: calc(100% - #{$btn-padding-x-lg});
+            color: $btn-link-hover-color;
+            content: "";
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+            margin-top: 2rem;
+            bottom: 0.1em;
+            background: $secondary;
+        }
     }
     &:focus,
     &.focus {
       box-shadow: none;
+      &::after {
+        height: 2px;
+        width: calc(100% - #{$btn-padding-x-lg});
+        content: "";
+        position: absolute;
+        transform: translateX(-50%);
+        left: 50%;
+        margin-top: 2rem;
+        bottom: 0.1em;
+        background: $secondary;
+    }
     }
     &:disabled,
     &.disabled {
