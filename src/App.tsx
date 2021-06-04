@@ -21,35 +21,42 @@ const App: React.FunctionComponent = () => {
 
         <Menu defaultIndex={0}>
           <MenuItem index={0}>
-            <Button
-              size={ButtonSize.Large}
-              styleType={ButtonType.Primary}
-            >
-                123
-            </Button>
+            666
           </MenuItem>
           <MenuItem index={1}>
-            <Button
-              size={ButtonSize.Small}
-              disabled
-            >
-              123
-            </Button>
+            888
           </MenuItem>
         </Menu>
-        <Button
+          <Button
+            size={ButtonSize.Large}
+            styleType={ButtonType.Primary}
+            style={{ marginRight: '8px'}}
+          >
+              123
+          </Button>
+          <Button
+            size={ButtonSize.Small}
+            disabled
+            style={{ marginRight: '8px'}}
+          >
+            123
+          </Button>
+          <Button
             styleType={ButtonType.Danger}
             size={ButtonSize.Large}
+            style={{ marginRight: '8px'}}
           >
             test
           </Button>
           <Button
             onClick={() => alert('hello world')}
+            style={{ marginRight: '8px'}}
           >
             test
           </Button>
           <Button
             styleType={ButtonType.Secondary}
+            style={{ marginRight: '8px'}}
           >
             Second
           </Button>
