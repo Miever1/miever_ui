@@ -36,24 +36,23 @@ const App: React.FunctionComponent = () => {
               123
             </Button>
           </MenuItem>
-            
-            <Button
-              styleType={ButtonType.Danger}
-              size={ButtonSize.Large}
-            >
-              test
-            </Button>
-            <Button
-              onClick={() => alert('hello world')}
-            >
-              test
-            </Button>
-            <Button
-              styleType={ButtonType.Secondary}
-            >
-              Second
-            </Button>
         </Menu>
+        <Button
+            styleType={ButtonType.Danger}
+            size={ButtonSize.Large}
+          >
+            test
+          </Button>
+          <Button
+            onClick={() => alert('hello world')}
+          >
+            test
+          </Button>
+          <Button
+            styleType={ButtonType.Secondary}
+          >
+            Second
+          </Button>
       </div>
     </div>
   );
