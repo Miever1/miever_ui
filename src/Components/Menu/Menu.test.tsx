@@ -66,6 +66,7 @@ describe('test Menu and MenuItem components', () => {
         expect(menuElement).toHaveClass('menu menu-vertical');
     });
 
+    
     // to do
     // test('renders child component', () => {
     //     cleanup();
