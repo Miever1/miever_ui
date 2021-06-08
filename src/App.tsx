@@ -1,31 +1,30 @@
 import React from 'react';
 import Button, { ButtonSize, ButtonType } from './Components/Button/Button';
-import Menu from './Components/Menu/Menu';
-import MenuItem from './Components/Menu/MenuItem';
+import Menu from './Components/Menu';
 
 const App: React.FunctionComponent = () => {
   return (
     <div className="App">
       <div style={{ margin: '120px'}}>
         <Menu mode='vertical' onSelect={() => console.log(1)} defaultIndex={1}>
-          <MenuItem index={0}>
+          <Menu.Item index={0}>
             012
-          </MenuItem>
-          <MenuItem index={1}>
+          </Menu.Item>
+          <Menu.Item index={1}>
             123
-          </MenuItem>
-          <MenuItem index={2} disabled>
+          </Menu.Item>
+          <Menu.Item index={2} disabled>
             456
-          </MenuItem>
+          </Menu.Item>
         </Menu>
 
         <Menu defaultIndex={0}>
-          <MenuItem index={0}>
+          <Menu.Item index={0}>
             666
-          </MenuItem>
-          <MenuItem index={1}>
+          </Menu.Item>
+          <Menu.Item index={1}>
             888
-          </MenuItem>
+          </Menu.Item>
         </Menu>
           <Button
             size={ButtonSize.Large}
