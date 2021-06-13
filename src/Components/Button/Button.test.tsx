@@ -1,14 +1,20 @@
 import React from "react";
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+<<<<<<< HEAD
+import Button from './Button';
+import { NativeButtonProps } from './interface';
+
+=======
 import Button, { ButtonSize, ButtonType, NativeButtonProps } from './Button';
+>>>>>>> master
 const defaultProps = {
     onClick: jest.fn()
 }
 
 const testProps: NativeButtonProps = {
-    styleType: ButtonType.Primary,
-    size: ButtonSize.Large,
+    styleType: 'primary',
+    size: 'lg',
     className: 'class',
 }
 
@@ -37,7 +43,7 @@ describe(' test Button Components', () => {
     });
 
     test('should render a link when styleType equals link', () => {
-        const wrapper = render(<Button styleType={ButtonType.Link}>Link</Button>);
+        const wrapper = render(<Button styleType='link'>Link</Button>);
         const element = wrapper.getByText('Link');
         expect(element).toBeInTheDocument();
         expect(element.tagName).toEqual('BUTTON');
