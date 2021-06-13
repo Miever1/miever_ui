@@ -30,8 +30,5 @@ const MenuItem: React.FunctionComponent<IMenuItemProps> = ({
     );
 }
 
-<<<<<<< HEAD
 MenuItem.displayName = 'MenuItem'
-=======
->>>>>>> master
 export default MenuItem;
