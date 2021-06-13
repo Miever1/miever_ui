@@ -9,7 +9,9 @@ const MenuItem: React.FunctionComponent<IMenuItemProps> = ({
     const context = useContext(MenuContext);
     const { index: MenuIndex, onSelect } = context;
     const handleClick = () => {
-        !disabled && onSelect?.(index);
+        if (!disabled && onSelect && (typeof index === 'number')) {
+            onSelect(index);
+        }
     }
 
     const classes = classNames('menu-item', className, {
@@ -28,4 +30,5 @@ const MenuItem: React.FunctionComponent<IMenuItemProps> = ({
     );
 }
 
+MenuItem.displayName = 'MenuItem'
 export default MenuItem;

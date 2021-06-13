@@ -1,31 +1,20 @@
-import React from 'react';
+import React, { FunctionComponent, } from 'react';
 import classNames from 'classnames';
+import { NativeButtonProps } from './interface';
 
-export enum ButtonSize {
-    Large = 'lg',
-    Middle = 'md',
-    Small = 'sm',
-}
+/**
+ * 
+ * To trigger an operation.
+ * 
+ *  ```javascript
+ *      import { Button } from 'miever_components';
+ *  ```
+ * @param NativeButtonProps 
+ * @returns 
+ */
 
-export enum ButtonType {
-    Primary = 'primary',
-    Default = 'default',
-    Danger = 'danger',
-    Link = 'link',
-    Disabled = 'disabled',
-    Secondary = 'secondary'
-}
-export interface IButtonProps {
-    className?: string,
-    size?: ButtonSize,
-    styleType?: ButtonType,
-    disabled?: boolean,
-    children?: React.ReactNode
-}
-
-export type NativeButtonProps = IButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
-const Button: React.FunctionComponent<NativeButtonProps> = (props) => {
-    const { size, styleType, disabled, children, className, ...restProps } = props;
+const Button: FunctionComponent<NativeButtonProps> = (props) => {
+    const { size, styleType, disabled = false, children, className, ...restProps } = props;
     const classes = classNames('btn', className, {
         [`btn-${styleType}`]: styleType,
         [`btn-${size}`]: size,
@@ -44,9 +33,9 @@ const Button: React.FunctionComponent<NativeButtonProps> = (props) => {
 }
 
 Button.defaultProps = {
-    size: ButtonSize.Middle,
-    styleType: ButtonType.Default,
-    disabled: false 
+    size: 'md',
+    styleType: 'default',
+    disabled: false,
 }
 
 export default Button;
