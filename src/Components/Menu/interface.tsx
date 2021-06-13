@@ -21,19 +21,10 @@ export interface IMenuItemProps {
 export interface IMenuContext {
     index?: number;
     onSelect?: SelectCallback;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
 }
 export interface ISubmenuProps {
     index?: number,
     title: string,
     className?: string,
     children: React.ReactNode
-<<<<<<< HEAD
-=======
-=======
->>>>>>> master
->>>>>>> master
 }
