@@ -15,7 +15,7 @@ jobs:
           node-version: 14
       - run: npm install
       - run: npm run-script build
-      - run: npm run-script storybook
+      - run: npm run-script build-storybook
 
       - uses: wlixcc/SFTP-Deploy-Action@v1.0 
         with:  
