@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: 14
+      - run: npm install
       - run: npm run-script build-storybook
 
       - uses: wlixcc/SFTP-Deploy-Action@v1.0 
