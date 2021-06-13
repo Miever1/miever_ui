@@ -1,9 +1,13 @@
 import React from "react";
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+<<<<<<< HEAD
 import Button from './Button';
 import { NativeButtonProps } from './interface';
 
+=======
+import Button, { ButtonSize, ButtonType, NativeButtonProps } from './Button';
+>>>>>>> master
 const defaultProps = {
     onClick: jest.fn()
 }

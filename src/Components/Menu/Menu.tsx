@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React, { useState, createContext, FunctionComponentElement, cloneElement } from "react";
 import classNames from "classnames";
 import { IMenuProps, IMenuContext, IMenuItemProps } from "./interface";
+=======
+import React, { useState, createContext } from "react";
+import classNames from "classnames";
+import { IMenuProps, IMenuContext } from "./interface";
+>>>>>>> master
 
 export const MenuContext = createContext<IMenuContext>({ index: 0 });
 
@@ -15,6 +21,7 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
     const [currentActive, setCurrentActive] = useState(defaultIndex);
 
     const classes = classNames('menu', className, {
+<<<<<<< HEAD
         'menu-vertical': mode === 'vertical',
         'menu-horizontal': mode !== 'vertical'
     });
@@ -30,6 +37,11 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
         });
     }
 
+=======
+        'menu-vertical': mode === 'vertical'
+    });
+
+>>>>>>> master
     const handleClick = (index: number) => {
         console.log(index);
         setCurrentActive(index);
@@ -48,7 +60,11 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
             data-testid="test-menu"
         >
             <MenuContext.Provider value={passedContext}>
+<<<<<<< HEAD
                 {renderChildren()}
+=======
+                {children}
+>>>>>>> master
             </MenuContext.Provider>
         </ul>
     );
