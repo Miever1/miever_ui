@@ -8,7 +8,7 @@ export const parameters = {
         colorSecondary: '#12aa9c',
         barSelectedColor: '#12aa9c',
         brandUrl: 'https://components.miever.net',
-        brandImage: './components.png',
+        brandImage: './miever_components.png',
       }
     ,
     themes: [
