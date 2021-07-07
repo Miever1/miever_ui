@@ -59,7 +59,7 @@
 
 .btn-link {
     font-weight: $font-weight-normal;
-    color: $secondary;
+    color: $primary;
     text-decoration: $link-decoration;
     border: none;
     background: none;
@@ -76,7 +76,7 @@
             left: 50%;
             margin-top: 2rem;
             bottom: 0.1em;
-            background: $secondary;
+            background: $primary;
         }
     }
     &:focus,

@@ -17,10 +17,10 @@ Basic.args = {};
 export const StyleType: React.VFC<{}> = () => {
   return (
     <React.Fragment>
+      <Button styleType='link' style={{ marginRight: '8px' }}>Link</Button>
       <Button styleType='default' style={{ marginRight: '8px' }}>Default</Button>
       <Button styleType='primary' style={{ marginRight: '8px' }}>Primary</Button>
       <Button styleType='danger' style={{ marginRight: '8px' }}>Danger</Button>
-      <Button styleType='link' style={{ marginRight: '8px' }}>Link</Button>
       <Button styleType='disabled' style={{ marginRight: '8px' }}>Disabled</Button>
       <Button styleType='secondary' style={{ marginRight: '8px' }}>Secondary</Button>
     </React.Fragment>
