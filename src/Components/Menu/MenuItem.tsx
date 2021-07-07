@@ -4,19 +4,17 @@ import { IMenuItemProps } from "./interface";
 import { MenuContext } from "./Menu";
 
 const MenuItem: React.FunctionComponent<IMenuItemProps> = ({
-    index, className, style={}, children, disabled
+    index, className, style, children, disabled
 }) => {
     const context = useContext(MenuContext);
     const { index: MenuIndex, onSelect } = context;
-    const handleClick = () => {
-        if (!disabled && onSelect && (typeof index === 'number')) {
-            onSelect(index);
-        }
-    }
 
+    const handleClick = () => {
+        (!disabled && onSelect && (typeof index === 'string')) && onSelect(index);
+    }
     const classes = classNames('menu-item', className, {
         'disabled': disabled,
-        'active': MenuIndex === index,
+        'active': MenuIndex === index
     });
 
     return (
@@ -30,5 +28,5 @@ const MenuItem: React.FunctionComponent<IMenuItemProps> = ({
     );
 }
 
-MenuItem.displayName = 'MenuItem'
+MenuItem.displayName = 'MenuItem';
 export default MenuItem;

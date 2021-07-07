@@ -1,19 +1,20 @@
 import React, { Children } from "react";
-import { render, fireEvent, RenderResult, cleanup } from '@testing-library/react';
+import { render, fireEvent, RenderResult, cleanup, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import Menu from './Menu';
+import SubMenu from "./SubMenu";
 import MenuItem from './MenuItem';
 import { IMenuProps } from './interface';
 
 const testProps: IMenuProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     onSelect: jest.fn(),
     className: 'test'
 }
 
 const testVerticalProps: IMenuProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     mode: 'vertical',
     children: <div />
 }
@@ -30,14 +31,35 @@ const generateMenu = (props : IMenuProps) => {
           <MenuItem>
             click
           </MenuItem>
+          <SubMenu title="dropdown">
+              <MenuItem>
+                drop1
+              </MenuItem>
+          </SubMenu>
         </Menu>
     )
 }
 
-let  wrapper: RenderResult, menuElement: HTMLElement, activeElement: HTMLElement, disabledElement: HTMLElement; 
+let  wrapper: RenderResult, menuElement: HTMLElement, activeElement: HTMLElement, disabledElement: HTMLElement;
+
+const createStyleFile = () => {
+    const cssFile: string = `
+        .submenu {
+            display: none;
+        }
+        .submenu.submenu-visible {
+            display: block;
+        }
+    `;
+    const style = document.createElement('style');
+    style.innerHTML = cssFile;
+    return style
+}
+
 describe('test Menu and MenuItem components', () => {
     beforeEach(() => {
         wrapper = render(generateMenu(testProps));
+        wrapper.container.append(createStyleFile());
         menuElement = wrapper.getByTestId('test-menu');
         activeElement = wrapper.getByText('active');
         disabledElement = wrapper.getByText('disabled');
@@ -45,7 +67,7 @@ describe('test Menu and MenuItem components', () => {
     test('should render correct Menu and MenuItem based on default props', () => {
         expect(menuElement).toBeInTheDocument();
         expect(menuElement).toHaveClass('menu test');
-        expect(menuElement.getElementsByTagName('li').length).toEqual(3);
+        expect(menuElement.querySelectorAll(':scope > li').length).toEqual(4);
         expect(activeElement).toHaveClass('menu-item active');
     });
 
@@ -53,7 +75,7 @@ describe('test Menu and MenuItem components', () => {
         const thirdItem = wrapper.getByText('click');
         fireEvent.click(thirdItem);
         expect(thirdItem).toHaveClass('active');
-        expect(testProps.onSelect).toHaveBeenCalledWith(2);
+        expect(testProps.onSelect).toHaveBeenCalledWith('2');
         fireEvent.click(disabledElement);
         expect(disabledElement).not.toHaveClass('active');
         expect(testProps.onSelect).not.toHaveBeenCalledWith(1);
@@ -66,10 +88,18 @@ describe('test Menu and MenuItem components', () => {
         expect(menuElement).toHaveClass('menu menu-vertical');
     });
 
-    // to do
-    // test('renders child component', () => {
-    //     cleanup();
-    //     const wrapper = render(<MenuItem index={0}><div>test</div></MenuItem>);
-    //     expect(wrapper.getByLabelText('<div>')).toBeTruthy();
-    // })
+    test('should show dropdown items when hover on SubMenu', async () => {
+        expect(wrapper.queryByText('drop1')).not.toBeVisible();
+        const dropdownElement = wrapper.getByText('dropdown');
+        fireEvent.mouseEnter(dropdownElement);
+        await (() => {
+            expect(wrapper.queryByText('drop1')).toBeVisible();
+        });
+        fireEvent.click(wrapper.getByText('drop1'));
+        expect(testProps.onSelect).toHaveBeenCalledWith('3-0');
+        fireEvent.mouseLeave(dropdownElement);
+        await (() => {
+            expect(wrapper.queryByText('drop1')).not.toBeVisible();
+        });
+    });
 });
