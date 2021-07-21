@@ -5,7 +5,7 @@ import Menu from './index';
 import '../../Styles/index.scss';
 
 export default {
-  title: 'General/Menu',
+  title: 'Navigation/Menu',
   component: Menu,
   decorators: [
     Story => (
