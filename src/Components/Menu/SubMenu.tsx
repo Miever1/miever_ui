@@ -1,7 +1,9 @@
 import React, { useContext, useState ,FunctionComponent, FunctionComponentElement } from "react";
 import classNames from "classnames";
+
 import { MenuContext } from "./Menu";
 import Icon from 'Components/Icon/Index';
+import Transition from 'Components/Transition';
 import { ISubmenuProps, IMenuItemProps } from "./interface";
 
 const SubMenu: FunctionComponent<ISubmenuProps> = ({
@@ -50,9 +52,15 @@ const SubMenu: FunctionComponent<ISubmenuProps> = ({
             }
         });
         return (
-            <ul className={submenuClasses}>
-                {childrenComponent}
-            </ul>
+            <Transition
+                timeout={300}
+                in={subMenuVisible}
+                animation="zoom-in-top"
+            >
+                <ul className={submenuClasses}>
+                    {childrenComponent}
+                </ul>
+            </Transition>
         );
     }
 
