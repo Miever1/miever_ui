@@ -1,11 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './Styles/index.scss';
-import App from './App';
+import Button from "./Components/Button";
+import Icon from "./Components/Icon";
+import Input from "./Components/Input";
+import Menu from "./Components/Menu";
+import Transition from "./Components/Transition";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export {
+  Button,
+  Icon,
+  Input,
+  Menu,
+  Transition
+}
