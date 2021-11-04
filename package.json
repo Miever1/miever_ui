@@ -90,6 +90,7 @@
     "@storybook/react": "^6.2.9",
     "jest": "^26.6.0",
     "rimraf": "^3.0.2",
+    "storybook-facelift": "^6.9.0",
     "tsc-watch": "^4.5.0",
     "yalc-watch": "^0.0.6"
   }
