@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import Icon from './Index';
+import Icon from './index';
 import { IIconProps }  from './interface';
 
 export default {

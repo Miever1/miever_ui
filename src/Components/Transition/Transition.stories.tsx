@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 
 import Transition from './index';
-import { TransitionProps } from './interface';
-import Button from 'Components/Button/Button';
+import Button from '../Button';
 
 export default {
   title: 'Other/Transition',

@@ -2,8 +2,8 @@ import React, { useContext, useState ,FunctionComponent, FunctionComponentElemen
 import classNames from "classnames";
 
 import { MenuContext } from "./Menu";
-import Icon from 'Components/Icon/Index';
-import Transition from 'Components/Transition';
+import Icon from '../Icon/index';
+import Transition from '../Transition';
 import { ISubmenuProps, IMenuItemProps } from "./interface";
 
 const SubMenu: FunctionComponent<ISubmenuProps> = ({
