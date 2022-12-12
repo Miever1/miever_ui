@@ -1,6 +1,7 @@
 name: Test build and deploy site
 
 on:
+  workflow_dispatch: {}
   push:
     branches: 
       - master 
