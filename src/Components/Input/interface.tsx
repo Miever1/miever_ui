@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 
 export type InputSizes = 'sm' | 'lg';
 

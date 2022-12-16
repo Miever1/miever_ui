@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meta, } from '@storybook/react';
 
+import Box from '../Box';
 import Menu from './index';
 import '../../Styles/index.scss';
 
@@ -9,9 +10,9 @@ export default {
   component: Menu,
   decorators: [
     Story => (
-      <div style={{ height: '200px' }}>
+      <Box style={{ height: '200px' }}>
         {Story()}
-      </div>
+      </Box>
     ),
   ],
 } as Meta;
@@ -29,7 +30,7 @@ export const Basic: React.VFC<{}> = () => {
 
 export const SubMenu: React.VFC<{}> = () => {
   return (
-    <div>
+    <Box>
       <Menu>
         <Menu.Item>React</Menu.Item>
         <Menu.Item>JavaScript</Menu.Item>
@@ -53,6 +54,6 @@ export const SubMenu: React.VFC<{}> = () => {
           <Menu.Item>Testing Environments</Menu.Item>
         </Menu.SubMenu>
       </Menu>
-    </div>
+    </Box>
   )
 };

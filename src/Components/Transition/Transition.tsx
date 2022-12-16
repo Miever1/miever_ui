@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { TransitionProps } from './interface';
+import Box from '../Box';
 
 /**
  * 
@@ -29,7 +30,7 @@ const Transition: FunctionComponent<TransitionProps> = ({
             classNames={classNames ?? animation}
             {...restProps}
         >
-            {wrapper ? <div>{children}</div> : children}
+            {wrapper ? <Box>{children}</Box> : children}
         </CSSTransition>
     );
 }

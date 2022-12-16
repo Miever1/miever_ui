@@ -2,7 +2,8 @@ import React, { useContext, useState ,FunctionComponent, FunctionComponentElemen
 import classNames from "classnames";
 
 import { MenuContext } from "./Menu";
-import Icon from '../Icon/index';
+import Icon from '../Icon';
+import Box from "../Box";
 import Transition from '../Transition';
 import { ISubmenuProps, IMenuItemProps } from "./interface";
 
@@ -66,10 +67,10 @@ const SubMenu: FunctionComponent<ISubmenuProps> = ({
 
     return (
         <li key={index} className={classes} {...hoverEvents} >
-            <div className="submenu-title" {...clickEvents}>
+            <Box className="submenu-title" {...clickEvents}>
                 {title}
                 <Icon icon='angle-down' className='arrow-icon' />
-            </div>
+            </Box>
             {renderChildren()}
         </li>
     );
