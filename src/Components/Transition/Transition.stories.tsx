@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import Transition from './index';
 import Button from '../Button';
+import Box from '../Box';
 
 export default {
   title: 'Other/Transition',
   component: Transition,
   decorators: [
     Story => (
-      <div style={{ height: '200px' }}>
+      <Box style={{ height: '200px' }}>
         {Story()}
-      </div>
+      </Box>
     )
   ]
 } as Meta;
@@ -19,17 +20,17 @@ export default {
 export const Basic: React.VFC<{}> = () => {
   const [visible, setVisible] = useState(false);
   return (
-    <div>
+    <Box>
       <Button onClick={() => setVisible(!visible)}>click</Button>
       <Transition
         timeout={300}
         in={visible}
         animation="zoom-in-top"
       >
-        <div>
+        <Box>
           当点击按钮时会出现动画效果
-        </div>
+        </Box>
       </Transition>
-    </div>
+    </Box>
   )
 };

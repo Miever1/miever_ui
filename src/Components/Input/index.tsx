@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import { NativeInputProps } from "./interface";
+import Box from '../Box';
 
 /**
  * 
@@ -29,13 +30,13 @@ const Input: FunctionComponent<NativeInputProps> = ({
     });
     
     return (
-        <div className={classes} style={style}>
+        <Box className={classes} style={style}>
             <input
                 disabled={disabled}
                 className="input-inner"
                 {...restProps}
             />
-        </div>
+        </Box>
         
     );
 }

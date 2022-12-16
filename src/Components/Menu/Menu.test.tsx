@@ -1,5 +1,4 @@
-import React, { Children } from "react";
-import { render, fireEvent, RenderResult, cleanup, wait } from '@testing-library/react';
+import { render, fireEvent, RenderResult, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import Menu from './Menu';

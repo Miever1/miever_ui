@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export type sizes = 'sm' | 'md' | 'lg';
 export type styleTypes = 'default' | 'primary' | 'danger' | 'link' | 'disabled' | 'secondary';

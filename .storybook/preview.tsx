@@ -1,5 +1,7 @@
 import React from "react";
 
+import Box from "../src/Components/Box";
+
 export const parameters = {
   facelift: {
     addProvider: true,
@@ -8,7 +10,7 @@ export const parameters = {
         colorSecondary: '#12aa9c',
         barSelectedColor: '#12aa9c',
         brandUrl: 'https://components.miever.net',
-        brandImage: './miever_components.png',
+        brandImage: './miever_ui.png',
       }
     ,
     themes: [
@@ -28,8 +30,8 @@ export const parameters = {
 
 export const decorators = [
   Story => (
-    <div style={{ height: '240px' }}>
+    <Box style={{ height: '240px' }}>
       {Story()}
-    </div>
+    </Box>
   ),
 ];
