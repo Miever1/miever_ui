@@ -11,7 +11,7 @@ export default {
 
 const Template: Story<IIconProps> = (args) => <Icon {...args}>Icon</Icon>;
 export const Basic = Template.bind({});
-Basic.args = { icon: 'coffee' };
+Basic.args = { icon: ["fab", "github"] };
 
 export const Size = Template.bind({});
 Size.args = { size: '10x', icon: 'coffee' }

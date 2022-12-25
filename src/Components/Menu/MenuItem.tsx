@@ -1,29 +1,30 @@
-import React, { useContext } from "react";
+import React from "react";
 import classNames from "classnames";
 import { IMenuItemProps } from "./interface";
-import { MenuContext } from "./Menu";
 
-const MenuItem: React.FunctionComponent<IMenuItemProps> = ({
-    index, className, style, children, disabled
+const MenuItem: React.FunctionComponent<Omit<IMenuItemProps, "key"> & {
+    itemKey: string, 
+    currentKey: string;
+    handleClick: (key: string) => void;
+}> = ({
+    itemKey,
+    currentKey,
+    label,
+    disabled,
+    handleClick
 }) => {
-    const context = useContext(MenuContext);
-    const { index: MenuIndex, onSelect } = context;
-
-    const handleClick = () => {
-        (!disabled && onSelect && (typeof index === 'string')) && onSelect(index);
-    }
-    const classes = classNames('menu-item', className, {
+    const classes = classNames('menu-item', {
         'disabled': disabled,
-        'active': MenuIndex === index
+        'active': currentKey === itemKey
     });
 
     return (
         <li
-            style={style}
+            key={itemKey}
             className={classes}
-            onClick={handleClick}
+            onClick={() => handleClick(itemKey)}
         >
-            {children}
+            {label}
         </li>
     );
 }

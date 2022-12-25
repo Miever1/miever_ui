@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library, IconPack } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import classNames from 'classnames';
 import { IIconProps } from './interface';
@@ -20,6 +21,7 @@ import { IIconProps } from './interface';
 const Icon: FunctionComponent<IIconProps> = ({
     theme, className, ...restProps
 }) => {
+    library.add(fab as IconPack);
     library.add(fas);
     const classes = classNames('icon', className, {
         [`icon-${theme}`]: theme
