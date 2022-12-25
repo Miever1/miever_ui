@@ -2,31 +2,32 @@ type MenuMode = 'horizontal' | 'vertical';
 type SelectCallback = (selectedIndex: string) => void;
 
 export interface IMenuProps {
-    defaultIndex?: string;
+    defaultKey?: string;
     className?: string;
     mode?: MenuMode;
     style?: React.CSSProperties;
-    children?: React.ReactNode;
     onSelect?: SelectCallback;
+    items: IMenuItemProps[];
+    prefix?: React.ReactNode;
+    suffix?: React.ReactNode;
 }
 
-export interface IMenuItemProps {
-    index?: string;
+interface LabelKey {
+    label?: React.ReactNode;
+    key: string;
+}
+
+export interface IMenuItemProps extends LabelKey {
     disabled?: boolean;
-    style?: React.CSSProperties;
-    children: React.ReactNode;
-    className?: string;
+    children?: LabelKey[];
 }
 
-export interface IMenuContext {
-    mode?: string;
-    index: string;
-    onSelect?: SelectCallback;
-}
 export interface ISubmenuProps {
-    index?: string,
-    title: string,
-    className?: string,
-    children: React.ReactNode,
-    isOpened?: boolean
+    currentKey: string;
+    itemKey: string;
+    title: React.ReactNode;
+    isOpened?: boolean;
+    items: LabelKey[];
+    mode: MenuMode;
+    handleClick: (key: string) => void;
 }

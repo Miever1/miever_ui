@@ -7,35 +7,49 @@ import MenuItem from './MenuItem';
 import { IMenuProps } from './interface';
 
 const testProps: IMenuProps = {
-    defaultIndex: '0',
+    defaultKey: '0',
     onSelect: jest.fn(),
-    className: 'test'
+    className: 'test',
+    items: [
+        {
+          label: "active",
+          key: "active",
+        },
+        {
+          label: "disabled",
+          key: "disabled",
+        },
+        {
+          label: "click",
+          key: "click",
+        },
+      ]
 }
 
 const testVerticalProps: IMenuProps = {
-    defaultIndex: '0',
+    defaultKey: '0',
     mode: 'vertical',
-    children: <div />
+    items: [
+        {
+          label: "active",
+          key: "active",
+        },
+        {
+          label: "disabled",
+          key: "disabled",
+        },
+        {
+          label: "click",
+          key: "click",
+        },
+      ]
 }
 
 const generateMenu = (props : IMenuProps) => {
     return (
-        <Menu {...props}>
-          <MenuItem>
-            active
-          </MenuItem>
-          <MenuItem disabled>
-            disabled
-          </MenuItem>
-          <MenuItem>
-            click
-          </MenuItem>
-          <SubMenu title="dropdown">
-              <MenuItem>
-                drop1
-              </MenuItem>
-          </SubMenu>
-        </Menu>
+        <Menu 
+            {...props}
+        />
     )
 }
 
@@ -87,18 +101,4 @@ describe('test Menu and MenuItem components', () => {
         expect(menuElement).toHaveClass('menu menu-vertical');
     });
 
-    test('should show dropdown items when hover on SubMenu', async () => {
-        expect(wrapper.queryByText('drop1')).not.toBeVisible();
-        const dropdownElement = wrapper.getByText('dropdown');
-        fireEvent.mouseEnter(dropdownElement);
-        await (() => {
-            expect(wrapper.queryByText('drop1')).toBeVisible();
-        });
-        fireEvent.click(wrapper.getByText('drop1'));
-        expect(testProps.onSelect).toHaveBeenCalledWith('3-0');
-        fireEvent.mouseLeave(dropdownElement);
-        await (() => {
-            expect(wrapper.queryByText('drop1')).not.toBeVisible();
-        });
-    });
 });

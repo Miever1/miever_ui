@@ -19,41 +19,116 @@ export default {
 
 export const Basic: React.VFC<{}> = () => {
   return (
-      <Menu>
-        <Menu.Item>Docs</Menu.Item>
-        <Menu.Item>Tutorial</Menu.Item>
-        <Menu.Item>Blog</Menu.Item>
-        <Menu.Item>Community</Menu.Item>
-      </Menu>
+      <Menu
+          defaultKey='active'
+          onSelect={value => console.log(value)}
+          items={[
+              {
+                  label: "active",
+                  key: "active"
+              },
+              {
+                  label: "disabled",
+                  key: "disabled"
+              },
+              {
+                  label: "click",
+                  key: "click"
+              },
+              {
+                  label: "drop1",
+                  key: "drop1"
+              },
+          ]}
+      />
   )
 };
 
 export const SubMenu: React.VFC<{}> = () => {
   return (
     <Box>
-      <Menu>
-        <Menu.Item>React</Menu.Item>
-        <Menu.Item>JavaScript</Menu.Item>
-        <Menu.SubMenu title="Hooks">
-          <Menu.Item>Introducing Hooks</Menu.Item>
-          <Menu.Item>Hooks at a Glance</Menu.Item>
-          <Menu.Item>Using the State Hook</Menu.Item>
-          <Menu.Item>Using the Effect Hook</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.Item disabled>Disabled</Menu.Item>
-      </Menu>
-      <Menu mode='vertical' style={{ width: '200px'}}>
-        <Menu.Item>React</Menu.Item>
-        <Menu.SubMenu title="Hooks" isOpened>
-          <Menu.Item>Introducing Hooks</Menu.Item>
-          <Menu.Item>Rules of Hooks</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.SubMenu title="Testing">
-          <Menu.Item>Testing Overview</Menu.Item>
-          <Menu.Item>Testing Recipes</Menu.Item>
-          <Menu.Item>Testing Environments</Menu.Item>
-        </Menu.SubMenu>
-      </Menu>
+      <Menu
+        defaultKey='JavaScript'
+        items={[
+          {
+            label: "React",
+            key: "React",
+          },
+          {
+            label: "JavaScript",
+            key: "JavaScript",
+          },
+          {
+            label: "Hooks",
+            key: "Hooks",
+            children: [
+              {
+                label: "Introducing_Hooks",
+                key: "Hooks_a",
+              },
+              {
+                label: "JavaScript",
+                key: "Hooks_b",
+              },
+              {
+                label: "Introducing_Hooks",
+                key: "Hooks_c",
+              },
+              {
+                label: "JavaScript",
+                key: "Hooks_d",
+              },
+            ]
+          },
+          {
+            label: "Disabled",
+            key: "Disabled",
+            disabled: true
+          },
+        ]}
+      />
+      <Menu
+        mode='vertical'
+        style={{ width: '200px'}}
+        defaultKey="JavaScript"
+        items={[
+          {
+            label: "React",
+            key: "React",
+          },
+          {
+            label: "JavaScript",
+            key: "JavaScript",
+          },
+          {
+            label: "Hooks",
+            key: "Hooks",
+            children: [
+              {
+                label: "Introducing_Hooks",
+                key: "Hooks_a",
+              },
+              {
+                label: "JavaScript",
+                key: "Hooks_b",
+              },
+              {
+                label: "Introducing_Hooks",
+                key: "Hooks_c",
+              },
+              {
+                label: "JavaScript",
+                key: "Hooks_d",
+              },
+            ]
+          },
+          {
+            label: "Disabled",
+            key: "Disabled",
+            disabled: true
+          }
+        ]}
+      />
     </Box>
   )
 };
