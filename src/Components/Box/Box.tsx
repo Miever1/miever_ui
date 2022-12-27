@@ -1,7 +1,7 @@
 import React, { FunctionComponent, forwardRef } from "react"
 import styled from "@emotion/styled";
 import { BoxProps } from "./interface";
-import { SpaceList, Space_Size, SpaceType } from "../../Designs";
+import { SPACE_LIST, SPACE_SIZE, SpaceType } from "../../Designs";
 
 const BoxWrapper = styled("div")((props: BoxProps) => {
     const { flexBox, direction, justifyContent, alignItems, width, height, padding, paddingX, paddingY } = props
@@ -18,21 +18,27 @@ const BoxWrapper = styled("div")((props: BoxProps) => {
         styleText += `height: ${height}${typeof height === "number" ? "px" : ""};`;
     }
     if (paddingX) {
-        styleText += `padding-left: ${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""};padding-right: ${paddingX}${typeof paddingX === "number" ? "px" : ""};`;
-        if (SpaceList.includes(`${paddingX}`)) {
-            styleText += `padding-left: ${Space_Size[paddingX as SpaceType]};padding-right: ${Space_Size[paddingX as SpaceType]};`;
+        styleText += `
+            padding-left: ${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""};
+            padding-right: ${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""};
+        `;
+        if (SPACE_LIST.includes(`${paddingX}`)) {
+            styleText += `padding-left: ${SPACE_SIZE[paddingX as SpaceType]};padding-right: ${SPACE_SIZE[paddingX as SpaceType]};`;
         }
     }
     if (paddingY) {
-        styleText += `padding-top: ${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""};padding-bottom: ${paddingY}${typeof paddingY === "number" ? "px" : ""};`;
-        if (SpaceList.includes(`${paddingY}`)) {
-            styleText += `padding-top: ${Space_Size[paddingY as SpaceType]};padding-bottom: ${Space_Size[paddingY as SpaceType]};`;
+        styleText += `
+            padding-top: ${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""};
+            padding-bottom: ${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""};
+        `;
+        if (SPACE_LIST.includes(`${paddingY}`)) {
+            styleText += `padding-top: ${SPACE_SIZE[paddingY as SpaceType]};padding-bottom: ${SPACE_SIZE[paddingY as SpaceType]};`;
         }
     }
     if (padding) {
         styleText += `padding: ${typeof padding === "number" ? padding * 4 : padding}${typeof padding === "number" ? "px" : ""};`;
-        if (SpaceList.includes(`${padding}`)) {
-            styleText += `padding: ${Space_Size[padding as SpaceType]}`;
+        if (SPACE_LIST.includes(`${padding}`)) {
+            styleText += `padding: ${SPACE_SIZE[padding as SpaceType]}`;
         }
     }
     return styleText;

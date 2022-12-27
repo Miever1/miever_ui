@@ -1,8 +1,17 @@
 import type { SpaceType } from "./types";
 
-const SpaceList = ["xs", "sm", "md", "lg", "xlg", "xxlg", "xxxlg"]
+const SPACE_LIST = ["xs", "sm", "md", "lg", "xlg", "xxlg", "xxxlg"] 
 
-const Space_Size: {
+const BRAND_COLORS = {
+    "primary":    "#12aa9c",
+    "secondary":  "#6f42c1",
+    "success":    "#20c997",
+    "info":       "#17a2b8",
+    "warning":    "#fadb14",
+    "danger":     "#dc3545",
+}
+
+const SPACE_SIZE: {
     [key in SpaceType]: string
 } = {
     xs: "4px",
@@ -14,9 +23,17 @@ const Space_Size: {
     xxxlg: "32px"
 }
 
+const designs = {
+    SPACE_SIZE,
+    SPACE_LIST,
+    BRAND_COLORS
+}
+
 export {
-    Space_Size,
-    SpaceList
+    designs,
+    SPACE_SIZE,
+    SPACE_LIST,
+    BRAND_COLORS
 }
 
 export type {

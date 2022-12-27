@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, HTMLAttributes } from "react"
 import type { SpaceType } from "../../Designs";
 
-export interface BoxProps {
+interface BasicBoxProps {
     // 是否为容器，为容器时容器属性才能生效，并且被包裹的子组件中的一些属性（如 flex，order 等）才能生效）
     flexBox?: boolean
     children?: ReactNode
@@ -17,3 +17,5 @@ export interface BoxProps {
     style?: React.CSSProperties
     className?: string
 }
+
+export type BoxProps = BasicBoxProps & HTMLAttributes<HTMLDivElement>;
