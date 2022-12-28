@@ -10,7 +10,7 @@ export const parameters = {
         colorSecondary: '#12aa9c',
         barSelectedColor: '#12aa9c',
         brandUrl: 'https://components.miever.net',
-        brandImage: './miever_ui.png',
+        brandImage: './miever_ui.jpeg',
       }
     ,
     themes: [
