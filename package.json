@@ -23,6 +23,8 @@
     "React Components Library"
   ],
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
