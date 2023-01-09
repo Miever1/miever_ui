@@ -8,6 +8,7 @@ import Input from "./Components/Input";
 import Menu from "./Components/Menu";
 import Transition from "./Components/Transition";
 import Card from './Components/Card';
+import Tooltip from "./Components/Tooltip";
 
 import { designs } from './Designs';
 
@@ -21,5 +22,6 @@ export {
   Input,
   Menu,
   Transition,
-  Card
+  Card,
+  Tooltip
 }
