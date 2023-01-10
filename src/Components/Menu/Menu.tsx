@@ -65,7 +65,7 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
         >
             {mode === "horizontal" && prefix}
             {renderChildren()}
-            {mode === "horizontal" && suffix}
+            {mode === "horizontal" && suffix && <div style={{ position: "absolute", right: 0 }}>{suffix}</div>}
         </ul>
     );
 }
