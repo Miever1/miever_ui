@@ -4,8 +4,9 @@
 name: Publish Package
 
 on:
-  tags:        
-      - v0.*
+ push:
+    tags:        
+      - 'v*'
 
 jobs:
   run-build:
