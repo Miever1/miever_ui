@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses:  'phips28/gh-action-bump-version@master'
-        id: version-bump
+        id: version_bump
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+          NEW_TAG: ${{ steps.version_bump.outputs.newTag }}
       - uses: actions/setup-node@v3
         with:
           node-version: 14
