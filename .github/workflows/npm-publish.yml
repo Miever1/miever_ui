@@ -34,7 +34,7 @@ jobs:
 
   publish-npm:
     name: "Publish to npm"
-    needs: [bump-version run-build]
+    needs: [bump-version, run-build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
