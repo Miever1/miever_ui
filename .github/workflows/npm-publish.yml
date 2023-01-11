@@ -13,11 +13,15 @@ jobs:
     name: 'Bump Version on release created'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.ref_name }}
       - uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   run-build:
+    needs: bump-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
