@@ -13,12 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name:  'Automated Version Bump'
-      uses:  'phips28/gh-action-bump-version@master'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        target-branch: 'feature/add_publish_action'
+      - name: 'Checkout source code'
+        uses: 'actions/checkout@v2'
+        with:
+          persist-credentials: false
+          ref: ${{ github.ref }}
+      - name: 'cat package.json'
+        run: cat ./package.json
+      - name: 'Automated Version Bump'
+        id: version-bump
+        uses: 'phips28/gh-action-bump-version@master'
+        with:
+          tag-prefix: 'v'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'cat package.json'
+        run: cat ./package.json
+      - name: 'Output Step'
+        env:
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+        run: echo "new tag $NEW_TAG"
+
   # publish-npm:
   #   needs: build
   #   runs-on: ubuntu-latest
