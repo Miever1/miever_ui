@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: 'Checkout source code'
-        uses: 'actions/checkout@v2'
+        uses: 'actions/checkout@v3'
         with:
-          persist-credentials: false
-          ref: ${{ github.ref }}
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Automated Version Bump'
