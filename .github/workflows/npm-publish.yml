@@ -8,10 +8,12 @@ on:
     types: [created]
 
 jobs:
-  build:
+bump-version:
+    name: 'Bump Version on master'
     runs-on: ubuntu-latest
+
     steps:
-       - name: 'Checkout source code'
+      - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
         with:
           ref: ${{ github.ref }}
@@ -30,6 +32,9 @@ jobs:
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
