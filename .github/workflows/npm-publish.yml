@@ -14,9 +14,8 @@ jobs:
 
     steps:
       - name: 'Checkout source code'
-        uses: 'actions/checkout@v3'
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
       - name: 'cat package.json'
         run: cat ./package.json
