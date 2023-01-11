@@ -27,11 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        env:
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-        env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
       - run: npm ci
       - run: npm run build
 
