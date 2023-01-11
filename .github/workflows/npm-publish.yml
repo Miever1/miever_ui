@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - id: version-bump
       - uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,6 +23,8 @@ jobs:
 
   run-build:
     name: 'Library build'
+    env:
+        NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
     needs: bump-version
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +37,7 @@ jobs:
 
   publish-npm:
     name: "Publish to npm"
-    needs: [bump-version, run-build]
+    needs: run-build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
