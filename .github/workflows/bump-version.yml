@@ -21,15 +21,3 @@ jobs:
         with:
           version-type:  'patch'
           tag-prefix:  'v'
-
-  run-build:
-    name: 'Library build'
-    needs: bump-version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
-      - run: npm ci
-      - run: npm run build
