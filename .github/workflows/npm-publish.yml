@@ -21,6 +21,7 @@ jobs:
           version-type:  'patch'
 
   run-build:
+    name: 'Library build'
     needs: bump-version
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +33,8 @@ jobs:
       - run: npm run build
 
   publish-npm:
-    needs: run-build
+    name: "Publish to npm"
+    needs: [bump-version run-build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
