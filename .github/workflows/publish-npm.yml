@@ -4,9 +4,10 @@
 name: Publish Package
 
 on:
- push:
-    tags:        
-      - 'v*'
+  workflow_dispatch: {}
+  push:
+      tags:        
+        - 'v*'
 
 jobs:
   run-build:
