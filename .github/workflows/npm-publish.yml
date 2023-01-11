@@ -8,16 +8,14 @@ on:
     types: [created]
 
 jobs:
-  - name:  'Automated Version Bump'
-    uses:  'phips28/gh-action-bump-version@master'
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      tag-prefix:  'v'
-
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag-prefix:  'v'
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
