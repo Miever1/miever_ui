@@ -22,9 +22,9 @@ jobs:
           automatic_release_tag: ${{needs.bump-version.outputs.new-version}}
           repo_token: ${{ github.token }}
           prerelease: true
+        uses: actions/checkout@v3
       - name: "bump version"
         id: version-bump
-        uses: actions/checkout@v3
         uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
