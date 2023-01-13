@@ -9,16 +9,6 @@ on:
       - 'feature/*'
 
 jobs:
-  verification:
-    name: Trigger - Lint, Test & Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger Workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          inputs: '{"ref": "${{ github.sha }}"}'
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow: Lint, Test & Build
   bump-version:
     name: 'Bump Version on release created'
     runs-on: ubuntu-latest
