@@ -32,7 +32,8 @@ jobs:
       - name: New Version
         env:
           NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
-        run: echo "new version $NEW_VERSION"    - name: Create Release
+        run: echo "new version $NEW_VERSION"    
+      - name: Create Release
         id: create-release
         uses: marvinpinto/action-automatic-releases@latest
         with:
@@ -44,6 +45,7 @@ jobs:
     name: "Publish to npm"
     needs: run-build
     runs-on: ubuntu-latest
+    needs: [bump-version]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
