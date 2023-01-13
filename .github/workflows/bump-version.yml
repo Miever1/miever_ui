@@ -31,9 +31,9 @@ jobs:
     
     steps:
       - name: New Version
-          env:
-            NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
-          run: echo "new version $NEW_VERSION"    
+        env:
+          NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
+        run: echo "new version $NEW_VERSION"    
       - name: Create Release
         id: create-release
         uses: marvinpinto/action-automatic-releases@latest
