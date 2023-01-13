@@ -6,6 +6,7 @@ name: Node.js Package
 on:
   workflow_run:
     workflows: ["Bump Version on release created"]
+    branches: [feature/*]
     types:
       - completed
 
