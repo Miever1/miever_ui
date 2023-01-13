@@ -4,12 +4,10 @@
 name: Node.js Package
 
 on:
-  push:
-    branches:
-      - 'feature/*'
-    paths:
-      - 'package.json'
-
+  workflow_run:
+    workflows: ["Bump Version on release created"]
+    types:
+      - completed
 
 jobs:
   publish-npm:
