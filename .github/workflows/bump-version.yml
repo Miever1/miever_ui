@@ -53,6 +53,8 @@ jobs:
         with:
           ref: ${{ github.event.inputs.ref }}
       - name: Setup Node.js
+        env:
+            NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
         uses: actions/setup-node@v1
         with:
           node-version: 14
@@ -63,5 +65,5 @@ jobs:
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
-          package: dist
+          package: dist/index.js
           token: ${{ secrets.NPM_TOKEN }}
