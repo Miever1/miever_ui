@@ -5,11 +5,10 @@ name: Publish to NPM
 
 on:
   workflow_run:
-    workflows: [Bump Version]
-    types:
-      - completed
+    workflows: [Bump_Version]
+    types: [completed]
     branches:
-      - feature/*
+      - 'feature/**'
 
 jobs:
   publish-npm:
