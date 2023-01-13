@@ -4,8 +4,9 @@
 name: BumpVersion
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - 'master'
 
 jobs:
   bump-version:
