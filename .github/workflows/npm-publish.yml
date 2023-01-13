@@ -6,9 +6,8 @@ name: Publish to NPM
 on:
   workflow_run:
     workflows: ["Bump Version on release created"]
+    types: [completed]
     branches: [feature/publish_npm_action_fix]
-    types:
-      - completed
 
 jobs:
   publish-npm:
