@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: version-bump
-      - uses:  'phips28/gh-action-bump-version@master'
+        uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
