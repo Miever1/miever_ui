@@ -7,7 +7,8 @@ on:
       - master 
 
 jobs:
-  CI-CD:
+  deploy-storybook:
+    name: "Deploy Storybook"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
