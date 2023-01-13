@@ -9,7 +9,7 @@ on:
     types:
       - completed
     branches:
-      - 'feature/*'
+      - feature/*
 
 jobs:
   publish-npm:
