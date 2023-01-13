@@ -43,20 +43,20 @@ jobs:
   #         repo_token: ${{ github.token }}
   #         prerelease: true
 
-   publish-npm:
-    name: "Publish to npm"
-    needs: bump-version
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm install
-      - run: npm install miever_ui@${{ steps.bump-version.outputs.new-version }}
-      - run: npm run-script build
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    publish-npm:
+      name: "Publish to npm"
+      needs: bump-version
+      runs-on: ubuntu-latest
+      steps:
+        - run: npm install
+        - run: npm install miever_ui@${{ steps.bump-version.outputs.new-version }}
+        - run: npm run-script build
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 14
+            registry-url: https://registry.npmjs.org/
+        - run: npm ci
+        - run: npm publish
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
