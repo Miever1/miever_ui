@@ -15,15 +15,22 @@ jobs:
     outputs:
       new-version: ${{ steps.version-bump.outputs.newTag }}
     steps:
+      - name: Create Release
+        id: create-release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          automatic_release_tag: ${{needs.bump-version.outputs.new-version}}
+          repo_token: ${{ github.token }}
+          prerelease: true
       - name: "bump version"
         id: version-bump
         uses: actions/checkout@v3
         uses:  'phips28/gh-action-bump-version@master'
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            version-type:  'patch'
-            tag-prefix:  'v'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          version-type:  'patch'
+          tag-prefix:  'v'
 
   create-release:
     name: Create GitHub Release
