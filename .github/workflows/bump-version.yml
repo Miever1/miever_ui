@@ -11,7 +11,8 @@ on:
 jobs:
   verification:
     name: Trigger - Lint, Test & Build
-    runs-on: ubuntu-latest  steps:
+    runs-on: ubuntu-latest
+    steps:
       - name: Trigger Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
