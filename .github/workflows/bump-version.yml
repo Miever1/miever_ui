@@ -30,33 +30,15 @@ jobs:
   #   needs: [bump-version]
   #   if: needs.bump-version.outputs.new-version != ''
     
-  #   steps:
-  #     - name: New Version
-  #       env:
-  #         NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
-  #       run: echo "new version $NEW_VERSION"    
-  #     - name: Create Release
-  #       id: create-release
-  #       uses: marvinpinto/action-automatic-releases@latest
-  #       with:
-  #         automatic_release_tag: ${{needs.bump-version.outputs.new-version}}
-  #         repo_token: ${{ github.token }}
-  #         prerelease: true
-
-  publish-npm:
-    name: "Publish to npm"
-    needs: bump-version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: 14
-      - run: npm version patch
-      - run: npm install
-      - run: npm run-script build
-      - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./package.json
+  # steps:
+  #   - name: New Version
+  #     env:
+  #       NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
+  #     run: echo "new version $NEW_VERSION"    
+  #   - name: Create Release
+  #     id: create-release
+  #     uses: marvinpinto/action-automatic-releases@latest
+  #     with:
+  #       automatic_release_tag: ${{needs.bump-version.outputs.new-version}}
+  #       repo_token: ${{ github.token }}
+  #       prerelease: true
