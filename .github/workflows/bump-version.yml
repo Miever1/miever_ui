@@ -15,14 +15,14 @@ jobs:
     outputs:
       new-version: ${{ steps.version-bump.outputs.newTag }}
     steps:
-      - uses: actions/checkout@v3
-      - id: version-bump
-        uses:  'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          version-type:  'patch'
-          tag-prefix:  'v'
+      # - uses: actions/checkout@v3
+      # - id: version-bump
+      #   uses:  'phips28/gh-action-bump-version@master'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     version-type:  'patch'
+      #     tag-prefix:  'v'
       - run: gh workflow run npm-publish.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
