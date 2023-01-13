@@ -23,7 +23,7 @@ jobs:
         with:
           version-type:  'patch'
           tag-prefix:  'v'
-      run: gh workflow run npm-publish.yml
+      - run: gh workflow run npm-publish.yml
 
   # create-release:
   #   name: Create GitHub Release
