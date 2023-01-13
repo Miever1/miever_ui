@@ -3,13 +3,6 @@
 
 name: Publish to NPM
 
-on:
-  workflow_run:
-    workflows: [Bump_Version]
-    types: [completed]
-    branches:
-      - 'feature/**'
-
 jobs:
   publish-npm:
     name: "Publish to npm"
