@@ -22,11 +22,11 @@ jobs:
         with:
           version-type:  'patch'
           tag-prefix:  'v'
+
   create-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
     needs: [bump-version]
-    if: needs.bump-version.outputs.new-version != ''
     
     steps:
       - name: New Version
@@ -39,6 +39,7 @@ jobs:
           automatic_release_tag: ${{needs.bump-version.outputs.new-version}}
           repo_token: ${{ github.token }}
           prerelease: true
+
   publish-npm:
     name: "Publish to npm"
     needs: run-build
