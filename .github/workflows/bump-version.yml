@@ -4,10 +4,8 @@
 name: BumpVersion
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - 'feature/*'
+  release:
+    types: [created]
 
 jobs:
   bump-version:

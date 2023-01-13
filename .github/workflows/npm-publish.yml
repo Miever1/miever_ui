@@ -7,8 +7,6 @@ on:
   workflow_run:
     workflows: [BumpVersion]
     types: [completed]
-    branches:
-      - 'feature/*'
 
 jobs:
   publish-npm:
