@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build package
-        run: npm build
+        run: npm run-script build
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
