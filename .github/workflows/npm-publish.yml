@@ -7,7 +7,8 @@ on:
   workflow_run:
     workflows: ["Bump Version on release created"]
     types: [completed]
-    branches: [feature/publish_npm_action_fix]
+    branches:
+      - 'feature/**'
 
 jobs:
   publish-npm:
@@ -19,7 +20,6 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: 14
-      - run: npm version patch
       - run: npm install
       - run: npm run-script build
       - name: Publish to NPM
