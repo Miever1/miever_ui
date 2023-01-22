@@ -4,6 +4,17 @@ import classNames from 'classnames';
 import Box from "../Box";
 import { ICardProps } from "./interface";
 
+/**
+ * 
+ * Simple rectangular container.
+ * 
+ *  ```javascript
+ *      import { Card } from 'miever_components';
+ *  ```
+ * @param ICardProps 
+ * @returns 
+ */
+
 const Card:FunctionComponent<ICardProps> = ({
     title,
     subTitle,
