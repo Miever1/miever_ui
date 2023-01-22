@@ -43,6 +43,7 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
             if (children && children.length) {
                 return (
                     <SubMenu
+                        key={key}
                         itemKey={key}
                         title={label}
                         items={children}
@@ -53,7 +54,7 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
                 )
             }
             return (
-                <MenuItem disabled={disabled} currentKey={currentKey} itemKey={key} label={label} handleClick={() => handleClick(key)} />
+                <MenuItem key={key} disabled={disabled} currentKey={currentKey} itemKey={key} label={label} handleClick={() => handleClick(key)} />
             )
         })
     }
