@@ -63,6 +63,7 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
         <ul
             style={style}
             className={classes}
+            data-testid="test-menu"
         >
             {mode === "horizontal" && prefix}
             {renderChildren()}
