@@ -1,16 +1,13 @@
 {
-    "compilerOptions": {
-      "outDir": "./dist",
-      "declaration": true,
-      "declarationDir": "./dist",
-      "module": "ESNext",
-      "target": "es5",
-      "jsx": "react-jsx",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "strict": true
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.stories.tsx"]
-  }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "emitDeclarationOnly": true,
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "strict": true
+  },
+  "include": ["src/components/**/*"],
+  "exclude": ["node_modules","**/*.stories.tsx", "**/*.test.tsx"]
+}
