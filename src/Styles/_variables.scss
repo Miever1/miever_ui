@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'sass:math';
+
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -10,7 +13,7 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black:    #000 !default;
 
-$blue:    #2775b6 !default;
+$blue:    #0CC0DF !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
@@ -21,8 +24,8 @@ $green:   #12aa9c !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
-$primary:       $green !default;
-$secondary:     $purple !default;
+$primary:       $blue !default;
+$secondary:     $green !default;
 $success:       $teal !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
@@ -87,7 +90,7 @@ $body-text-align:           null !default;
 // Spacing
 $spacer: 1rem !default;
 
-$headings-margin-bottom:      $spacer / 2 !default;
+$headings-margin-bottom:      math.div($spacer, 2) !default;
 $headings-font-family:        null !default;
 $headings-font-style:         null !default;
 $headings-font-weight:        500 !default;
@@ -99,7 +102,7 @@ $headings-color:              null !default;
 $paragraph-margin-bottom:   1rem !default;
 
 // 字体其他部分 heading list hr 等等
-$headings-margin-bottom:      $spacer / 2 !default;
+$headings-margin-bottom:      math.div($spacer, 2) !default;
 $headings-font-family:        null !default;
 $headings-font-style:         null !default;
 $headings-font-weight:        500 !default;
@@ -261,7 +264,7 @@ $input-border-radius-lg:                $border-radius-lg !default;
 $input-border-radius-sm:                $border-radius-sm !default;
 
 $input-focus-bg:                        $input-bg !default;
-$input-focus-border-color:              lighten($primary, 25%) !default;
+$input-focus-border-color:              color.scale($primary, $lightness: 25%) !default;
 $input-focus-width:                     .2rem !default;
 $input-focus-color:                     $input-color !default;
 $input-focus-shadow-color:              rgba($primary, .25) !default;

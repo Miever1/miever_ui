@@ -1,25 +1,31 @@
-module.exports = {
-  "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/welcome.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
+import type { StorybookConfig } from "@storybook/react-vite";
+
+const config: StorybookConfig = {
+  stories: [
+    "../src/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../src/**/*.mdx",
   ],
-  "addons": [
-    "@storybook/addon-links",
+  addons: [
+    "@storybook/addon-docs", 
     "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app",
-    '@storybook/addon-storysource',
-    'storybook-facelift'
+    "@storybook/addon-interactions",
+    "@storybook/addon-links",
   ],
+  framework: {
+    name: "@storybook/react-vite",
+    options: {}
+  },
   typescript: {
-    check: false,
-    checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
+    check: true,
+    reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
-      savePropValueAsString: true,
-      shouldRemoveUndefinedFromOptional: true,
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+      shouldRemoveUndefinedFromOptional: true,
+      savePropValueAsString: true,
     },
   },
 };
+
+export default config;

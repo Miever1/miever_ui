@@ -1,26 +1,28 @@
+@use '../../Styles/variables' as variables;
+
 .menu {
   display: flex;
   position: relative;
   flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  border-bottom: $menu-border-width solid $menu-border-color;
-  box-shadow: $menu-box-shadow;
+  border-bottom: variables.$menu-border-width solid variables.$menu-border-color;
+  box-shadow: variables.$menu-box-shadow;
   >.menu-item {
-    padding: $menu-item-padding-y $menu-item-padding-x;
+    padding: variables.$menu-item-padding-y variables.$menu-item-padding-x;
     cursor: pointer;
-    transition: $menu-transition;
+    transition: variables.$menu-transition;
     &:hover, &:focus {
       text-decoration: none;
     }
     &.disabled {
-      color: $menu-item-disabled-color;
+      color: variables.$menu-item-disabled-color;
       pointer-events: none;
       cursor: default;
     }
     &.active, &:hover {
-      color: $menu-item-active-color;
-      border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
+      color: variables.$menu-item-active-color;
+      border-bottom: variables.$menu-item-active-border-width solid variables.$menu-item-active-color;
     }
   }
 
@@ -59,12 +61,12 @@
     padding-left: 0;
     white-space: nowrap;
     .menu-item {
-      padding: $menu-item-padding-y $menu-item-padding-x;
+      padding: variables.$menu-item-padding-y variables.$menu-item-padding-x;
       cursor: pointer;
-      transition: $menu-transition;
-      color: $body-color;
+      transition: variables.$menu-transition;
+      color: variables.$body-color;
       &.active, &:hover {
-        color: $menu-item-active-color !important;
+        color: variables.$menu-item-active-color !important;
       }
     }
   }
@@ -74,16 +76,16 @@
 }
 .menu-horizontal {
   >.menu-item {
-    border-bottom: $menu-item-active-border-width solid transparent;
+    border-bottom: variables.$menu-item-active-border-width solid transparent;
   }
   .submenu {
     position: absolute;
-    background: $white;
+    background: variables.$white;
     z-index: 100;
     top: calc(100% + 8px);
     left: 0;
-    border: $menu-border-width solid $menu-border-color;
-    box-shadow: $submenu-box-shadow;
+    border: variables.$menu-border-width solid variables.$menu-border-color;
+    box-shadow: variables.$submenu-box-shadow;
   }
 }
 
@@ -91,12 +93,12 @@
   flex-direction: column;
   border-bottom: 0px;
   margin: 10px 20px;
-  border-right: $menu-border-width solid $menu-border-color;
+  border-right: variables.$menu-border-width solid variables.$menu-border-color;
   >.menu-item {
-    border-left: $menu-item-active-border-width solid transparent;
+    border-left: variables.$menu-item-active-border-width solid transparent;
     &.active, &:hover {
       border-bottom: 0px;
-      border-left: $menu-item-active-border-width solid $menu-item-active-color;
+      border-left: variables.$menu-item-active-border-width solid variables.$menu-item-active-color;
     }
   }
 }

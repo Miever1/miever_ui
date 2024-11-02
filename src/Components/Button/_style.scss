@@ -1,66 +1,58 @@
+@use '../../Styles/variables' as variables;
+@use '../../Styles/mixin' as mixin;
+
 .btn {
     position: relative;
     display: inline-block;
-    font-weight: $btn-font-weight;
-    line-height: $btn-line-height;
-    color: $body-color;
+    font-weight: variables.$btn-font-weight;
+    line-height: variables.$btn-line-height;
+    color: variables.$body-color;
     white-space: nowrap;
     text-align: center;
     vertical-align: middle;
     background-image: none;
-    border: $btn-border-width solid transparent;
-    box-shadow: $btn-box-shadow;
+    border: variables.$btn-border-width solid transparent;
+    box-shadow: variables.$btn-box-shadow;
     cursor: pointer;
-    transition: $btn-transition;
-    @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
+    transition: variables.$btn-transition;
+    @include mixin.button-size(variables.$btn-padding-y, variables.$btn-padding-x, variables.$btn-font-size, variables.$btn-border-radius);
     &.disabled,
     &[disabled] {
         cursor: not-allowed;
-        opacity: $btn-disabled-opacity;
+        opacity: variables.$btn-disabled-opacity;
         box-shadow: none;
         pointer-events: none;
     }
 }
 
 .btn-lg {
-    @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+    @include mixin.button-size(variables.$btn-padding-y-lg, variables.$btn-padding-x-lg, variables.$btn-font-size-lg, variables.$btn-border-radius-lg);
 }
 
 .btn-sm {
-    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
+    @include mixin.button-size(variables.$btn-padding-y-sm, variables.$btn-padding-x-sm, variables.$btn-font-size-sm, variables.$btn-border-radius-sm);
 }
 
 .btn-danger {
-    @include button-style($danger, $danger, $white);
+    @include mixin.button-style(variables.$danger, variables.$danger, variables.$white);
 }
 
 .btn-primary {
-    @include button-style($primary, $primary, $white);
+    @include mixin.button-style(variables.$primary, variables.$primary, variables.$white);
 }
 
 .btn-default {
-    @include button-style($white, $gray-400, $black, $white ,$primary, $primary);
+    @include mixin.button-style(variables.$white, variables.$gray-400, variables.$black, variables.$white ,variables.$primary, variables.$primary);
 }
 
 .btn-secondary {
-    background: transparent;
-    box-shadow: none;
-    color: $secondary;
-    &:hover,
-    &.hover {
-        color: $secondary;
-        border: 1px solid $secondary;
-    }
-    &:focus,
-    &.focus {
-        border: 1px solid $secondary;
-    }
+    @include mixin.button-style(variables.$secondary, variables.$secondary, variables.$white);
 }
 
 .btn-link {
-    font-weight: $font-weight-normal;
-    color: $primary;
-    text-decoration: $link-decoration;
+    font-weight: variables.$font-weight-normal;
+    color: variables.$primary;
+    text-decoration: variables.$link-decoration;
     border: none;
     background: none;
     box-shadow: none;
@@ -68,15 +60,15 @@
     &.hover {
         &::after {
             height: 2px;
-            width: calc(100% - #{$btn-padding-x-lg});
-            color: $btn-link-hover-color;
+            width: calc(100% - #{variables.$btn-padding-x-lg});
+            color: variables.$btn-link-hover-color;
             content: "";
             position: absolute;
             transform: translateX(-50%);
             left: 50%;
             margin-top: 2rem;
             bottom: 0.1em;
-            background: $primary;
+            background: variables.$primary;
         }
     }
     &:focus,
@@ -84,19 +76,19 @@
       box-shadow: none;
       &::after {
         height: 2px;
-        width: calc(100% - #{$btn-padding-x-lg});
+        width: calc(100% - #{variables.$btn-padding-x-lg});
         content: "";
         position: absolute;
         transform: translateX(-50%);
         left: 50%;
         margin-top: 2rem;
         bottom: 0.1em;
-        background: $primary;
+        background: variables.$primary;
     }
     }
     &:disabled,
     &.disabled {
-      color: $btn-link-disabled-color;
+      color: variables.$btn-link-disabled-color;
       text-decoration: none;
     }
   }

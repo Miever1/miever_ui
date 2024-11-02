@@ -1,15 +1,16 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Icon from './index';
 import { IIconProps }  from './interface';
 
 export default {
   title: 'General/Icon',
-  component: Icon
+  component: Icon,
+  tags: ['autodocs'],
 } as Meta;
 
-const Template: Story<IIconProps> = (args) => <Icon {...args}>Icon</Icon>;
+const Template: StoryFn<IIconProps> = (args) => <Icon {...args}>Icon</Icon>;
 export const Basic = Template.bind({});
 Basic.args = { icon: ["fab", "github"] };
 
