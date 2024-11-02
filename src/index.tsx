@@ -1,4 +1,3 @@
-// src/index.tsx
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +14,7 @@ import Tooltip from './Components/Tooltip';
 // Add FontAwesome solid icons to the library
 library.add(fas);
 
-// Export only components
+// Export components
 export {
     Box,
     Button,

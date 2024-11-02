@@ -1,3 +1,4 @@
+import React from "react";
 import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import { BoxProps } from "./interface";  // Ensure BoxProps type definition is correct
@@ -56,10 +57,5 @@ const BoxWrapper = styled.div<BoxProps>`
 const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     return <BoxWrapper {...props} ref={ref} />;
 });
-
-// Ensure PropTypes are defined correctly if used
-Box.propTypes = {
-  // Add prop-types validation here if needed
-};
 
 export default Box;
