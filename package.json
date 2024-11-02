@@ -1,8 +1,27 @@
 {
-  "name": "storybook",
-  "private": true,
-  "version": "0.0.0",
+  "name": "miever_ui",
+  "version": "0.1.3",
+  "private": false,
+  "author": "Miever",
+  "license": "MPL-2.0 license",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/Miever1/miever_ui",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Miever1/miever_ui.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "React UI Component",
+    "React",
+    "Miever",
+    "React Components Library"
+  ],
 "scripts": {
     "dev": "vite",
     "test": "jest",
@@ -12,11 +31,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "clean-build": "rimraf ./dist",
-    "build-ts": "tsc -p tsconfig.build.json",
-    "build-css": "node-sass ./src/Styles/index.scss ./dist/index.css",
     "prepublish": "npm run lint && npm run test && npm run build",
     "prepare": "husky install"
-  },
+},
   "dependencies": {
     "@mdx-js/react": "^3.1.0",
     "miever_ui": "^0.1.2",
