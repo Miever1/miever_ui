@@ -8,6 +8,6 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src/components/**/*"],
-  "exclude": ["node_modules","**/*.stories.tsx", "**/*.test.tsx"]
+  "include": ["src/Components/**/*"],
+  "exclude": ["node_modules", "**/*.stories.tsx", "**/*.test.tsx"]
 }
