@@ -2,23 +2,26 @@
   "name": "miever_ui",
   "version": "0.1.8",
   "private": false,
+  "author": "Miever",
+  "license": "MPL-2.0 license",
+  "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "style": "dist/style.css",
+  "homepage": "https://github.com/Miever1/miever_ui",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Miever1/miever_ui.git"
+  },
   "files": [
-    "dist" 
+    "dist"
   ],
-  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.cjs.js"
     }
-  },
-  "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "keywords": [
     "React UI Component",
@@ -26,7 +29,6 @@
     "Miever",
     "React Components Library"
   ],
-  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "test": "jest",
@@ -39,8 +41,25 @@
     "prepublish": "npm run lint && npm run test && npm run build",
     "prepare": "husky install"
   },
-  "devDependencies": {
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mdx-js/react": "^3.1.0",
+    "classnames": "^2.5.1",
+    "rc-tooltip": "^6.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-transition-group": "^4.4.5"
+  },
+  "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@storybook/addon-docs": "^8.4.1",
     "@storybook/addon-essentials": "^8.4.1",
