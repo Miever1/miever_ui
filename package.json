@@ -5,9 +5,10 @@
   "author": "Miever",
   "license": "MPL-2.0 license",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "style": "dist/style.css",
   "homepage": "https://github.com/Miever1/miever_ui",
   "repository": {
     "type": "git",
@@ -16,6 +17,12 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
   "keywords": [
     "React UI Component",
     "React",
@@ -34,11 +41,23 @@
     "prepublish": "npm run lint && npm run test && npm run build",
     "prepare": "husky install"
   },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mdx-js/react": "^3.1.0",
-    "miever_ui": "^0.1.2",
+    "classnames": "^2.5.1",
+    "rc-tooltip": "^6.2.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
