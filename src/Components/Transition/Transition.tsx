@@ -17,7 +17,7 @@ import Box from '../Box';
  */
 
 const Transition: FunctionComponent<TransitionProps> = ({
-    wrapper,
+    wrapper = false,
     children,
     classNames,
     animation,
@@ -27,6 +27,8 @@ const Transition: FunctionComponent<TransitionProps> = ({
 }) => {
     return (
         <CSSTransition
+            appear={appear}
+            unmountOnExit={unmountOnExit}
             classNames={classNames ?? animation}
             {...restProps}
         >

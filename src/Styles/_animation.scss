@@ -1,4 +1,6 @@
-@include zoom-animation('top', scaleY(0), scaleY(1), center top);
-@include zoom-animation('left', scale(.45, .45), scaleY(1, 1), center left);
-@include zoom-animation('right', scale(.45, .45), scaleY(1, 1), center right);
-@include zoom-animation('bottom', scaleY(0), scaleY(1), center bottom);
+@use 'mixin';
+
+@include mixin.zoom-animation('top', scaleY(0), scaleY(1), center top);
+@include mixin.zoom-animation('left', scale(.45, .45), scaleY(1, 1), center left);
+@include mixin.zoom-animation('right', scale(.45, .45), scaleY(1, 1), center right);
+@include mixin.zoom-animation('bottom', scaleY(0), scaleY(1), center bottom);

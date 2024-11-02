@@ -1,26 +1,18 @@
 // config
-@import "variables";
+@use "variables";
 
 // layout
-@import "reboot";
+@use "reboot";
 
 // mixin
-@import "mixin";
+@use "mixin";
 
 // animation
-@import "animation";
+@use "animation";
 
-// layout
-@import "../Components/Button/style";
-
-// menu
-@import "../Components/Menu/style";
-
-// icon
-@import "../Components/Icon/style";
-
-// input
-@import "../Components/Input/style";
-
-// card
-@import "../Components/Card/style"
+// layout for components
+@use "../Components/Button/style" as Button;
+@use "../Components/Menu/style" as Menu;
+@use "../Components/Icon/style" as Icon;
+@use "../Components/Input/style" as Input;
+@use "../Components/Card/style" as Card;

@@ -1,3 +1,6 @@
+@use "sass:color";
+@use 'variables' as *;
+
 @mixin button-size($padding-y, $padding-x, $font-size, $border-raduis) {
     padding: $padding-y $padding-x;
     font-size: $font-size;
@@ -8,8 +11,8 @@
     $background,
     $border,
     $color,
-    $hover-background: lighten($background, 7.5%),
-    $hover-border: lighten($background, 10%),
+    $hover-background: color.adjust($background, $lightness: 7.5%),
+    $hover-border: color.adjust($background, $lightness: 10%),
     $hover-color: $color,
 ) {
     color: $color;
@@ -39,7 +42,7 @@
     &:active {
         color: $hover-color;
         background: $background;
-        border: lighten($hover-color, 7.5%) 1px solid;
+        border: color.adjust($hover-color, $lightness: 7.5%) 1px solid;
     }
 }
 

@@ -1,18 +1,16 @@
 {
     "compilerOptions": {
-        "outDir": "dist",
-        "module": "esnext",
-        "target": "ES5",
-        "declaration": true,
-        "jsx": "react",
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true
+      "outDir": "./dist",
+      "declaration": true,
+      "declarationDir": "./dist",
+      "module": "ESNext",
+      "target": "es5",
+      "jsx": "react-jsx",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "strict": true
     },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "src/**/*.test.tsx",
-        "src/**/*.stories.tsx"
-    ]  
-}
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.stories.tsx"]
+  }

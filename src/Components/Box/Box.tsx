@@ -1,63 +1,61 @@
-import React, { FunctionComponent, forwardRef } from "react"
+import React from "react";
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
-import { BoxProps } from "./interface";
+import { BoxProps } from "./interface";  // Ensure BoxProps type definition is correct
 import { SPACE_LIST, SPACE_SIZE, SpaceType } from "../../Designs";
 
-const BoxWrapper = styled("div")((props: BoxProps) => {
-    const { flexBox, direction, justifyContent, alignItems, width, height, padding, paddingX, paddingY } = props
-    let styleText = `
-        display: ${flexBox ? "flex" : "block"};
-        flex-direction: ${direction};
-        justify-content: ${justifyContent};
-        align-items: ${alignItems};
-    `;
-    if (width) {
-        styleText += `width: ${width}${typeof width === "number" ? "px" : ""};`;
+// Define the styled BoxWrapper component
+const BoxWrapper = styled.div<BoxProps>`
+  display: ${({ flexBox }) => (flexBox ? "flex" : "block")};
+  flex-direction: ${({ direction }) => direction};
+  justify-content: ${({ justifyContent }) => justifyContent};
+  align-items: ${({ alignItems }) => alignItems};
+  width: ${({ width }) => (width ? `${width}${typeof width === "number" ? "px" : ""}` : "auto")};
+  height: ${({ height }) => (height ? `${height}${typeof height === "number" ? "px" : ""}` : "auto")};
+
+  /* Handle padding properties */
+  padding: ${({ padding }) => padding ? `${typeof padding === "number" ? padding * 4 : padding}${typeof padding === "number" ? "px" : ""}` : "0"};
+  padding-left: ${({ paddingX }) => paddingX ? `${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""}` : "0"};
+  padding-right: ${({ paddingX }) => paddingX ? `${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""}` : "0"};
+  padding-top: ${({ paddingY }) => paddingY ? `${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""}` : "0"};
+  padding-bottom: ${({ paddingY }) => paddingY ? `${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""}` : "0"};
+  
+  /* Handle special padding values using SPACE_LIST */
+  ${({ paddingX, paddingY, padding }) => {
+    let styles = "";
+    if (SPACE_LIST.includes(`${paddingX}`)) {
+      styles += `
+        padding-left: ${SPACE_SIZE[paddingX as SpaceType]};
+        padding-right: ${SPACE_SIZE[paddingX as SpaceType]};
+      `;
     }
-    if (height) {
-        styleText += `height: ${height}${typeof height === "number" ? "px" : ""};`;
+    if (SPACE_LIST.includes(`${paddingY}`)) {
+      styles += `
+        padding-top: ${SPACE_SIZE[paddingY as SpaceType]};
+        padding-bottom: ${SPACE_SIZE[paddingY as SpaceType]};
+      `;
     }
-    if (paddingX) {
-        styleText += `
-            padding-left: ${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""};
-            padding-right: ${typeof paddingX === "number" ? paddingX * 4 : paddingX}${typeof paddingX === "number" ? "px" : ""};
-        `;
-        if (SPACE_LIST.includes(`${paddingX}`)) {
-            styleText += `padding-left: ${SPACE_SIZE[paddingX as SpaceType]};padding-right: ${SPACE_SIZE[paddingX as SpaceType]};`;
-        }
+    if (SPACE_LIST.includes(`${padding}`)) {
+      styles += `
+        padding: ${SPACE_SIZE[padding as SpaceType]};
+      `;
     }
-    if (paddingY) {
-        styleText += `
-            padding-top: ${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""};
-            padding-bottom: ${typeof paddingY === "number" ? paddingY * 4 : paddingY}${typeof paddingY === "number" ? "px" : ""};
-        `;
-        if (SPACE_LIST.includes(`${paddingY}`)) {
-            styleText += `padding-top: ${SPACE_SIZE[paddingY as SpaceType]};padding-bottom: ${SPACE_SIZE[paddingY as SpaceType]};`;
-        }
-    }
-    if (padding) {
-        styleText += `padding: ${typeof padding === "number" ? padding * 4 : padding}${typeof padding === "number" ? "px" : ""};`;
-        if (SPACE_LIST.includes(`${padding}`)) {
-            styleText += `padding: ${SPACE_SIZE[padding as SpaceType]}`;
-        }
-    }
-    return styleText;
-})
+    return styles;
+  }}
+`;
 
 /**
- * 
- * Box is the most abstract component on top of which all other Miever UI components are built. By default, it renders a `div` element
+ * Box component is the most abstract component on top of which all other Miever UI components are built.
+ * By default, it renders a `div` element.
  * 
  *  ```javascript
- *      import { Box } from 'miever_components';
+ *      import { Box } from 'miever_ui';
  *  ```
  * @param BoxProps 
- * @returns 
+ * @returns Rendered Box component
  */
-
-const Box: FunctionComponent<BoxProps> = forwardRef((props, ref) => {
-    const { className } = props;
-    return <BoxWrapper {...props} ref={ref} className={className} />
-})
+const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+    return <BoxWrapper {...props} ref={ref} />;
+});
 
 export default Box;
