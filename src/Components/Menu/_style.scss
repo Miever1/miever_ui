@@ -1,4 +1,4 @@
-@use '../../Styles/variables' as variables;
+@use '../../Styles/variables' as menuVars;
 
 .menu {
   display: flex;
@@ -6,23 +6,23 @@
   flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  border-bottom: variables.$menu-border-width solid variables.$menu-border-color;
-  box-shadow: variables.$menu-box-shadow;
+  border-bottom: menuVars.$menu-border-width solid menuVars.$menu-border-color;
+  box-shadow: menuVars.$menu-box-shadow;
   >.menu-item {
-    padding: variables.$menu-item-padding-y variables.$menu-item-padding-x;
+    padding: menuVars.$menu-item-padding-y menuVars.$menu-item-padding-x;
     cursor: pointer;
-    transition: variables.$menu-transition;
+    transition: menuVars.$menu-transition;
     &:hover, &:focus {
       text-decoration: none;
     }
     &.disabled {
-      color: variables.$menu-item-disabled-color;
+      color: menuVars.$menu-item-disabled-color;
       pointer-events: none;
       cursor: default;
     }
     &.active, &:hover {
-      color: variables.$menu-item-active-color;
-      border-bottom: variables.$menu-item-active-border-width solid variables.$menu-item-active-color;
+      color: menuVars.$menu-item-active-color;
+      border-bottom: menuVars.$menu-item-active-border-width solid menuVars.$menu-item-active-color;
     }
   }
 
@@ -61,12 +61,12 @@
     padding-left: 0;
     white-space: nowrap;
     .menu-item {
-      padding: variables.$menu-item-padding-y variables.$menu-item-padding-x;
+      padding: menuVars.$menu-item-padding-y menuVars.$menu-item-padding-x;
       cursor: pointer;
-      transition: variables.$menu-transition;
-      color: variables.$body-color;
+      transition: menuVars.$menu-transition;
+      color: menuVars.$body-color;
       &.active, &:hover {
-        color: variables.$menu-item-active-color !important;
+        color: menuVars.$menu-item-active-color !important;
       }
     }
   }
@@ -76,16 +76,16 @@
 }
 .menu-horizontal {
   >.menu-item {
-    border-bottom: variables.$menu-item-active-border-width solid transparent;
+    border-bottom: menuVars.$menu-item-active-border-width solid transparent;
   }
   .submenu {
     position: absolute;
-    background: variables.$white;
+    background: menuVars.$white;
     z-index: 100;
     top: calc(100% + 8px);
     left: 0;
-    border: variables.$menu-border-width solid variables.$menu-border-color;
-    box-shadow: variables.$submenu-box-shadow;
+    border: menuVars.$menu-border-width solid menuVars.$menu-border-color;
+    box-shadow: menuVars.$submenu-box-shadow;
   }
 }
 
@@ -93,12 +93,12 @@
   flex-direction: column;
   border-bottom: 0px;
   margin: 10px 20px;
-  border-right: variables.$menu-border-width solid variables.$menu-border-color;
+  border-right: menuVars.$menu-border-width solid menuVars.$menu-border-color;
   >.menu-item {
-    border-left: variables.$menu-item-active-border-width solid transparent;
+    border-left: menuVars.$menu-item-active-border-width solid transparent;
     &.active, &:hover {
       border-bottom: 0px;
-      border-left: variables.$menu-item-active-border-width solid variables.$menu-item-active-color;
+      border-left: menuVars.$menu-item-active-border-width solid menuVars.$menu-item-active-color;
     }
   }
 }

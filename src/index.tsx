@@ -1,5 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import './Styles/index.scss';
 
 // Import components
 import Box from './Components/Box';
@@ -10,6 +11,8 @@ import Menu from './Components/Menu';
 import Transition from './Components/Transition';
 import Card from './Components/Card';
 import Tooltip from './Components/Tooltip';
+
+import { designs } from './Designs';
 
 // Add FontAwesome solid icons to the library
 library.add(fas);
@@ -24,4 +27,5 @@ export {
     Transition,
     Card,
     Tooltip,
+    designs
 };

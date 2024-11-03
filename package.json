@@ -5,24 +5,26 @@
   "author": "Miever",
   "license": "MPL-2.0 license",
   "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "style": "dist/style.css",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "homepage": "https://github.com/Miever1/miever_ui",
   "repository": {
     "type": "git",
     "url": "git@github.com:Miever1/miever_ui.git"
   },
   "files": [
-    "dist"
+    "dist/cjs",
+    "dist/esm",
+    "dist/types",
+    "dist/index.css"
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style": "./dist/index.css"
   },
   "keywords": [
     "React UI Component",
@@ -35,16 +37,13 @@
     "test": "jest",
     "build": "npm run clean-build && tsc -b tsconfig.build.json && vite build",
     "lint": "eslint .",
+    "watch": "tsc -b tsconfig.build.json --watch",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "clean-build": "rimraf ./dist",
     "prepublish": "npm run lint && npm run test && npm run build",
     "prepare": "husky install"
-  },
-  "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -91,7 +90,8 @@
     "ts-jest": "^29.2.5",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.11.0",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vite-plugin-dts": "^4.3.0"
   },
   "eslintConfig": {
     "extends": [

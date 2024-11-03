@@ -2,9 +2,9 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "*": ["*"]
+      "*": ["src/*", "node_modules/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
