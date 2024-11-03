@@ -3,8 +3,8 @@ import type { SpaceType } from "./types";
 const SPACE_LIST = ["xs", "sm", "md", "lg", "xlg", "xxlg", "xxxlg"];
 
 const BRAND_COLORS = {
-    primary: "#12aa9c",
-    secondary: "#6f42c1",
+    primary: "#0CC0DF",
+    secondary: "#12aa9c",
     success: "#20c997",
     info: "#17a2b8",
     warning: "#fadb14",
