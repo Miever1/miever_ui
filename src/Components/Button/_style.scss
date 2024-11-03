@@ -1,58 +1,58 @@
-@use '../../Styles/variables' as variables;
+@use '../../Styles/variables' as buttonVars;
 @use '../../Styles/mixin' as mixin;
 
 .btn {
     position: relative;
     display: inline-block;
-    font-weight: variables.$btn-font-weight;
-    line-height: variables.$btn-line-height;
-    color: variables.$body-color;
+    font-weight: buttonVars.$btn-font-weight;
+    line-height: buttonVars.$btn-line-height;
+    color: buttonVars.$body-color;
     white-space: nowrap;
     text-align: center;
     vertical-align: middle;
     background-image: none;
-    border: variables.$btn-border-width solid transparent;
-    box-shadow: variables.$btn-box-shadow;
+    border: buttonVars.$btn-border-width solid transparent;
+    box-shadow: buttonVars.$btn-box-shadow;
     cursor: pointer;
-    transition: variables.$btn-transition;
-    @include mixin.button-size(variables.$btn-padding-y, variables.$btn-padding-x, variables.$btn-font-size, variables.$btn-border-radius);
+    transition: buttonVars.$btn-transition;
+    @include mixin.button-size(buttonVars.$btn-padding-y, buttonVars.$btn-padding-x, buttonVars.$btn-font-size, buttonVars.$btn-border-radius);
     &.disabled,
     &[disabled] {
         cursor: not-allowed;
-        opacity: variables.$btn-disabled-opacity;
+        opacity: buttonVars.$btn-disabled-opacity;
         box-shadow: none;
         pointer-events: none;
     }
 }
 
 .btn-lg {
-    @include mixin.button-size(variables.$btn-padding-y-lg, variables.$btn-padding-x-lg, variables.$btn-font-size-lg, variables.$btn-border-radius-lg);
+    @include mixin.button-size(buttonVars.$btn-padding-y-lg, buttonVars.$btn-padding-x-lg, buttonVars.$btn-font-size-lg, buttonVars.$btn-border-radius-lg);
 }
 
 .btn-sm {
-    @include mixin.button-size(variables.$btn-padding-y-sm, variables.$btn-padding-x-sm, variables.$btn-font-size-sm, variables.$btn-border-radius-sm);
+    @include mixin.button-size(buttonVars.$btn-padding-y-sm, buttonVars.$btn-padding-x-sm, buttonVars.$btn-font-size-sm, buttonVars.$btn-border-radius-sm);
 }
 
 .btn-danger {
-    @include mixin.button-style(variables.$danger, variables.$danger, variables.$white);
+    @include mixin.button-style(buttonVars.$danger, buttonVars.$danger, buttonVars.$white);
 }
 
 .btn-primary {
-    @include mixin.button-style(variables.$primary, variables.$primary, variables.$white);
+    @include mixin.button-style(buttonVars.$primary, buttonVars.$primary, buttonVars.$white);
 }
 
 .btn-default {
-    @include mixin.button-style(variables.$white, variables.$gray-400, variables.$black, variables.$white ,variables.$primary, variables.$primary);
+    @include mixin.button-style(buttonVars.$white, buttonVars.$gray-400, buttonVars.$black, buttonVars.$white ,buttonVars.$primary, buttonVars.$primary);
 }
 
 .btn-secondary {
-    @include mixin.button-style(variables.$secondary, variables.$secondary, variables.$white);
+    @include mixin.button-style(buttonVars.$secondary, buttonVars.$secondary, buttonVars.$white);
 }
 
 .btn-link {
-    font-weight: variables.$font-weight-normal;
-    color: variables.$primary;
-    text-decoration: variables.$link-decoration;
+    font-weight: buttonVars.$font-weight-normal;
+    color: buttonVars.$primary;
+    text-decoration: buttonVars.$link-decoration;
     border: none;
     background: none;
     box-shadow: none;
@@ -60,15 +60,15 @@
     &.hover {
         &::after {
             height: 2px;
-            width: calc(100% - #{variables.$btn-padding-x-lg});
-            color: variables.$btn-link-hover-color;
+            width: calc(100% - #{buttonVars.$btn-padding-x-lg});
+            color: buttonVars.$btn-link-hover-color;
             content: "";
             position: absolute;
             transform: translateX(-50%);
             left: 50%;
             margin-top: 2rem;
             bottom: 0.1em;
-            background: variables.$primary;
+            background: buttonVars.$primary;
         }
     }
     &:focus,
@@ -76,19 +76,19 @@
       box-shadow: none;
       &::after {
         height: 2px;
-        width: calc(100% - #{variables.$btn-padding-x-lg});
+        width: calc(100% - #{buttonVars.$btn-padding-x-lg});
         content: "";
         position: absolute;
         transform: translateX(-50%);
         left: 50%;
         margin-top: 2rem;
         bottom: 0.1em;
-        background: variables.$primary;
+        background: buttonVars.$primary;
     }
     }
     &:disabled,
     &.disabled {
-      color: variables.$btn-link-disabled-color;
+      color: buttonVars.$btn-link-disabled-color;
       text-decoration: none;
     }
   }

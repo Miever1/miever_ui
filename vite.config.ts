@@ -1,26 +1,47 @@
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      outDir: 'dist/types',
+      insertTypesEntry: true,
+    })
+  ] as Plugin[],
   build: {
+    outDir: 'dist',
+    emptyOutDir: false,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.tsx'),  // Set the main entry point
+      entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'miever_ui',
-      fileName: (format) => `index.${format}.js`,       // Output file name
-      formats: ['es', 'cjs']                            // Output as ES and CommonJS modules
+      formats: ['es', 'cjs'],
+      fileName: (format) => {
+        if (format === 'es') {
+          return 'esm/index.js';
+        } else if (format === 'cjs') {
+          return 'cjs/index.js';
+        }
+        return 'index.js';
+      }
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],                 // Treat `react` and `react-dom` as external dependencies
+      external: ['react', 'react-dom'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
-        }
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'index.css';
+          }
+          return 'assets/[name][extname]';
+        },
       }
     },
-    outDir: 'dist',                                     // Output directory
-    emptyOutDir: true                                   // Clean the output directory before building
+    cssCodeSplit: false,
   }
 });
