@@ -45,38 +45,3 @@ export default defineConfig({
     cssCodeSplit: false,
   }
 });
-
-// import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react';
-// import path from 'path';
-
-// export default defineConfig({
-//   plugins: [react()],
-//   build: {
-//     outDir: 'dist/vite',
-//     lib: {
-//       name: 'miever_ui',
-//       entry: path.resolve(__dirname, 'src/index.tsx'),
-//       formats: ['es', 'cjs'],
-//       fileName: (format) => `index.${format}.js`,
-//     },
-//     rollupOptions: {
-//       external: ['react', 'react-dom'],
-//       output: {
-//         globals: {
-//                  react: 'React',
-//                 'react-dom': 'ReactDOM'
-//                },
-
-//         entryFileNames: '[name].js',
-//         assetFileNames: (assetInfo) => {
-//           if (assetInfo.name === 'style.css') {
-//             return 'index.css';
-//           }
-//           return 'assets/[name][extname]';
-//         },
-//       },
-//     },
-//     cssCodeSplit: false,
-//   },
-// });
