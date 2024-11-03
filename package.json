@@ -97,5 +97,8 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "resolutions": {
+    "esbuild": "^0.24.0"
   }
 }
