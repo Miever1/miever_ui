@@ -1,10 +1,10 @@
-import React, { ForwardRefRenderFunction, forwardRef } from "react"
+import React, { FunctionComponent } from "react";
 import styled from "@emotion/styled";
 import { BoxProps } from "./interface";
 import { SPACE_LIST, SPACE_SIZE, SpaceType } from "../../Designs";
 
 const BoxWrapper = styled("div")((props: BoxProps) => {
-    const { flexBox, direction, justifyContent, alignItems, width, height, padding, paddingX, paddingY } = props
+    const { flexBox, direction, justifyContent, alignItems, width, height, padding, paddingX, paddingY } = props;
     let styleText = `
         display: ${flexBox ? "flex" : "block"};
         flex-direction: ${direction};
@@ -42,22 +42,25 @@ const BoxWrapper = styled("div")((props: BoxProps) => {
         }
     }
     return styleText;
-})
+});
 
 /**
+ * Box is a versatile and customizable container component that can be used as a building block for creating layouts.
+ * By default, it renders a `div` element, but it can be easily customized to suit various needs.
  * 
- * Box is the most abstract component on top of which all other Miever UI components are built. By default, it renders a `div` element
+ * ### Usage
+ * ```javascript
+ * import { Box } from 'miever_components';
  * 
- *  ```javascript
- *      import { Box } from 'miever_components';
- *  ```
- * @param BoxProps 
- * @returns 
+ * <Box padding="sm" width="200px" height="100px">
+ *   Content goes here
+ * </Box>
+ * ```
  */
 
-const Box: ForwardRefRenderFunction<HTMLDivElement, BoxProps> = (props, ref) => {
+const Box: FunctionComponent<BoxProps> = (props) => {
     const { className } = props;
-    return <BoxWrapper {...props} ref={ref} className={className} />
-}
+    return <BoxWrapper {...props} className={className} />;
+};
 
-export default forwardRef(Box);
+export default Box;

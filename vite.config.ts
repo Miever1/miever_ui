@@ -19,13 +19,8 @@ export default defineConfig({
       name: 'miever_ui',
       formats: ['es', 'cjs'],
       fileName: (format) => {
-        if (format === 'es') {
-          return 'esm/index.js';
-        } else if (format === 'cjs') {
-          return 'cjs/index.js';
-        }
-        return 'index.js';
-      }
+        return format === 'es' ? 'esm/index.js' : 'cjs/index.js';
+      },
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -35,10 +30,9 @@ export default defineConfig({
           'react-dom': 'ReactDOM'
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') {
-            return 'index.css';
-          }
-          return 'assets/[name][extname]';
+          return assetInfo.name === 'style.css'
+            ? 'index.css'
+            : 'assets/[name][extname]';
         },
       }
     },

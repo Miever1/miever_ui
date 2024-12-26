@@ -5,14 +5,20 @@ import Box from "../Box";
 import { ICardProps } from "./interface";
 
 /**
+ * A versatile and customizable rectangular container for displaying content.
  * 
- * Simple rectangular container.
- * 
- *  ```javascript
- *      import { Card } from 'miever_components';
- *  ```
- * @param ICardProps 
- * @returns 
+ * ```jsx
+ * import { Card } from 'miever_components';
+ *
+ * <Card 
+ *   title="Card Title" 
+ *   subTitle="Card Subtitle" 
+ *   hoverable 
+ *   style={{ width: '300px', padding: '16px' }}
+ * >
+ *   This is the content of the card.
+ * </Card>
+ * ```
  */
 
 const Card:FunctionComponent<ICardProps> = ({
