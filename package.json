@@ -17,7 +17,7 @@
     "dist/cjs",
     "dist/esm",
     "dist/types",
-    "dist/assets/index.css"
+    "dist/assets/miever_ui.css"
   ],
   "exports": {
     ".": {
