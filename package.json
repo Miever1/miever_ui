@@ -17,7 +17,7 @@
     "dist/cjs",
     "dist/esm",
     "dist/types",
-    "dist/index.css"
+    "dist/assets/index.css"
   ],
   "exports": {
     ".": {
