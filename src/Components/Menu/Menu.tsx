@@ -71,13 +71,13 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
             data-testid="test-menu"
         >
             {mode === "horizontal" && prefix && (
-                <li aria-hidden="true">
+                <li>
                     {prefix}
                 </li>
             )}
             {renderChildren()}
             {mode === "horizontal" && suffix && (
-                <li aria-hidden="true" style={{ position: "absolute", right: 0 }}>
+                <li style={{ position: "absolute", right: 0 }}>
                     {suffix}
                 </li>
             )}
