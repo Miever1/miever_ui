@@ -16,43 +16,52 @@ export default {
     },
     styleType: {
       control: { type: 'select' },
-      options: ['default', 'primary', 'danger', 'link', 'disabled', 'secondary'],
+      options: ['default', 'primary', 'danger', 'link', 'secondary'],
       description: 'Determines the button style',
     },
   },
 } as Meta;
 
+// Basic Button Story
 const Template: StoryFn<IButtonProps> = (args) => <Button {...args}>Button</Button>;
 
-// Basic Button Story
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {
+  size: 'md',
+  styleType: 'default',
+};
 
-// Button Styles
-export const StyleType = Template.bind({});
-StyleType.args = { styleType: 'primary' };
-
-// Sizes
-export const Size = Template.bind({});
-Size.args = { size: 'md' };
-
-// Multiple Style Variations
-export const StyleVariations: React.VFC = () => (
-  <>
-    <Button styleType="link" style={{ marginRight: '8px' }}>Link</Button>
-    <Button styleType="default" style={{ marginRight: '8px' }}>Default</Button>
-    <Button styleType="primary" style={{ marginRight: '8px' }}>Primary</Button>
-    <Button styleType="danger" style={{ marginRight: '8px' }}>Danger</Button>
-    <Button styleType="disabled" style={{ marginRight: '8px' }}>Disabled</Button>
-    <Button styleType="secondary" style={{ marginRight: '8px' }}>Secondary</Button>
-  </>
+// Button Styles Variations
+export const StyleVariations = () => (
+  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+    <Button styleType="default">Default</Button>
+    <Button styleType="primary">Primary</Button>
+    <Button styleType="secondary">Secondary</Button>
+    <Button styleType="danger">Danger</Button>
+    <Button disabled>Disabled</Button>
+    <Button styleType="link">Link</Button>
+  </div>
 );
+StyleVariations.parameters = {
+  docs: {
+    description: {
+      story: 'Showcases all the different button styles supported by the `Button` component.',
+    },
+  },
+};
 
-// Multiple Size Variations
-export const SizeVariations: React.VFC = () => (
-  <>
-    <Button size="sm" style={{ marginRight: '8px' }}>Small</Button>
-    <Button size="md" style={{ marginRight: '8px' }}>Medium</Button>
-    <Button size="lg">Large</Button>
-  </>
+// Button Size Variations
+export const SizeVariations = () => (
+  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+    <Button size="sm" style={{ flex: 'none' }}>Small</Button>
+    <Button size="md" style={{ flex: 'none' }}>Medium</Button>
+    <Button size="lg" style={{ flex: 'none' }}>Large</Button>
+  </div>
 );
+SizeVariations.parameters = {
+  docs: {
+    description: {
+      story: 'Displays buttons in small, medium, and large sizes.',
+    },
+  },
+};

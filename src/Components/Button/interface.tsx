@@ -14,10 +14,9 @@ export type ButtonSizes = 'sm' | 'md' | 'lg';
  * - 'primary' - Primary action button
  * - 'danger' - Warning or danger button
  * - 'link' - Link-styled button
- * - 'disabled' - Disabled style
  * - 'secondary' - Secondary action button
  */
-export type ButtonStyleTypes = 'default' | 'primary' | 'danger' | 'link' | 'disabled' | 'secondary';
+export type ButtonStyleTypes = 'default' | 'primary' | 'danger' | 'link' | 'secondary';
 
 /**
  * Props for the Button component.

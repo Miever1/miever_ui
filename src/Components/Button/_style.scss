@@ -88,8 +88,10 @@
     }
     &:disabled,
     &.disabled {
-      color: buttonVars.$btn-link-disabled-color;
-      text-decoration: none;
+        color: buttonVars.$btn-link-disabled-color;
+        text-decoration: none;
+        pointer-events: none;
+        cursor: not-allowed;
     }
   }
 

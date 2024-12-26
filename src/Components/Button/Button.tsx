@@ -3,13 +3,15 @@ import classNames from 'classnames';
 import { NativeButtonProps } from './interface';
 
 /**
- * A customizable button component.
- * 
- * @param {IButtonProps} props - Props for the button.
- * @param {'sm' | 'md' | 'lg'} [props.size='md'] - Specifies button size.
- * @param {'default' | 'primary' | 'danger' | 'link' | 'disabled' | 'secondary'} [props.styleType='default'] - Style variation of the button.
- * @param {boolean} [props.disabled=false] - Disables the button if true.
- * @returns {JSX.Element} The rendered button component.
+ *
+ * A versatile and customizable button component for various use cases.
+ *
+ * ### Usage
+ * ```javascript
+ * import { Button } from 'miever_components';
+ *
+ * <Button styleType="primary" size="lg">Click Me</Button>
+ * ```
  */
 const Button: FunctionComponent<NativeButtonProps> = ({
     size = 'md',

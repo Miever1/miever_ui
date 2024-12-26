@@ -11,9 +11,6 @@ import SubMenu from "./SubMenu";
  *  ```javascript
  *      import { Menu } from 'miever_components';
  *  ```
- * 
- * @param IMenuComponent 
- * @returns 
  */
 
 const Menu: React.FunctionComponent<IMenuProps> = ({
@@ -54,7 +51,15 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
                 )
             }
             return (
-                <MenuItem key={key} disabled={disabled} currentKey={currentKey} itemKey={key} label={label} handleClick={() => handleClick(key)} />
+                <MenuItem
+                    key={key}
+                    disabled={disabled}
+                    aria-disabled={disabled}
+                    currentKey={currentKey}
+                    itemKey={key}
+                    label={label}
+                    handleClick={() => handleClick(key)}
+                />
             )
         })
     }
@@ -65,9 +70,17 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
             className={classes}
             data-testid="test-menu"
         >
-            {mode === "horizontal" && prefix}
+            {mode === "horizontal" && prefix && (
+                <li aria-hidden="true">
+                    {prefix}
+                </li>
+            )}
             {renderChildren()}
-            {mode === "horizontal" && suffix && <div style={{ position: "absolute", right: 0 }}>{suffix}</div>}
+            {mode === "horizontal" && suffix && (
+                <li aria-hidden="true" style={{ position: "absolute", right: 0 }}>
+                    {suffix}
+                </li>
+            )}
         </ul>
     );
 }

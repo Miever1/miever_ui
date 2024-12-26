@@ -5,15 +5,23 @@ import { TransitionProps } from './interface';
 import Box from '../Box';
 
 /**
- * 
- * A simple encapsulation of CSSTransition.
- * 
- *  ```javascript
- *      import { Transition } from 'miever_components';
- *  ```
- * 
- * @param TransitionProps 
- * @returns 
+ * A wrapper component for `CSSTransition` from `react-transition-group`, providing easy integration for CSS-based animations.
+ * This component allows wrapping content with various transition animations and provides the ability to control the mounting/unmounting behavior.
+ *
+ * ### Usage
+ * ```javascript
+ * import { Transition } from 'miever_components';
+ *
+ * <Transition 
+ *   in={isVisible} 
+ *   timeout={300} 
+ *   animation="zoom-in-top" 
+ *   unmountOnExit
+ * >
+ *   <div>Your content here</div>
+ * </Transition>
+ * ```
+ *
  */
 
 const Transition: FunctionComponent<TransitionProps> = ({

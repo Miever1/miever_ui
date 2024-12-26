@@ -1,5 +1,6 @@
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { BRAND_COLORS } from '../../Designs';
 
 export interface IIconProps extends FontAwesomeIconProps {
-    theme?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark'
+    theme?: keyof typeof BRAND_COLORS;
 }
