@@ -24,7 +24,7 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
-    "./style": "./dist/index.css"
+    "./style": "./dist/assets/miever_ui.css"
   },
   "keywords": [
     "React UI Component",
