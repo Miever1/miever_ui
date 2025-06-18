@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-export type InputSizes = 'sm' | 'lg';
+export type InputSizes = 'sm' | 'md' | 'lg';
 
 export interface InputProps {
     size?: InputSizes,

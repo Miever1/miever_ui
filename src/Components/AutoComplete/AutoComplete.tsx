@@ -1,5 +1,4 @@
 import React, {
-    FunctionComponent,
     useState,
     useRef,
     useMemo,
@@ -55,7 +54,7 @@ import Transition from '../Transition';
  * ```
  */
 
-const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
+const AutoComplete = <T,>({
     value = '',
     size = 'md',
     disabled = false,
@@ -67,7 +66,7 @@ const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
     renderOption,
     placeholder = 'Search...',
     ...restProps
-}) => {
+}: AutoCompleteProps<T>) => {
     const [inputValue, setInputValue] = useState(String(value || ''));
     const [showOptions, setShowOptions] = useState(false);
     const [highlightIndex, setHighlightIndex] = useState(-1);
@@ -85,7 +84,7 @@ const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
         }
     };
 
-    const defaultGetOptionLabel = (option: any): string => {
+    const defaultGetOptionLabel = (option: T): string => {
         if (typeof option === 'string' || typeof option === 'number') {
             return String(option);
         }
@@ -98,7 +97,7 @@ const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
         return String(option);
     };
 
-    const defaultFilterFunction = (input: string, options: any[]): any[] => {
+    const defaultFilterFunction = (input: string, options: T[]): T[] => {
         const inputStr = String(input || '');
         if (!inputStr.trim()) return options;
         
@@ -115,7 +114,7 @@ const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
         return filterFn(inputValue, options);
     }, [inputValue, options, filterFunction]);
 
-    const handleSelect = (selectedOption: any) => {
+    const handleSelect = (selectedOption: T) => {
         const displayValue = defaultGetOptionLabel(selectedOption);
         setInputValue(displayValue);
         onChange?.(displayValue);
@@ -160,7 +159,7 @@ const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
         }
     };
 
-    const renderTemplate = (option: any, index: number) => {
+    const renderTemplate = (option: T, index: number) => {
         if (renderOption) {
             return renderOption(option, index);
         }
