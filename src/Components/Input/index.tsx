@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import { NativeInputProps } from "./interface";
 import Box from '../Box';
+import Icon from '../Icon';
 
 /**
  * 
@@ -21,6 +22,7 @@ const Input: FunctionComponent<NativeInputProps> = ({
     size,
     disabled,
     style,
+    icon,
     ...restProps
 }) => {
 
@@ -31,10 +33,18 @@ const Input: FunctionComponent<NativeInputProps> = ({
     
     return (
         <Box className={classes} style={style}>
+            {icon && (
+                <Box className="icon-wrapper">
+                    <Icon
+                        icon={icon}
+                        size={size === 'lg' ? 'lg' : 'sm'}
+                    />
+                </Box>
+            )}
             <input
                 disabled={disabled}
                 className="input-inner"
-                {...restProps}
+                {...(restProps as React.InputHTMLAttributes<HTMLInputElement>)}
             />
         </Box>
         

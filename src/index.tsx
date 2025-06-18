@@ -11,6 +11,7 @@ import Menu from './Components/Menu';
 import Transition from './Components/Transition';
 import Card from './Components/Card';
 import Tooltip from './Components/Tooltip';
+import AutoComplete from './Components/AutoComplete';
 
 import { designs } from './Designs';
 
@@ -27,5 +28,6 @@ export {
     Transition,
     Card,
     Tooltip,
+    AutoComplete,
     designs
 };

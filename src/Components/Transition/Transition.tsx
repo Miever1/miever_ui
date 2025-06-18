@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { TransitionProps } from './interface';
@@ -33,8 +33,10 @@ const Transition: FunctionComponent<TransitionProps> = ({
     appear=true,
     ...restProps
 }) => {
+    const nodeRef = useRef(null);
     return (
         <CSSTransition
+            nodeRef={nodeRef}
             appear={appear}
             unmountOnExit={unmountOnExit}
             classNames={classNames ?? animation}

@@ -1,0 +1,53 @@
+@use '../../Styles/variables' as vars;
+
+.options-list {
+    background: vars.$autocomplete-bg;
+    border: vars.$autocomplete-border-width solid vars.$autocomplete-focus-border-color;
+    border-top: none;
+    border-radius: 0 0 vars.$autocomplete-border-radius vars.$autocomplete-border-radius;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.autocompelete-input {
+    margin-bottom: 0;
+}
+
+.autocompelete-input > .input-inner {
+    &:focus {
+        border-radius: vars.$autocomplete-border-radius vars.$autocomplete-border-radius 0 0;
+    }
+}
+
+.option-item {
+    padding: 0 vars.$autocomplete-padding-x;
+
+    &:hover,
+    &.highlight {
+        cursor: pointer;
+        background-color: vars.$primary;
+        color: vars.$white; 
+    }
+
+    &.disabled {
+        color: vars.$input-disabled-bg;
+        cursor: not-allowed;
+    }
+}
+
+.option-item-active {
+    background-color: vars.$primary;
+    color: vars.$white;
+}
+
+  .auto-complete-sm .input-inner {
+    padding: vars.$input-padding-y-sm vars.$input-padding-x-sm;
+    font-size: vars.$input-font-size-sm;
+    border-radius: vars.$input-border-radius-sm;
+  }
+  
+  .auto-complete-lg .input-inner {
+    padding: vars.$input-padding-y-lg vars.$input-padding-x-lg;
+    font-size: vars.$input-font-size-lg;
+    border-radius: vars.$input-border-radius-lg;
+  }

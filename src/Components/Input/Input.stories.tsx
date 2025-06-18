@@ -4,7 +4,7 @@ import Input from './index';
 import { NativeInputProps } from './interface';
 
 export default {
-  title: 'General/Input',
+  title: 'Data Entry/Input',
   component: Input,
   tags: ['autodocs'],
   argTypes: {
@@ -42,6 +42,13 @@ const Template: StoryFn<NativeInputProps> = (args) => <Input {...args} />;
 export const Basic = Template.bind({});
 Basic.args = {
   placeholder: 'Basic Input',
+};
+
+// Input with Icon
+export const InputWithIcon = Template.bind({});
+InputWithIcon.args = {
+  icon: 'search',
+  placeholder: 'Input with Icon',
 };
 
 // Disabled Input
