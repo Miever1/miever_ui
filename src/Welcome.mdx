@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs';
-import { Button } from 'miever_ui';
 
 <Meta title="Welcome" />
 
-<div style={{
+export const styles = {
+  container: {
     padding: '30px',
     fontFamily: 'Arial, sans-serif',
     color: '#333',
@@ -13,64 +13,140 @@ import { Button } from 'miever_ui';
     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     borderRadius: '10px',
     backgroundColor: '#fff'
-}}>
-  <h1 style={{
-      color: '#007bff',
-      fontSize: '2.5em',
-      fontWeight: '600',
-      textAlign: 'center',
-      marginBottom: '20px'
-  }}>Welcome to Miever UI</h1>
-  
-  <p style={{ fontSize: '18px', marginBottom: '20px' }}>
-    Miever UI is a versatile React component library designed to make your applications more robust, maintainable, and easy to develop.
-  </p>
+  },
+  title: {
+    color: '#0CC0DF',
+    fontSize: '2.5em',
+    fontWeight: '600',
+    textAlign: 'center',
+    marginBottom: '20px'
+  },
+  sectionTitle: {
+    color: '#495057',
+    fontSize: '1.5em',
+    fontWeight: '500',
+    marginTop: '30px',
+    marginBottom: '15px'
+  },
+  codeBlock: {
+    backgroundColor: '#f8f9fa',
+    padding: '15px',
+    borderRadius: '5px',
+    fontFamily: 'monospace',
+    color: '#333',
+    marginBottom: '20px',
+    border: '1px solid #e9ecef'
+  },
+  text: {
+    fontSize: '16px',
+    marginBottom: '10px'
+  },
+  introText: {
+    fontSize: '18px',
+    marginBottom: '20px',
+    textAlign: 'center'
+  },
+  image: {
+    width: '100%',
+    maxWidth: '400px',
+    height: 'auto',
+    display: 'block',
+    margin: '20px auto',
+    borderRadius: '8px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+  },
+  demoSection: {
+    marginTop: '15px',
+    padding: '20px',
+    backgroundColor: '#f8f9fa',
+    borderRadius: '8px',
+    textAlign: 'center',
+    border: '1px solid #e9ecef'
+  },
+  highlightBox: {
+    backgroundColor: '#e7f3ff',
+    padding: '15px',
+    borderRadius: '8px',
+    borderLeft: '4px solid #0CC0DF',
+    marginBottom: '20px'
+  }
+};
 
-  <h2 style={{ color: '#495057' }}>🧳 Installation</h2>
-  <div style={{
-      backgroundColor: '#f8f9fa',
-      padding: '15px',
-      borderRadius: '5px',
-      fontFamily: 'monospace',
-      color: '#333',
-      marginBottom: '20px'
-  }}>
-    <code style={{ display: 'block' }}>npm install miever_ui</code>
-    <code style={{ display: 'block', marginTop: '5px' }}>or</code>
-    <code style={{ display: 'block', marginTop: '5px' }}>yarn add miever_ui</code>
+export const CodeBlock = ({ children, title }) => (
+  <div>
+    {title && <h4 style={{ color: '#6c757d', fontSize: '14px', marginBottom: '8px' }}>{title}</h4>}
+    <div style={styles.codeBlock}>
+      {Array.isArray(children) ? 
+        children.map((child, index) => (
+          <code key={index} style={{ display: 'block', marginTop: index > 0 ? '5px' : '0' }}>
+            {child}
+          </code>
+        )) :
+        <code style={{ display: 'block' }}>{children}</code>
+      }
+    </div>
+  </div>
+);
+
+<main role="main" style={styles.container}>
+  <header>
+    <h1 style={styles.title}>Welcome to</h1>
+    
+    <img 
+      src="https://miever.s3.ap-east-1.amazonaws.com/static/miever-ui.jpg" 
+      alt="Miever UI Logo"
+      style={styles.image}
+    />
+    
+    <p style={styles.introText}>
+      Miever UI is a versatile React component library designed to make your applications more robust, maintainable, and easy to develop.
+    </p>
+  </header>
+
+  <div style={styles.highlightBox}>
+    <p style={{ margin: 0, fontSize: '16px' }}>
+      <strong>🚀 Quick Start:</strong> Get up and running with Miever UI in minutes. Explore our comprehensive component library and start building amazing user interfaces today!
+    </p>
   </div>
 
-  <h2 style={{ color: '#495057' }}>🛠 Usage</h2>
-  <p style={{ fontSize: '16px', marginBottom: '10px' }}>
-    To use a component from Miever UI, import it into your project:
-  </p>
-  <div style={{
-      backgroundColor: '#f8f9fa',
-      padding: '15px',
-      borderRadius: '5px',
-      fontFamily: 'monospace',
-      color: '#333',
-      marginBottom: '20px'
-  }}>
-    <code style={{ display: 'block' }}>import {'{ Button, Icon }'} from 'miever_ui';</code>
-  </div>
+  <section aria-labelledby="installation">
+    <h2 id="installation" style={styles.sectionTitle}>🧳 Installation</h2>
+    <p style={styles.text}>
+      Install Miever UI using your preferred package manager:
+    </p>
+    
+    <CodeBlock title="NPM">
+      {['npm install miever_ui', 'or', 'yarn add miever_ui']}
+    </CodeBlock>
+  </section>
 
-  <p style={{ fontSize: '16px', marginBottom: '10px' }}>
-    Here’s a quick example to get started:
-  </p>
-  <div style={{
-      backgroundColor: '#f8f9fa',
-      padding: '15px',
-      borderRadius: '5px',
-      fontFamily: 'monospace',
-      color: '#333',
-      marginBottom: '20px'
-  }}>
-    <code style={{ display: 'block' }}>{`<Button onClick={() => alert('Hello World!')}>Click Me!</Button>`}</code>
-  </div>
+  <section aria-labelledby="usage">
+    <h2 id="usage" style={styles.sectionTitle}>🛠 Usage</h2>
+    <p style={styles.text}>
+      To use a component from Miever UI, import it into your project:
+    </p>
+    
+    <CodeBlock title="Import Components">
+      {"import { Button, Icon } from 'miever_ui';"}
+    </CodeBlock>
+  </section>
 
-  <h2 style={{ color: '#495057' }}>🌟 Explore More</h2>
-  <p style={{ fontSize: '16px', marginBottom: '10px' }}>
-    Explore the sidebar to see more components and their usage. You’ll find a variety of options, from buttons to icons, that you can easily integrate into your projects.
-  </p>
-</div>
+  <section aria-labelledby="explore">
+    <h2 id="explore" style={styles.sectionTitle}>🌟 Explore More</h2>
+    <p style={styles.text}>
+      Explore the sidebar to discover our comprehensive component library. You'll find a variety of options, from buttons to icons, forms to layouts, that you can easily integrate into your projects.
+    </p>
+    
+    <div style={styles.highlightBox}>
+      <p style={{ margin: 0, fontSize: '16px' }}>
+        <strong>💡 Pro Tip:</strong> Each component comes with detailed documentation, code examples, and interactive demos to help you get started quickly.
+      </p>
+    </div>
+  </section>
+
+  <footer style={{ marginTop: '40px', padding: '20px 0', borderTop: '1px solid #e9ecef', textAlign: 'center' }}>
+    <p style={{ color: '#6c757d', fontSize: '14px', margin: 0 }}>
+      Happy coding with Miever UI! 🎉
+    </p>
+  </footer>
+</main>

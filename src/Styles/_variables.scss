@@ -288,3 +288,12 @@ $progress-bg:                       $gray-200 !default;
 $progress-border-radius:            $border-radius !default;
 $progress-bar-color:                $white !default;
 $progress-bar-transition:           width .6s ease !default;
+
+// AutoComplete
+$autocomplete-bg:                 $input-bg !default;
+$autocomplete-border-width:       $input-border-width !default;
+$autocomplete-border-color:      $input-border-color !default;
+$autocomplete-border-radius:     $input-border-radius !default;
+$autocomplete-padding-y:         $btn-padding-y-sm !default;
+$autocomplete-padding-x:         $btn-padding-x-sm !default;
+$autocomplete-focus-border-color:   color.scale($primary, $lightness: 25%) !default;

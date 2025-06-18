@@ -1,10 +1,12 @@
 import { InputHTMLAttributes } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-export type InputSizes = 'sm' | 'lg';
+export type InputSizes = 'sm' | 'md' | 'lg';
 
 export interface InputProps {
     size?: InputSizes,
-    disabled?: boolean
+    disabled?: boolean,
+    icon?: IconProp,
 }
 
-export type NativeInputProps = InputProps & Omit<InputHTMLAttributes<HTMLElement>, "size">;
+export type NativeInputProps = InputProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
