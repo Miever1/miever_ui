@@ -14,7 +14,7 @@ export const DocsContainer = (props) => {
       setIsDark(dark);
     };
     
-    const initialDark = localStorage.getItem('sb-addon-dark-mode') === 'true';
+    const initialDark = typeof window !== 'undefined' && localStorage.getItem('sb-addon-dark-mode') === 'true';
     setIsDark(initialDark);
     
     channel.on('DARK_MODE', handleThemeChange);

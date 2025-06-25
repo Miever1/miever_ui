@@ -20,17 +20,16 @@ const getCurrentDarkMode = (): boolean => {
 
 // Listen for dark mode toggle events
 channel.on('DARK_MODE', (isDark: boolean) => {
-  console.log('Dark mode toggled:', isDark); // Debug log
   setBackgroundColor(isDark);
 });
 
 // Initialize background color on page load
 if (typeof window !== 'undefined') {
   // Delay execution to ensure DOM is loaded
-  setTimeout(() => {
+  window.addEventListener('DOMContentLoaded', () => {
     const isDark = getCurrentDarkMode();
     setBackgroundColor(isDark);
-  }, 100);
+  });
 }
 
 const preview: Preview = {
