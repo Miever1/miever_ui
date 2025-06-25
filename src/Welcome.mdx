@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/addon-docs';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { addons } from '@storybook/preview-api';
 
 <Meta title="Welcome" />
@@ -26,8 +26,8 @@ export const WelcomeContent = () => {
       channel.removeListener('DARK_MODE', handleDarkMode);
     };
   }, []);
-  
-  const styles = {
+
+  const styles = useMemo(() => ({
     container: {
       padding: '30px',
       fontFamily: 'Arial, sans-serif',
@@ -118,7 +118,7 @@ export const WelcomeContent = () => {
       fontSize: '14px',
       marginBottom: '8px'
     }
-  };
+  }), [isDark]);
 
   const CodeBlock = ({ children, title }) => (
     <div>

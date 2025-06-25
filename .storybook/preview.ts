@@ -37,7 +37,7 @@ const preview: Preview = {
     // Configure storybook-dark-mode plugin
     darkMode: {
       classTarget: 'html',
-      current: 'light',
+      current: getCurrentDarkMode() ? 'dark' : 'light',
       dark: { ...themes.dark },
       light: { ...themes.light },
       stylePreview: true
