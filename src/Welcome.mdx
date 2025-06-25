@@ -1,152 +1,205 @@
 import { Meta } from '@storybook/addon-docs';
+import React, { useState, useEffect } from 'react';
+import { addons } from '@storybook/preview-api';
 
 <Meta title="Welcome" />
 
-export const styles = {
-  container: {
-    padding: '30px',
-    fontFamily: 'Arial, sans-serif',
-    color: '#333',
-    lineHeight: '1.6',
-    maxWidth: '800px',
-    margin: '0 auto',
-    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-    borderRadius: '10px',
-    backgroundColor: '#fff'
-  },
-  title: {
-    color: '#0CC0DF',
-    fontSize: '2.5em',
-    fontWeight: '600',
-    textAlign: 'center',
-    marginBottom: '20px'
-  },
-  sectionTitle: {
-    color: '#495057',
-    fontSize: '1.5em',
-    fontWeight: '500',
-    marginTop: '30px',
-    marginBottom: '15px'
-  },
-  codeBlock: {
-    backgroundColor: '#f8f9fa',
-    padding: '15px',
-    borderRadius: '5px',
-    fontFamily: 'monospace',
-    color: '#333',
-    marginBottom: '20px',
-    border: '1px solid #e9ecef'
-  },
-  text: {
-    fontSize: '16px',
-    marginBottom: '10px'
-  },
-  introText: {
-    fontSize: '18px',
-    marginBottom: '20px',
-    textAlign: 'center'
-  },
-  image: {
-    width: '100%',
-    maxWidth: '400px',
-    height: 'auto',
-    display: 'block',
-    margin: '20px auto',
-    borderRadius: '8px',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
-  },
-  demoSection: {
-    marginTop: '15px',
-    padding: '20px',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '8px',
-    textAlign: 'center',
-    border: '1px solid #e9ecef'
-  },
-  highlightBox: {
-    backgroundColor: '#e7f3ff',
-    padding: '15px',
-    borderRadius: '8px',
-    borderLeft: '4px solid #0CC0DF',
-    marginBottom: '20px'
-  }
+export const WelcomeContent = () => {
+  const [isDark, setIsDark] = useState(false);
+  
+  useEffect(() => {
+    const channel = addons.getChannel();
+    
+    // Listen for dark mode toggle events
+    const handleDarkMode = (dark) => {
+      setIsDark(dark);
+    };
+    
+    // Get initial state
+    const initialDark = localStorage.getItem('sb-addon-dark-mode') === 'true';
+    setIsDark(initialDark);
+    
+    // Listen for events
+    channel.on('DARK_MODE', handleDarkMode);
+    
+    return () => {
+      channel.removeListener('DARK_MODE', handleDarkMode);
+    };
+  }, []);
+  
+  const styles = {
+    container: {
+      padding: '30px',
+      fontFamily: 'Arial, sans-serif',
+      color: isDark ? '#ffffff' : '#333',
+      lineHeight: '1.6',
+      maxWidth: '800px',
+      margin: '0 auto',
+      boxShadow: isDark ? '0 4px 30px rgba(255, 255, 255, 0.1)' : '0 4px 30px rgba(0, 0, 0, 0.1)',
+      borderRadius: '10px',
+      backgroundColor: isDark ? '#2d2d2d' : '#fff',
+      transition: 'all 0.3s ease'
+    },
+    title: {
+      color: '#0CC0DF',
+      fontSize: '2.5em',
+      fontWeight: '600',
+      textAlign: 'center',
+      marginBottom: '20px'
+    },
+    sectionTitle: {
+      color: isDark ? '#e9ecef' : '#495057',
+      fontSize: '1.5em',
+      fontWeight: '500',
+      marginTop: '30px',
+      marginBottom: '15px'
+    },
+    codeBlock: {
+      backgroundColor: isDark ? '#1a1a1a' : '#f8f9fa',
+      padding: '15px',
+      borderRadius: '5px',
+      fontFamily: 'monospace',
+      color: isDark ? '#ffffff' : '#333',
+      marginBottom: '20px',
+      border: isDark ? '1px solid #444' : '1px solid #e9ecef',
+      transition: 'all 0.3s ease'
+    },
+    text: {
+      fontSize: '16px',
+      marginBottom: '10px',
+      color: isDark ? '#e9ecef' : '#333'
+    },
+    introText: {
+      fontSize: '18px',
+      marginBottom: '20px',
+      textAlign: 'center',
+      color: isDark ? '#ffffff' : '#333'
+    },
+    image: {
+      width: '100%',
+      maxWidth: '400px',
+      height: 'auto',
+      display: 'block',
+      margin: '20px auto',
+      borderRadius: '8px',
+      filter: isDark ? 'brightness(0.9)' : 'none',
+      transition: 'all 0.3s ease'
+    },
+    demoSection: {
+      marginTop: '15px',
+      padding: '20px',
+      backgroundColor: isDark ? '#1a1a1a' : '#f8f9fa',
+      borderRadius: '8px',
+      textAlign: 'center',
+      border: isDark ? '1px solid #444' : '1px solid #e9ecef',
+      transition: 'all 0.3s ease'
+    },
+    highlightBox: {
+      backgroundColor: isDark ? '#1a3a4a' : '#e7f3ff',
+      padding: '15px',
+      borderRadius: '8px',
+      borderLeft: '4px solid #0CC0DF',
+      marginBottom: '20px',
+      transition: 'all 0.3s ease'
+    },
+    footer: {
+      marginTop: '40px',
+      padding: '20px 0',
+      borderTop: isDark ? '1px solid #444' : '1px solid #e9ecef',
+      textAlign: 'center'
+    },
+    footerText: {
+      color: isDark ? '#adb5bd' : '#6c757d',
+      fontSize: '14px',
+      margin: 0
+    },
+    codeTitle: {
+      color: isDark ? '#adb5bd' : '#6c757d',
+      fontSize: '14px',
+      marginBottom: '8px'
+    }
+  };
+
+  const CodeBlock = ({ children, title }) => (
+    <div>
+      {title && <h4 style={styles.codeTitle}>{title}</h4>}
+      <div style={styles.codeBlock}>
+        {Array.isArray(children) ? 
+          children.map((child, index) => (
+            <code key={index} style={{ display: 'block', marginTop: index > 0 ? '5px' : '0' }}>
+              {child}
+            </code>
+          )) :
+          <code style={{ display: 'block' }}>{children}</code>
+        }
+      </div>
+    </div>
+  );
+
+  return (
+    <main role="main" style={styles.container}>
+      <header>
+        <h1 style={styles.title}>Welcome to</h1>
+        
+        <img 
+          src="https://miever.s3.ap-east-1.amazonaws.com/static/miever-ui.webp" 
+          alt="Miever UI Logo"
+          style={styles.image}
+        />
+        
+        <p style={styles.introText}>
+          Miever UI is a versatile React component library designed to make your applications more robust, maintainable, and easy to develop.
+        </p>
+      </header>
+
+      <div style={styles.highlightBox}>
+        <p style={{ margin: 0, fontSize: '16px', color: isDark ? '#ffffff' : 'inherit' }}>
+          <strong>🚀 Quick Start:</strong> Get up and running with Miever UI in minutes. Explore our comprehensive component library and start building amazing user interfaces today!
+        </p>
+      </div>
+
+      <section aria-labelledby="installation">
+        <h2 id="installation" style={styles.sectionTitle}>🧳 Installation</h2>
+        <p style={styles.text}>
+          Install Miever UI using your preferred package manager:
+        </p>
+        
+        <CodeBlock title="NPM">
+          {['npm install miever_ui', 'or', 'yarn add miever_ui']}
+        </CodeBlock>
+      </section>
+
+      <section aria-labelledby="usage">
+        <h2 id="usage" style={styles.sectionTitle}>🛠 Usage</h2>
+        <p style={styles.text}>
+          To use a component from Miever UI, import it into your project:
+        </p>
+        
+        <CodeBlock title="Import Components">
+          {"import { Button, Icon } from 'miever_ui';"}
+        </CodeBlock>
+      </section>
+
+      <section aria-labelledby="explore">
+        <h2 id="explore" style={styles.sectionTitle}>🌟 Explore More</h2>
+        <p style={styles.text}>
+          Explore the sidebar to discover our comprehensive component library. You'll find a variety of options, from buttons to icons, forms to layouts, that you can easily integrate into your projects.
+        </p>
+        
+        <div style={styles.highlightBox}>
+          <p style={{ margin: 0, fontSize: '16px', color: isDark ? '#ffffff' : 'inherit' }}>
+            <strong>💡 Pro Tip:</strong> Each component comes with detailed documentation, code examples, and interactive demos to help you get started quickly.
+          </p>
+        </div>
+      </section>
+
+      <footer style={styles.footer}>
+        <p style={styles.footerText}>
+          Happy coding with Miever UI! 🎉
+        </p>
+      </footer>
+    </main>
+  );
 };
 
-export const CodeBlock = ({ children, title }) => (
-  <div>
-    {title && <h4 style={{ color: '#6c757d', fontSize: '14px', marginBottom: '8px' }}>{title}</h4>}
-    <div style={styles.codeBlock}>
-      {Array.isArray(children) ? 
-        children.map((child, index) => (
-          <code key={index} style={{ display: 'block', marginTop: index > 0 ? '5px' : '0' }}>
-            {child}
-          </code>
-        )) :
-        <code style={{ display: 'block' }}>{children}</code>
-      }
-    </div>
-  </div>
-);
-
-<main role="main" style={styles.container}>
-  <header>
-    <h1 style={styles.title}>Welcome to</h1>
-    
-    <img 
-      src="https://miever.s3.ap-east-1.amazonaws.com/static/miever-ui.jpg" 
-      alt="Miever UI Logo"
-      style={styles.image}
-    />
-    
-    <p style={styles.introText}>
-      Miever UI is a versatile React component library designed to make your applications more robust, maintainable, and easy to develop.
-    </p>
-  </header>
-
-  <div style={styles.highlightBox}>
-    <p style={{ margin: 0, fontSize: '16px' }}>
-      <strong>🚀 Quick Start:</strong> Get up and running with Miever UI in minutes. Explore our comprehensive component library and start building amazing user interfaces today!
-    </p>
-  </div>
-
-  <section aria-labelledby="installation">
-    <h2 id="installation" style={styles.sectionTitle}>🧳 Installation</h2>
-    <p style={styles.text}>
-      Install Miever UI using your preferred package manager:
-    </p>
-    
-    <CodeBlock title="NPM">
-      {['npm install miever_ui', 'or', 'yarn add miever_ui']}
-    </CodeBlock>
-  </section>
-
-  <section aria-labelledby="usage">
-    <h2 id="usage" style={styles.sectionTitle}>🛠 Usage</h2>
-    <p style={styles.text}>
-      To use a component from Miever UI, import it into your project:
-    </p>
-    
-    <CodeBlock title="Import Components">
-      {"import { Button, Icon } from 'miever_ui';"}
-    </CodeBlock>
-  </section>
-
-  <section aria-labelledby="explore">
-    <h2 id="explore" style={styles.sectionTitle}>🌟 Explore More</h2>
-    <p style={styles.text}>
-      Explore the sidebar to discover our comprehensive component library. You'll find a variety of options, from buttons to icons, forms to layouts, that you can easily integrate into your projects.
-    </p>
-    
-    <div style={styles.highlightBox}>
-      <p style={{ margin: 0, fontSize: '16px' }}>
-        <strong>💡 Pro Tip:</strong> Each component comes with detailed documentation, code examples, and interactive demos to help you get started quickly.
-      </p>
-    </div>
-  </section>
-
-  <footer style={{ marginTop: '40px', padding: '20px 0', borderTop: '1px solid #e9ecef', textAlign: 'center' }}>
-    <p style={{ color: '#6c757d', fontSize: '14px', margin: 0 }}>
-      Happy coding with Miever UI! 🎉
-    </p>
-  </footer>
-</main>
+<WelcomeContent />
