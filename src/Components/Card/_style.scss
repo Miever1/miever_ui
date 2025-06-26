@@ -1,8 +1,11 @@
+@use '../../Styles/variables' as cardVars;
+
 .card {
-    border: 1px solid #E2E8F0;
+    border: 1px solid cardVars.$card-border-color !important;
+    color: var(--body-color);
     display: flex;
     flex-direction: column;
-    background: rgba(255,255,255,.8);
+    background: cardVars.$card-bg;
     border-radius: 8px;
     min-width: 580px;
     box-shadow: 0 1px 1px 0 rgba(86, 152, 195, 0.1),0 1px 1px 0 rgba(86, 152, 195, 0.1);

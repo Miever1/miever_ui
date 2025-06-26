@@ -58,7 +58,8 @@
       background-color: inputVars.$input-disabled-bg;
       border-color: inputVars.$input-disabled-border-color;
       // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
-      opacity: inputVars.$btn-disabled-opacity;;
+      opacity: inputVars.$btn-disabled-opacity;
+      cursor: not-allowed;
     }
   }
   .input-size-sm .input-inner {

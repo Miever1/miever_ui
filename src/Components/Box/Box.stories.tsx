@@ -1,7 +1,88 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import Box from './Box';
 import { BoxProps } from './interface';
+
+const useTheme = () => {
+  const [isDark, setIsDark] = useState(() => {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+  });
+
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && 
+            mutation.attributeName === 'data-theme' &&
+            mutation.target === document.documentElement) {
+          const newIsDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          setIsDark(newIsDark);
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+};
+
+const getThemeStyles = (isDark: boolean) => {
+  return {
+    container: {
+      background: isDark ? '#2a2a2a' : '#f9f9f9',
+      border: `1px solid ${isDark ? '#404040' : '#ccc'}`,
+      color: isDark ? '#ffffff' : '#000000',
+      borderRadius: '8px',
+      boxShadow: isDark 
+        ? '0 2px 5px rgba(0, 0, 0, 0.3)' 
+        : '0 2px 5px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.3s ease',
+    },
+    flexContainer: {
+      background: isDark ? '#1e1e1e' : '#f0f0f0',
+      border: `2px dashed ${isDark ? '#555' : '#ddd'}`,
+      borderRadius: '8px',
+      boxShadow: isDark 
+        ? '0 4px 12px rgba(0, 0, 0, 0.4)' 
+        : '0 4px 12px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.3s ease',
+    },
+    child: (index: number) => {
+      const colors = ['#0CC0DF', '#12aa9c', '#20c997'];
+      return {
+        background: colors[index % colors.length],
+        padding: '16px',
+        color: '#fff',
+        borderRadius: '4px',
+        boxShadow: isDark 
+          ? '0px 4px 10px rgba(0, 0, 0, 0.3)' 
+          : '0px 4px 10px rgba(0, 0, 0, 0.1)',
+        transition: 'all 0.3s ease',
+      };
+    },
+    paddingExample: {
+      background: isDark ? '#2a2a2a' : '#f9f9f9',
+      border: `1px solid ${isDark ? '#404040' : '#ddd'}`,
+      color: isDark ? '#ffffff' : '#000000',
+      borderRadius: '4px',
+      transition: 'all 0.3s ease',
+    },
+    dynamicContainer: {
+      background: isDark ? '#1a2332' : '#e6f7ff',
+      border: `1px solid ${isDark ? '#2d3748' : '#91d5ff'}`,
+      borderRadius: '8px',
+      boxShadow: isDark 
+        ? '0px 4px 12px rgba(0, 0, 0, 0.4)' 
+        : '0px 4px 12px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.3s ease',
+    },
+  };
+};
 
 export default {
   title: 'Layout/Box',
@@ -58,116 +139,116 @@ export default {
   },
 } as Meta;
 
-// Default Template for Box stories
-const Template: StoryFn<BoxProps> = (args) => <Box {...args}>This is a Box</Box>;
+// Default Template
+const Template: StoryFn<BoxProps> = (args) => {
+  const isDark = useTheme();
+  const styles = getThemeStyles(isDark);
+  
+  return (
+    <Box 
+      {...args} 
+      style={{
+        ...styles.container,
+        ...args.style,
+      }}
+    >
+      This is a Box
+    </Box>
+  );
+};
 
-// Default Box Story with Enhanced Styling
 export const Default = Template.bind({});
 Default.args = {
   width: '200px',
   height: '100px',
   padding: '16px',
-  style: {
-    border: '1px solid #ccc',
-    background: '#f9f9f9',
-    borderRadius: '8px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    transition: 'all 0.3s ease',
-  },
 };
 
-// Flexbox Example with Improved Layout and Styling
-export const FlexboxExample = () => (
-  <Box
-    flexBox
-    direction="row"
-    justifyContent="center"
-    alignItems="center"
-    style={{
-      width: '100%',
-      height: '200px',
-      padding: '16px',
-      background: '#f0f0f0',
-      border: '2px dashed #ddd',
-      borderRadius: '8px',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-    }}
-  >
+// Flexbox Example with Theme Support
+export const FlexboxExample = () => {
+  const isDark = useTheme();
+  const styles = getThemeStyles(isDark);
+  
+  return (
     <Box
+      flexBox
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
       style={{
-        background: '#0CC0DF',
+        width: '100%',
+        height: '200px',
         padding: '16px',
-        color: '#fff',
-        borderRadius: '4px',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        transition: 'all 0.3s ease',
+        ...styles.flexContainer,
       }}
     >
-      Child 1
+      {['Child 1', 'Child 2', 'Child 3'].map((text, index) => (
+        <Box
+          key={index}
+          style={{
+            ...styles.child(index),
+            margin: '0 8px',
+          }}
+        >
+          {text}
+        </Box>
+      ))}
     </Box>
-    <Box
-      style={{
-        background: '#12aa9c',
-        padding: '16px',
-        color: '#fff',
-        borderRadius: '4px',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        transition: 'all 0.3s ease',
-      }}
-    >
-      Child 2
-    </Box>
-    <Box
-      style={{
-        background: '#20c997',
-        padding: '16px',
-        color: '#fff',
-        borderRadius: '4px',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        transition: 'all 0.3s ease',
-      }}
-    >
-      Child 3
-    </Box>
-  </Box>
-);
-FlexboxExample.storyName = 'Flexbox Layout Example with Enhanced Styling';
+  );
+};
+FlexboxExample.storyName = 'Flexbox Layout Example';
 
-// Padding Variations with Visual Styles
-export const PaddingVariations = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-    <Box padding="xs" style={{ background: '#f9f9f9', border: '1px solid #ddd', borderRadius: '4px' }}>
-      Padding XS
-    </Box>
-    <Box padding="sm" style={{ background: '#f9f9f9', border: '1px solid #ddd', borderRadius: '4px' }}>
-      Padding SM
-    </Box>
-    <Box padding="lg" style={{ background: '#f9f9f9', border: '1px solid #ddd', borderRadius: '4px' }}>
-      Padding LG
-    </Box>
-  </div>
-);
-PaddingVariations.storyName = 'Padding Variations with Visual Styles';
+// Padding Variations with Theme Support
+export const PaddingVariations = () => {
+  const isDark = useTheme();
+  const styles = getThemeStyles(isDark);
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {['xs', 'sm', 'lg'].map((size) => (
+        <Box 
+          key={size}
+          padding={size} 
+          style={styles.paddingExample}
+        >
+          Padding {size.toUpperCase()}
+        </Box>
+      ))}
+    </div>
+  );
+};
+PaddingVariations.storyName = 'Padding Variations';
 
-// Dynamic Flexbox with Responsive Children and Borders
-export const DynamicFlexbox = () => (
-  <Box
-    flexBox
-    direction="row"
-    justifyContent="space-between"
-    alignItems="center"
-    height="150px"
-    style={{
-      background: '#e6f7ff',
-      border: '1px solid #91d5ff',
-      padding: '16px',
-      borderRadius: '8px',
-      boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-    }}
-  >
-    <Box style={{ width: '50px', height: '50px', background: '#0CC0DF', borderRadius: '4px' }} />
-    <Box style={{ width: '50px', height: '50px', background: '#12aa9c', borderRadius: '4px' }} />
-    <Box style={{ width: '50px', height: '50px', background: '#20c997', borderRadius: '4px' }} />
-  </Box>
-);
-DynamicFlexbox.storyName = 'Dynamic Flexbox Example with Borders';
+// Dynamic Flexbox with Theme Support
+export const DynamicFlexbox = () => {
+  const isDark = useTheme();
+  const styles = getThemeStyles(isDark);
+  
+  return (
+    <Box
+      flexBox
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      height="150px"
+      style={{
+        padding: '16px',
+        ...styles.dynamicContainer,
+      }}
+    >
+      {[0, 1, 2].map((index) => (
+        <Box 
+          key={index}
+          style={{ 
+            width: '50px', 
+            height: '50px', 
+            ...styles.child(index),
+            margin: 0,
+            padding: 0,
+          }} 
+        />
+      ))}
+    </Box>
+  );
+};
+DynamicFlexbox.storyName = 'Dynamic Flexbox Example';

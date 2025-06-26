@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import Button from './index';
-import '../../Styles/index.scss';
 import { IButtonProps } from './interface';
 
 export default {

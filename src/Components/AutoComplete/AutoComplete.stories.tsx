@@ -170,7 +170,7 @@ export const Controlled = () => {
         onSelect={(selected) => setValue(selected)}
         placeholder="Search frameworks..."
       />
-      <div style={{ marginTop: '16px', padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+      <div >
         <p><strong>Current value:</strong> {value || 'Empty'}</p>
       </div>
     </div>
@@ -422,7 +422,6 @@ export const InteractiveDemo = () => {
       <div style={{ 
         marginTop: '16px', 
         padding: '12px', 
-        backgroundColor: '#f9f9f9', 
         borderRadius: '4px',
         fontSize: '14px'
       }}>

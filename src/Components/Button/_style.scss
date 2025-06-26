@@ -19,9 +19,9 @@
     &.disabled,
     &[disabled] {
         cursor: not-allowed;
+        color: buttonVars.$btn-disabled-color;
         opacity: buttonVars.$btn-disabled-opacity;
         box-shadow: none;
-        pointer-events: none;
     }
 }
 
@@ -42,7 +42,7 @@
 }
 
 .btn-default {
-    @include mixin.button-style(buttonVars.$white, buttonVars.$gray-400, buttonVars.$black, buttonVars.$white ,buttonVars.$primary, buttonVars.$primary);
+    @include mixin.button-style(buttonVars.$btn-default-bg, buttonVars.$btn-default-border-color, buttonVars.$btn-default-color, buttonVars.$btn-default-hover-bg ,buttonVars.$primary, buttonVars.$primary);
 }
 
 .btn-secondary {

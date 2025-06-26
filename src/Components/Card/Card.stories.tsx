@@ -25,7 +25,7 @@ export default {
 
 // Template for reusable story creation
 const Template: StoryFn = (args) => (
-  <Card {...args} style={{ width: '300px', border: '1px solid #eee', padding: '16px' }}>
+  <Card {...args} style={{ width: '300px', padding: '16px' }}>
     {args.children || 'This is the content of the card.'}
   </Card>
 );

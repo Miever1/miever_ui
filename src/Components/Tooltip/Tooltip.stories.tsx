@@ -1,5 +1,4 @@
 import { Meta, StoryFn } from '@storybook/react';
-
 import '../../Styles/index.scss';
 import Tooltip from './index';
 import Button from '../Button';
@@ -29,11 +28,18 @@ export default {
   },
 } as Meta<typeof Tooltip>;
 
-const Template: StoryFn<typeof Tooltip> = (args) => (
+interface TooltipStoryProps extends React.ComponentProps<typeof Tooltip> {
+  buttonText?: string;
+}
+
+const Template: StoryFn<TooltipStoryProps> = ({
+  buttonText = 'Hover Me',
+  ...args
+}) => (
   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
     <Tooltip {...args}>
       <Button styleType='primary'>
-        Hover Me
+        {buttonText}
       </Button>
     </Tooltip>
   </div>
@@ -56,6 +62,7 @@ ClickTrigger.args = {
   overlay: 'This tooltip is triggered by clicking.',
   placement: 'bottom',
   trigger: 'click',
+  buttonText: 'Click Me'
 };
 
 export const MultipleExamples = () => (

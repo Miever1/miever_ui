@@ -1,6 +1,6 @@
-@use '../../Styles/variables' as cardVars;
+@use '../../Styles/variables' as themeVars;
 
-@each $key, $val in cardVars.$theme-colors {
+@each $key, $val in themeVars.$theme-colors {
   .icon-#{$key} {
     color: $val;
   }

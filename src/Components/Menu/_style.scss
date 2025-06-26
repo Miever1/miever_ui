@@ -1,6 +1,8 @@
 @use '../../Styles/variables' as menuVars;
 
 .menu {
+  color: menuVars.$body-color;
+  background: menuVars.$menu-bg;
   display: flex;
   position: relative;
   flex-wrap: wrap;
@@ -17,8 +19,12 @@
     }
     &.disabled {
       color: menuVars.$menu-item-disabled-color;
-      pointer-events: none;
-      cursor: default;
+      cursor: not-allowed;
+      &:hover, &:focus {
+        text-decoration: none;
+        color: menuVars.$menu-item-disabled-color;
+        border-bottom: none;
+      }
     }
     &.active, &:hover {
       color: menuVars.$menu-item-active-color;
@@ -75,9 +81,6 @@
   }
 }
 .menu-horizontal {
-  >.menu-item {
-    border-bottom: menuVars.$menu-item-active-border-width solid transparent;
-  }
   .submenu {
     position: absolute;
     background: menuVars.$white;
