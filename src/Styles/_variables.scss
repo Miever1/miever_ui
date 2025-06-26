@@ -45,6 +45,55 @@ $theme-colors:
   "dark":       $dark
 );
 
+@mixin light-theme {
+  --body-color: #{$gray-900};
+  --body-bg: #{$white};
+
+  --color-bg-primary: #{$white};
+  --color-bg-secondary: #{$gray-100};
+  --color-bg-disabled: #{$gray-200};
+  
+  --color-text-primary: #{$gray-900};
+  --color-text-secondary: #{$gray-700};
+  --color-text-disabled: #{$gray-500};
+  
+  --color-border-primary: #{$gray-300};
+  --color-border-secondary: #{$gray-400};
+  --color-border-focus: #{$primary};
+  
+  --color-surface-elevated: #{$white};
+  --color-surface-overlay: rgba(0, 0, 0, 0.1);
+}
+
+@mixin dark-theme {
+  --body-color: #{$gray-100};
+  --body-bg: #{$gray-900};
+
+  --color-bg-primary: #{$gray-900};
+  --color-bg-secondary: #{$gray-800};
+  --color-bg-disabled: #{$gray-700};
+  
+  --color-text-primary: #{$gray-500};
+  --color-text-secondary: #{$gray-300};
+  --color-text-disabled: #{$gray-100};
+  
+  --color-border-primary: #{$gray-800};
+  --color-border-secondary: #{$gray-500};
+  --color-border-focus: #{$primary};
+  
+  --color-surface-elevated: #{$gray-800};
+  --color-surface-overlay: rgba(255, 255, 255, 0.1);
+}
+
+// 应用主题
+:root {
+  @include light-theme;
+}
+
+[data-theme="dark"] {
+  @include dark-theme;
+}
+
 $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:            $font-family-sans-serif !default;
@@ -84,7 +133,7 @@ $link-hover-decoration:                   underline !default;
 
 // body
 $body-bg:                   $white !default;
-$body-color:                $gray-900 !default;
+$body-color:                var(--color-text-primary) !default;
 $body-text-align:           null !default;
 
 // Spacing
@@ -187,6 +236,12 @@ $btn-padding-x:               .75rem !default;
 $btn-font-family:             $font-family-base !default;
 $btn-font-size:               $font-size-base !default;
 $btn-line-height:             $line-height-base !default;
+$btn-default-bg:         var(--color-bg-primary) !default;
+$btn-default-border-color:  var(--color-border-primary) !default;
+$btn-default-color:         var(--color-text-primary) !default;
+$btn-default-hover-bg:     var(--color-bg-primary) !default;
+$btn-disabled-bg:             var(--color-bg-disabled) !default;
+$btn-disabled-color:         var(--color-text-disabled) !default;
 
 //不同大小按钮的 padding 和 font size
 $btn-padding-y-sm:            .25rem !default;
@@ -219,7 +274,8 @@ $btn-transition:              color .30s ease-in-out, background-color .30s ease
 
 // menu
 $menu-border-width:            $border-width !default;
-$menu-border-color:            $border-color !default;
+$menu-bg:                     var(--color-bg-primary) !default;
+$menu-border-color:            var(--color-border-primary) !default;
 $menu-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
 $menu-transition:              color .15s ease-in-out, border-color .15s ease-in-out !default;
 
@@ -250,12 +306,12 @@ $input-padding-y-lg:                    $btn-padding-y-lg !default;
 $input-padding-x-lg:                    $btn-padding-x-lg !default;
 $input-font-size-lg:                    $btn-font-size-lg !default;
 
-$input-bg:                              $white !default;
+$input-bg:                              var(--color-bg-primary) !default;
 $input-disabled-bg:                     $gray-200 !default;
 $input-disabled-border-color:           null !default;
 
-$input-color:                           $gray-700 !default;
-$input-border-color:                    $gray-400 !default;
+$input-color:                           var(--color-text-primary) !default;
+$input-border-color:                    var(--color-border-primary) !default;
 $input-border-width:                    $border-width !default;
 $input-box-shadow:                      $box-shadow-inset !default;
 
@@ -296,4 +352,9 @@ $autocomplete-border-color:      $input-border-color !default;
 $autocomplete-border-radius:     $input-border-radius !default;
 $autocomplete-padding-y:         $btn-padding-y-sm !default;
 $autocomplete-padding-x:         $btn-padding-x-sm !default;
+$autocomplete-list-color:      $input-color !default;
 $autocomplete-focus-border-color:   color.scale($primary, $lightness: 25%) !default;
+
+// Card
+$card-bg:                         var(--color-bg-primary) !default;
+$card-border-color:              var(--color-border-primary) !default;

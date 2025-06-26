@@ -18,11 +18,19 @@ const MenuItem: React.FunctionComponent<Omit<IMenuItemProps, "key"> & {
         'active': currentKey === itemKey
     });
 
+    const onClickHandler = (e: React.MouseEvent) => {
+        if (disabled) {
+            e.preventDefault();
+            return;
+        }
+        handleClick(itemKey);
+    };
+
     return (
         <li
             key={itemKey}
             className={classes}
-            onClick={() => handleClick(itemKey)}
+            onClick={onClickHandler}
         >
             {label}
         </li>

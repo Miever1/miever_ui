@@ -1,6 +1,7 @@
 @use '../../Styles/variables' as vars;
 
 .options-list {
+    color: vars.$autocomplete-list-color;
     background: vars.$autocomplete-bg;
     border: vars.$autocomplete-border-width solid vars.$autocomplete-focus-border-color;
     border-top: none;

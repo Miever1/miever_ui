@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import Menu from './index'; // 导入 Menu 组件
+import Menu from './index';
 import Box from '../Box';
-import '../../Styles/index.scss'; // 导入样式文件
+import '../../Styles/index.scss';
 
 export default {
   title: 'Navigation/Menu',
@@ -26,7 +26,7 @@ export default {
       description: 'The key of the menu item that should be selected by default.',
     },
     onSelect: {
-      action: 'selected', // Action will log the selected key to the console
+      action: 'selected',
       description: 'Callback function when a menu item is selected.',
     },
     prefix: {

@@ -181,6 +181,7 @@ const AutoComplete = <T,>({
                 onKeyDown={handleKeyDown}
                 placeholder={placeholder}
                 className="autocompelete-input"
+                disabled={disabled}
             />
             <Transition
                 in={showOptions && filteredOptions.length >= 0}

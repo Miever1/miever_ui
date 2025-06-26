@@ -37,6 +37,10 @@
         color: $color;
         background: $background;
         border-color: $border;
+        &:active {
+            color: $color;
+            border-color: $border;
+        }
     }
     &:active,
     &:active {
