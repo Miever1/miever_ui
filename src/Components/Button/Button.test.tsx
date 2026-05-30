@@ -26,7 +26,7 @@ describe('test Button Components', () => {
         expect(element).toBeInTheDocument();
         expect(element.tagName).toEqual('BUTTON');
         expect(element.disabled).toBeFalsy();
-        expect(element).toHaveClass('btn btn-default');
+        expect(element).toHaveClass('miever-btn miever-btn-default');
         fireEvent.click(element);
         expect(defaultProps.onClick).toHaveBeenCalled();
     });
@@ -35,7 +35,7 @@ describe('test Button Components', () => {
         const wrapper = render(<Button {...testProps}>Button</Button>);
         const element = wrapper.getByText('Button');
         expect(element.tagName).toEqual('BUTTON');
-        expect(element).toHaveClass('btn btn-primary btn-lg class');
+        expect(element).toHaveClass('miever-btn miever-btn-primary miever-btn-lg class');
     });
 
     test('should render a link when styleType equals link', () => {
@@ -43,7 +43,7 @@ describe('test Button Components', () => {
         const element = wrapper.getByText('Link');
         expect(element).toBeInTheDocument();
         expect(element.tagName).toEqual('BUTTON');
-        expect(element).toHaveClass('btn btn-link');
+        expect(element).toHaveClass('miever-btn miever-btn-link');
     });
 
     test('should render disabled button when disabled set to true', () => {

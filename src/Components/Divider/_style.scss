@@ -1,0 +1,50 @@
+@use '../../Styles/variables' as vars;
+
+.miever-divider {
+    box-sizing: border-box;
+}
+
+.miever-divider-horizontal {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: vars.$spacer 0;
+    border-top: vars.$border-width solid var(--color-border-primary);
+}
+
+.miever-divider-vertical {
+    display: inline-block;
+    height: 0.9em;
+    margin: 0 calc(#{vars.$spacer} * 0.5);
+    vertical-align: middle;
+    border-left: vars.$border-width solid var(--color-border-primary);
+}
+
+.miever-divider-dashed {
+    border-style: dashed;
+}
+
+.miever-divider-with-text {
+    border-top: none;
+
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        border-top: vars.$border-width solid var(--color-border-primary);
+    }
+
+    .miever-divider-text {
+        padding: 0 vars.$spacer;
+        color: var(--color-text-secondary);
+        font-size: vars.$font-size-sm;
+        white-space: nowrap;
+    }
+}
+
+.miever-divider-with-text.miever-divider-dashed {
+    &::before,
+    &::after {
+        border-top-style: dashed;
+    }
+}

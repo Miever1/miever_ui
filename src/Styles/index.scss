@@ -1,19 +1,20 @@
-// config
+// Design tokens & global config
 @use "variables";
 
-// layout
+// Global resets & primitives
 @use "reboot";
 
-// mixin
+// Shared mixins & animations
 @use "mixin";
-
-// animation
 @use "animation";
 
-// layout for components
+// Component styles
+@use "../Components/AutoComplete/style" as AutoComplete;
+@use "../Components/Badge/style" as Badge;
 @use "../Components/Button/style" as Button;
-@use "../Components/Menu/style" as Menu;
+@use "../Components/Card/style" as Card;
+@use "../Components/Divider/style" as Divider;
 @use "../Components/Icon/style" as Icon;
 @use "../Components/Input/style" as Input;
-@use "../Components/Card/style" as Card;
-@use "../Components/AutoComplete/style" as AutoComplete;
+@use "../Components/Menu/style" as Menu;
+@use "../Components/Tag/style" as Tag;

@@ -1,14 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+
+import { getPrefixCls } from '../../Utils/getPrefixCls';
 import { NativeButtonProps } from './interface';
 
+const prefixCls = getPrefixCls('btn');
+
 /**
- *
  * A versatile and customizable button component for various use cases.
  *
  * ### Usage
- * ```javascript
- * import { Button } from 'miever_components';
+ * ```jsx
+ * import { Button } from 'miever_ui';
  *
  * <Button styleType="primary" size="lg">Click Me</Button>
  * ```
@@ -21,21 +24,19 @@ const Button: FunctionComponent<NativeButtonProps> = ({
     className,
     ...restProps
 }) => {
-    const classes = classNames('btn', className, {
-        [`btn-${styleType}`]: styleType,
-        [`btn-${size}`]: size,
-        'disabled': disabled
+    const classes = classNames(prefixCls, className, {
+        [`${prefixCls}-${styleType}`]: styleType,
+        [`${prefixCls}-${size}`]: size,
+        disabled,
     });
 
     return (
-        <button
-            className={classes}
-            disabled={disabled}
-            {...restProps}
-        >
+        <button className={classes} disabled={disabled} {...restProps}>
             {children}
         </button>
     );
 };
+
+Button.displayName = 'Button';
 
 export default Button;

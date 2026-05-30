@@ -1,54 +1,47 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import Box from "../Box";
-import { ICardProps } from "./interface";
+import { getPrefixCls } from '../../Utils/getPrefixCls';
+import Box from '../Box';
+import { ICardProps } from './interface';
+
+const prefixCls = getPrefixCls('card');
 
 /**
- * A versatile and customizable rectangular container for displaying content.
- * 
- * ```jsx
- * import { Card } from 'miever_components';
+ * A versatile, rectangular container for displaying grouped content.
  *
- * <Card 
- *   title="Card Title" 
- *   subTitle="Card Subtitle" 
- *   hoverable 
- *   style={{ width: '300px', padding: '16px' }}
- * >
+ * ### Usage
+ * ```jsx
+ * import { Card } from 'miever_ui';
+ *
+ * <Card title="Card Title" subTitle="Subtitle" hoverable style={{ width: 300 }}>
  *   This is the content of the card.
  * </Card>
  * ```
  */
-
-const Card:FunctionComponent<ICardProps> = ({
+const Card: FunctionComponent<ICardProps> = ({
     title,
     subTitle,
     children,
     style,
     className,
-    hoverable=false,
+    hoverable = false,
 }) => {
-    const classes = classNames('card', className, {
-        'card-hover': hoverable
+    const classes = classNames(prefixCls, className, {
+        [`${prefixCls}-hover`]: hoverable,
     });
+
     return (
         <Box className={classes} style={style}>
-            <Box className="card-header">
-                <Box>
-                    {title}
-                </Box>
-                {subTitle && (
-                    <Box className="card-subtitle">
-                        {subTitle}
-                    </Box>
-                )}
+            <Box className={`${prefixCls}-header`}>
+                <Box>{title}</Box>
+                {subTitle && <Box className={`${prefixCls}-subtitle`}>{subTitle}</Box>}
             </Box>
-            <Box className="card-content">
-                {children}
-            </Box>
+            <Box className={`${prefixCls}-content`}>{children}</Box>
         </Box>
     );
-}
+};
+
+Card.displayName = 'Card';
 
 export default Card;

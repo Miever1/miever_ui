@@ -1,0 +1,51 @@
+@use '../../Styles/variables' as vars;
+
+.miever-badge {
+    position: relative;
+    display: inline-flex;
+    line-height: 1;
+}
+
+.miever-badge-count,
+.miever-badge-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    transform: translate(50%, -50%);
+    transform-origin: 100% 0;
+    color: vars.$white;
+    box-shadow: 0 0 0 1px var(--color-bg-primary);
+}
+
+.miever-badge-count {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9px;
+    white-space: nowrap;
+}
+
+.miever-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.miever-badge-standalone {
+    .miever-badge-count,
+    .miever-badge-dot {
+        position: static;
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+@each $key, $val in vars.$theme-colors {
+    .miever-badge-#{$key} {
+        background: $val;
+    }
+}

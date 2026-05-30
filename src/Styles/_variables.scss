@@ -1,6 +1,10 @@
 @use 'sass:color';
 @use 'sass:math';
 
+// Global class-name prefix shared by every component (see src/Utils/getPrefixCls.ts).
+// Component selectors are written as `.miever-*` to stay namespaced and consistent.
+$prefix: miever !default;
+
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;

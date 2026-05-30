@@ -1,0 +1,35 @@
+@use 'sass:color';
+@use '../../Styles/variables' as vars;
+
+.miever-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 calc(#{vars.$spacer} * 0.5);
+    font-size: vars.$font-size-sm;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+    border: vars.$border-width solid var(--color-border-primary);
+    border-radius: vars.$border-radius;
+    white-space: nowrap;
+}
+
+.miever-tag-close {
+    margin-left: calc(#{vars.$spacer} * 0.4);
+    font-size: calc(#{vars.$font-size-sm} * 0.85);
+    cursor: pointer;
+    opacity: 0.65;
+    transition: opacity .2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+@each $key, $val in vars.$theme-colors {
+    .miever-tag-#{$key} {
+        color: $val;
+        background: color.scale($val, $lightness: 85%);
+        border-color: color.scale($val, $lightness: 60%);
+    }
+}

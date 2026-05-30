@@ -1,3 +1,5 @@
+import { CSSProperties, ReactNode } from 'react';
+
 type MenuMode = 'horizontal' | 'vertical';
 type SelectCallback = (selectedIndex: string) => void;
 
@@ -5,15 +7,15 @@ export interface IMenuProps {
     defaultKey?: string;
     className?: string;
     mode?: MenuMode;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
     onSelect?: SelectCallback;
     items: IMenuItemProps[];
-    prefix?: React.ReactNode;
-    suffix?: React.ReactNode;
+    prefix?: ReactNode;
+    suffix?: ReactNode;
 }
 
 interface LabelKey {
-    label?: React.ReactNode;
+    label?: ReactNode;
     key: string;
 }
 
@@ -25,7 +27,7 @@ export interface IMenuItemProps extends LabelKey {
 export interface ISubmenuProps {
     currentKey: string;
     itemKey: string;
-    title: React.ReactNode;
+    title: ReactNode;
     isOpened?: boolean;
     items: LabelKey[];
     mode: MenuMode;

@@ -15,7 +15,7 @@ describe("Input Component", () => {
         const wrapper = render(<Input {...defaultProps} />);
         const testNode = wrapper.getByPlaceholderText('test-input') as HTMLInputElement;
         expect(testNode).toBeInTheDocument();
-        expect(testNode).toHaveClass('input-inner');
+        expect(testNode).toHaveClass('miever-input-inner');
         fireEvent.change(testNode, { target: { value: 'test' } });
         expect(defaultProps.onChange).toHaveBeenCalled();
         expect(testNode.value).toBe('test');
@@ -32,7 +32,7 @@ describe("Input Component", () => {
         const testNode = largeWrapper.getByPlaceholderText('test-large-input').parentElement as HTMLInputElement;
         const smallWrapper = render(<Input {...defaultProps} size="sm" placeholder="test-small-input" />);
         const smallTestNode = smallWrapper.getByPlaceholderText('test-small-input').parentElement as HTMLInputElement;
-        expect(testNode).toHaveClass('input-size-lg');
-        expect(smallTestNode).toHaveClass('input-size-sm');
+        expect(testNode).toHaveClass('miever-input-size-lg');
+        expect(smallTestNode).toHaveClass('miever-input-size-sm');
     });
 });

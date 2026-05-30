@@ -1,21 +1,21 @@
-import React from "react";
-import classNames from "classnames";
-import { IMenuItemProps } from "./interface";
+import React from 'react';
+import classNames from 'classnames';
 
-const MenuItem: React.FunctionComponent<Omit<IMenuItemProps, "key"> & {
-    itemKey: string, 
-    currentKey: string;
-    handleClick: (key: string) => void;
-}> = ({
-    itemKey,
-    currentKey,
-    label,
-    disabled,
-    handleClick
-}) => {
-    const classes = classNames('menu-item', {
-        'disabled': disabled,
-        'active': currentKey === itemKey
+import { getPrefixCls } from '../../Utils/getPrefixCls';
+import { IMenuItemProps } from './interface';
+
+const prefixCls = getPrefixCls('menu');
+
+const MenuItem: React.FunctionComponent<
+    Omit<IMenuItemProps, 'key'> & {
+        itemKey: string;
+        currentKey: string;
+        handleClick: (key: string) => void;
+    }
+> = ({ itemKey, currentKey, label, disabled, handleClick }) => {
+    const classes = classNames(`${prefixCls}-item`, {
+        disabled,
+        active: currentKey === itemKey,
     });
 
     const onClickHandler = (e: React.MouseEvent) => {
@@ -27,15 +27,12 @@ const MenuItem: React.FunctionComponent<Omit<IMenuItemProps, "key"> & {
     };
 
     return (
-        <li
-            key={itemKey}
-            className={classes}
-            onClick={onClickHandler}
-        >
+        <li className={classes} onClick={onClickHandler}>
             {label}
         </li>
     );
-}
+};
 
 MenuItem.displayName = 'MenuItem';
+
 export default MenuItem;

@@ -1,42 +1,47 @@
-import React, { useState } from "react";
-import classNames from "classnames";
-import { IMenuProps } from "./interface";
-import MenuItem from "./MenuItem";
-import SubMenu from "./SubMenu";
+import React, { useState } from 'react';
+import classNames from 'classnames';
+
+import { getPrefixCls } from '../../Utils/getPrefixCls';
+import { IMenuProps } from './interface';
+import MenuItem from './MenuItem';
+import SubMenu from './SubMenu';
+
+const prefixCls = getPrefixCls('menu');
 
 /**
- * 
- * A versatile menu for navigation.
- * 
- *  ```javascript
- *      import { Menu } from 'miever_components';
- *  ```
+ * A versatile navigation menu supporting horizontal/vertical modes and submenus.
+ *
+ * ### Usage
+ * ```jsx
+ * import { Menu } from 'miever_ui';
+ *
+ * <Menu defaultKey="0" items={[{ label: 'Home', key: '0' }]} />
+ * ```
  */
-
 const Menu: React.FunctionComponent<IMenuProps> = ({
     className,
     mode = 'horizontal',
     style,
     items,
-    defaultKey = "0",
+    defaultKey = '0',
     onSelect = () => {},
     prefix,
-    suffix
+    suffix,
 }) => {
     const [currentKey, setCurrentKey] = useState(defaultKey);
-    const classes = classNames('menu', className, {
-        'menu-vertical': mode === 'vertical',
-        'menu-horizontal': mode !== 'vertical'
+    const classes = classNames(prefixCls, className, {
+        [`${prefixCls}-vertical`]: mode === 'vertical',
+        [`${prefixCls}-horizontal`]: mode !== 'vertical',
     });
 
     const handleClick = (key: string) => {
         setCurrentKey(key);
         onSelect?.(key);
-    }
+    };
 
-    const renderChildren = () => {
-        return items.map(item => {
-            const { label, key, children=[], disabled } = item;
+    const renderChildren = () =>
+        items.map((item) => {
+            const { label, key, children = [], disabled } = item;
             if (children && children.length) {
                 return (
                     <SubMenu
@@ -48,7 +53,7 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
                         currentKey={currentKey}
                         handleClick={handleClick}
                     />
-                )
+                );
             }
             return (
                 <MenuItem
@@ -60,29 +65,20 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
                     label={label}
                     handleClick={() => handleClick(key)}
                 />
-            )
-        })
-    }
+            );
+        });
 
     return (
-        <ul
-            style={style}
-            className={classes}
-            data-testid="test-menu"
-        >
-            {mode === "horizontal" && prefix && (
-                <li>
-                    {prefix}
-                </li>
-            )}
+        <ul style={style} className={classes} data-testid="test-menu">
+            {mode === 'horizontal' && prefix && <li>{prefix}</li>}
             {renderChildren()}
-            {mode === "horizontal" && suffix && (
-                <li style={{ position: "absolute", right: 0 }}>
-                    {suffix}
-                </li>
+            {mode === 'horizontal' && suffix && (
+                <li style={{ position: 'absolute', right: 0 }}>{suffix}</li>
             )}
         </ul>
     );
-}
+};
+
+Menu.displayName = 'Menu';
 
 export default Menu;

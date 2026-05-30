@@ -1,107 +1,127 @@
 @use '../../Styles/variables' as menuVars;
 
-.menu {
-  color: menuVars.$body-color;
-  background: menuVars.$menu-bg;
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
-  padding-left: 0;
-  list-style: none;
-  border-bottom: menuVars.$menu-border-width solid menuVars.$menu-border-color;
-  box-shadow: menuVars.$menu-box-shadow;
-  >.menu-item {
-    padding: menuVars.$menu-item-padding-y menuVars.$menu-item-padding-x;
-    cursor: pointer;
-    transition: menuVars.$menu-transition;
-    &:hover, &:focus {
-      text-decoration: none;
-    }
-    &.disabled {
-      color: menuVars.$menu-item-disabled-color;
-      cursor: not-allowed;
-      &:hover, &:focus {
-        text-decoration: none;
-        color: menuVars.$menu-item-disabled-color;
-        border-bottom: none;
-      }
-    }
-    &.active, &:hover {
-      color: menuVars.$menu-item-active-color;
-      border-bottom: menuVars.$menu-item-active-border-width solid menuVars.$menu-item-active-color;
-    }
-  }
-
-  .submenu-item {
+.miever-menu {
+    color: menuVars.$body-color;
+    background: menuVars.$menu-bg;
+    display: flex;
     position: relative;
-    .submenu-title {
-      display: flex;
-      align-items: center;
-    }
-    .arrow-icon {
-      transition: transform .25s ease-in-out;
-      margin-left: 8px;
-    }
-    &:hover {
-      .arrow-icon {
-        transform: rotate(180deg);
-      }
-    }
-  }
-
-  .is-vertical {
-    .arrow-icon {
-      transform: rotate(0deg) !important;
-    }
-  }
-
-  .is-vertical.is-opened {
-    .arrow-icon {
-      transform: rotate(180deg) !important;
-    }
-  }
-  .submenu {
-    opacity: 0;
-    transition: opacity .5s ease-in-out;
-    list-style:none;
+    flex-wrap: wrap;
     padding-left: 0;
-    white-space: nowrap;
-    .menu-item {
-      padding: menuVars.$menu-item-padding-y menuVars.$menu-item-padding-x;
-      cursor: pointer;
-      transition: menuVars.$menu-transition;
-      color: menuVars.$body-color;
-      &.active, &:hover {
-        color: menuVars.$menu-item-active-color !important;
-      }
+    list-style: none;
+    border-bottom: menuVars.$menu-border-width solid menuVars.$menu-border-color;
+    box-shadow: menuVars.$menu-box-shadow;
+
+    > .miever-menu-item {
+        padding: menuVars.$menu-item-padding-y menuVars.$menu-item-padding-x;
+        cursor: pointer;
+        transition: menuVars.$menu-transition;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+
+        &.disabled {
+            color: menuVars.$menu-item-disabled-color;
+            cursor: not-allowed;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: menuVars.$menu-item-disabled-color;
+                border-bottom: none;
+            }
+        }
+
+        &.active,
+        &:hover {
+            color: menuVars.$menu-item-active-color;
+            border-bottom: menuVars.$menu-item-active-border-width solid menuVars.$menu-item-active-color;
+        }
     }
-  }
-  .submenu.submenu-visible {
-    opacity: 1;
-  }
-}
-.menu-horizontal {
-  .submenu {
-    position: absolute;
-    background: menuVars.$white;
-    z-index: 100;
-    top: calc(100% + 8px);
-    left: 0;
-    border: menuVars.$menu-border-width solid menuVars.$menu-border-color;
-    box-shadow: menuVars.$submenu-box-shadow;
-  }
+
+    .miever-submenu-item {
+        position: relative;
+
+        .miever-submenu-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .miever-menu-arrow {
+            transition: transform .25s ease-in-out;
+            margin-left: 8px;
+        }
+
+        &:hover {
+            .miever-menu-arrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .is-vertical {
+        .miever-menu-arrow {
+            transform: rotate(0deg) !important;
+        }
+    }
+
+    .is-vertical.is-opened {
+        .miever-menu-arrow {
+            transform: rotate(180deg) !important;
+        }
+    }
+
+    .miever-submenu {
+        opacity: 0;
+        transition: opacity .5s ease-in-out;
+        list-style: none;
+        padding-left: 0;
+        white-space: nowrap;
+
+        .miever-menu-item {
+            padding: menuVars.$menu-item-padding-y menuVars.$menu-item-padding-x;
+            cursor: pointer;
+            transition: menuVars.$menu-transition;
+            color: menuVars.$body-color;
+
+            &.active,
+            &:hover {
+                color: menuVars.$menu-item-active-color !important;
+            }
+        }
+    }
+
+    .miever-submenu.miever-submenu-visible {
+        opacity: 1;
+    }
 }
 
-.menu-vertical {
-  flex-direction: column;
-  border-bottom: 0px;
-  margin: 10px 20px;
-  border-right: menuVars.$menu-border-width solid menuVars.$menu-border-color;
-  >.menu-item {
-    border-left: menuVars.$menu-item-active-border-width solid transparent;
-    &.active, &:hover {
-      border-bottom: 0px;
-      border-left: menuVars.$menu-item-active-border-width solid menuVars.$menu-item-active-color;
+.miever-menu-horizontal {
+    .miever-submenu {
+        position: absolute;
+        background: menuVars.$menu-bg;
+        z-index: 100;
+        top: calc(100% + 8px);
+        left: 0;
+        border: menuVars.$menu-border-width solid menuVars.$menu-border-color;
+        box-shadow: menuVars.$submenu-box-shadow;
     }
-  }
+}
+
+.miever-menu-vertical {
+    flex-direction: column;
+    border-bottom: 0;
+    margin: 10px 20px;
+    border-right: menuVars.$menu-border-width solid menuVars.$menu-border-color;
+
+    > .miever-menu-item {
+        border-left: menuVars.$menu-item-active-border-width solid transparent;
+
+        &.active,
+        &:hover {
+            border-bottom: 0;
+            border-left: menuVars.$menu-item-active-border-width solid menuVars.$menu-item-active-color;
+        }
+    }
 }

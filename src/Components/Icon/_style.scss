@@ -1,7 +1,7 @@
 @use '../../Styles/variables' as themeVars;
 
 @each $key, $val in themeVars.$theme-colors {
-  .icon-#{$key} {
-    color: $val;
-  }
+    .miever-icon-#{$key} {
+        color: $val;
+    }
 }
