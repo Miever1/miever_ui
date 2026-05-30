@@ -2,7 +2,6 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import Menu from './index';
 import Box from '../Box';
-import '../../Styles/index.scss';
 
 export default {
   title: 'Navigation/Menu',

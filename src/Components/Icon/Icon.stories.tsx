@@ -1,114 +1,79 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import Icon from './Icon';
-import { IIconProps } from './interface';
 import { BRAND_COLORS } from '../../Designs';
 
-export default {
-  title: 'General/Icon',
-  component: Icon,
-  tags: ['autodocs'],
-  argTypes: {
-    icon: {
-      control: { type: 'select' },
-      options: ['coffee', 'home', 'user', 'bell', 'cog'],
-      description: 'Specifies the icon to render (e.g., "coffee", "home").',
+const meta: Meta<typeof Icon> = {
+    title: 'General/Icon',
+    component: Icon,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Icon renders any [FontAwesome](https://fontawesome.com/icons) glyph and can be tinted with a brand theme color. It forwards all `FontAwesomeIcon` props.',
+            },
+        },
     },
-    theme: {
-      control: { type: 'select' },
-      options: Object.keys(BRAND_COLORS),
-      description: 'Applies a theme class to the icon.',
+    argTypes: {
+        icon: {
+            control: 'select',
+            options: ['coffee', 'house', 'user', 'bell', 'gear', 'heart', 'star', 'magnifying-glass'],
+            description: 'FontAwesome icon name.',
+        },
+        theme: {
+            control: 'select',
+            options: [undefined, ...Object.keys(BRAND_COLORS)],
+            description: 'Brand color theme.',
+        },
     },
-    style: {
-      control: 'object',
-      description: 'Custom inline styles applied to the icon.',
+    args: {
+        icon: 'coffee',
+        theme: 'primary',
+        style: { fontSize: 24 },
     },
-    className: {
-      control: 'text',
-      description: 'Additional class names for custom styling.',
-    },
-  },
-} as Meta;
-
-// Template for general use
-const Template: StoryFn<IIconProps> = (args) => <Icon {...args} />;
-
-// Story 1: Icon with theme
-export const ThemedIcon = Template.bind({});
-ThemedIcon.args = {
-  icon: 'coffee',
-  theme: 'primary',
-  style: { fontSize: '24px' },
-};
-ThemedIcon.storyName = 'Themed Icon';
-
-// Story 2: All themes displayed together
-export const AllThemes = () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    {Object.keys(BRAND_COLORS).map((theme) => (
-      <Icon
-        key={theme}
-        icon="home"
-        theme={theme as keyof typeof BRAND_COLORS}
-        style={{ fontSize: '24px' }}
-      />
-    ))}
-  </div>
-);
-AllThemes.storyName = 'Icons with All Themes';
-
-// Story 3: Icon Sizes
-export const IconSizes = () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon icon="user" style={{ fontSize: '16px' }} />
-    <Icon icon="user" style={{ fontSize: '24px' }} />
-    <Icon icon="user" style={{ fontSize: '32px' }} />
-    <Icon icon="user" style={{ fontSize: '48px' }} />
-  </div>
-);
-IconSizes.storyName = 'Icons with Different Sizes';
-
-// Story 4: Custom Styles
-export const CustomStyles = () => (
-  <Icon
-    icon="cog"
-    style={{
-      fontSize: '32px',
-      color: 'purple',
-      border: '2px solid purple',
-      padding: '8px',
-      borderRadius: '50%',
-    }}
-  />
-);
-CustomStyles.storyName = 'Icon with Custom Styles';
-
-// Story 5: Interactive Example
-export const InteractiveIcon = Template.bind({});
-InteractiveIcon.args = {
-  icon: 'bell',
-  theme: 'warning',
-  style: { fontSize: '24px', cursor: 'pointer' },
-};
-InteractiveIcon.storyName = 'Interactive Icon';
-InteractiveIcon.parameters = {
-  docs: {
-    description: {
-      story:
-        'This example demonstrates an interactive icon styled with a warning theme and a clickable cursor.',
-    },
-  },
 };
 
-// Story 6: Accessibility Showcase
-export const AccessibleIcon = () => (
-  <Icon icon="home" style={{ fontSize: '32px' }} aria-label="Home icon" />
-);
-AccessibleIcon.storyName = 'Accessible Icon';
-AccessibleIcon.parameters = {
-  docs: {
-    description: {
-      story: 'This icon includes an `aria-label` for improved accessibility.',
-    },
-  },
+export default meta;
+type Story = StoryObj<typeof Icon>;
+
+/** The default playground. Use the controls panel to explore every prop. */
+export const Playground: Story = {};
+
+/** Every brand theme color. */
+export const Themes: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+            {Object.keys(BRAND_COLORS).map((theme) => (
+                <Icon
+                    key={theme}
+                    icon="house"
+                    theme={theme as keyof typeof BRAND_COLORS}
+                    style={{ fontSize: 24 }}
+                />
+            ))}
+        </div>
+    ),
+};
+
+/** Size is driven by `font-size`. */
+export const Sizes: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+            {[16, 24, 32, 48].map((size) => (
+                <Icon key={size} icon="user" style={{ fontSize: size }} />
+            ))}
+        </div>
+    ),
+};
+
+/** Brand icons work too — pass the `['fab', name]` tuple. */
+export const BrandIcons: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+            <Icon icon={['fab', 'github']} style={{ fontSize: 28 }} />
+            <Icon icon={['fab', 'react']} theme="info" style={{ fontSize: 28 }} />
+            <Icon icon={['fab', 'js']} theme="warning" style={{ fontSize: 28 }} />
+        </div>
+    ),
 };

@@ -1,38 +1,39 @@
 @use '../../Styles/variables' as cardVars;
 
-.card {
-    border: 1px solid cardVars.$card-border-color !important;
-    color: var(--body-color);
+.miever-card {
     display: flex;
     flex-direction: column;
+    color: var(--color-text-primary);
     background: cardVars.$card-bg;
-    border-radius: 8px;
-    min-width: 580px;
-    box-shadow: 0 1px 1px 0 rgba(86, 152, 195, 0.1),0 1px 1px 0 rgba(86, 152, 195, 0.1);
+    border: cardVars.$border-width solid cardVars.$card-border-color;
+    border-radius: cardVars.$border-radius-lg;
+    box-shadow: cardVars.$box-shadow-sm;
+    transition: cardVars.$btn-transition;
 }
 
-.card-hover {
+.miever-card-hover {
     &:hover,
     &.hover {
         cursor: pointer;
         border-color: transparent;
-        box-shadow: 0 1px 2px -2px rgba(86, 152, 195,.1),0 3px 6px 0 rgba(86, 152, 195,.1),0 5px 12px 4px rgba(0,0,0,.09);
+        box-shadow: cardVars.$box-shadow;
     }
 }
 
-.card-header {
-    padding: 16px;
-    font-size: 32px;
-    font-weight: 600;
+.miever-card-header {
+    padding: cardVars.$spacer;
+    font-size: cardVars.$h4-font-size;
+    font-weight: cardVars.$headings-font-weight;
 }
 
-.card-content {
-    padding: 16px;
+.miever-card-content {
+    padding: cardVars.$spacer;
+    color: var(--color-text-secondary);
 }
 
-.card-subtitle {
-    color: rgba(86, 152, 195, 1);
+.miever-card-subtitle {
     margin: 0 4px;
+    color: cardVars.$primary;
     font-weight: 600;
-    font-size: 14px;
+    font-size: cardVars.$font-size-sm;
 }

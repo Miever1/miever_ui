@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import Card from './Card';
-import '../../Styles/index.scss';
 
 export default {
   title: 'General/Card',

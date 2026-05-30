@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import Transition from './Transition';
 import { TransitionProps } from './interface';
-import '../../Styles/index.scss';
 import Button from '../Button';
 
 export default {

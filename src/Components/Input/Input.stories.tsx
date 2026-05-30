@@ -1,68 +1,72 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import Input from './index';
-import { NativeInputProps } from './interface';
+import type { Meta, StoryObj } from '@storybook/react';
+import Input from './Input';
 
-export default {
-  title: 'Data Entry/Input',
-  component: Input,
-  tags: ['autodocs'],
-  argTypes: {
-    size: {
-      control: { type: 'select' },
-      options: ['sm', 'lg'],
-      description: 'Set the size of the input field.',
-      defaultValue: 'sm',
+const meta: Meta<typeof Input> = {
+    title: 'Data Entry/Input',
+    component: Input,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'A text field for collecting single-line user input. Supports three sizes, an optional trailing icon, a disabled state, and all native `<input>` attributes.',
+            },
+        },
     },
-    disabled: {
-      control: { type: 'boolean' },
-      description: 'Disable the input field.',
-      defaultValue: false,
+    argTypes: {
+        size: {
+            control: 'inline-radio',
+            options: ['sm', 'md', 'lg'],
+            description: 'Input size.',
+            table: { defaultValue: { summary: 'md' } },
+        },
+        disabled: {
+            control: 'boolean',
+            description: 'Disables the input.',
+            table: { defaultValue: { summary: 'false' } },
+        },
+        placeholder: {
+            control: 'text',
+            description: 'Placeholder text.',
+        },
+        icon: {
+            control: 'text',
+            description: 'Optional trailing FontAwesome icon name (e.g. "magnifying-glass").',
+        },
     },
-    placeholder: {
-      control: 'text',
-      description: 'Placeholder text for the input field.',
-      defaultValue: 'Enter text...',
+    args: {
+        placeholder: 'Enter text...',
+        disabled: false,
     },
-    style: {
-      control: 'object',
-      description: 'Inline styles applied to the input wrapper.',
-    },
-    className: {
-      control: 'text',
-      description: 'Custom class names for styling the input wrapper.',
-    },
-  },
-} as Meta;
-
-// Template for stories
-const Template: StoryFn<NativeInputProps> = (args) => <Input {...args} />;
-
-// Basic Input Story
-export const Basic = Template.bind({});
-Basic.args = {
-  placeholder: 'Basic Input',
+    decorators: [
+        (Story) => <div style={{ maxWidth: 320 }}>{Story()}</div>,
+    ],
 };
 
-// Input with Icon
-export const InputWithIcon = Template.bind({});
-InputWithIcon.args = {
-  icon: 'search',
-  placeholder: 'Input with Icon',
+export default meta;
+type Story = StoryObj<typeof Input>;
+
+/** The default playground. Use the controls panel to explore every prop. */
+export const Playground: Story = {};
+
+/** Input with a trailing icon. */
+export const WithIcon: Story = {
+    args: { icon: 'magnifying-glass', placeholder: 'Search...' },
 };
 
-// Disabled Input
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-  placeholder: 'Disabled Input',
+/** Disabled input. */
+export const Disabled: Story = {
+    args: { disabled: true, placeholder: 'Disabled' },
 };
 
-// Input with Different Sizes
-export const SizeVariants = () => (
-  <div style={{ display: 'flex', gap: '16px', flexDirection: 'column' }}>
-    <Input size="sm" placeholder="Small Input" />
-    <Input size="lg" placeholder="Large Input" />
-  </div>
-);
-SizeVariants.storyName = 'Input with Different Sizes';
+/** The three available sizes. */
+export const Sizes: Story = {
+    render: () => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 320 }}>
+            <Input size="sm" placeholder="Small" />
+            <Input size="md" placeholder="Medium" />
+            <Input size="lg" placeholder="Large" />
+        </div>
+    ),
+};

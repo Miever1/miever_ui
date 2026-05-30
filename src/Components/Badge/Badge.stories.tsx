@@ -1,51 +1,83 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import Badge from './Badge';
-import { BadgeProps } from './interface';
 
-export default {
-    title: 'Data Display/Badge',
-    component: Badge,
-    tags: ['autodocs'],
-    argTypes: {
-        theme: {
-            control: { type: 'select' },
-            options: ['primary', 'secondary', 'success', 'info', 'warning', 'danger'],
-        },
-    },
-} as Meta;
-
-const Box = () => (
+const Avatar = () => (
     <span
         style={{
             display: 'inline-block',
             width: 40,
             height: 40,
             background: 'var(--color-bg-secondary)',
-            borderRadius: 6,
+            border: '1px solid var(--color-border-primary)',
+            borderRadius: 8,
         }}
     />
 );
 
-const Template: StoryFn<BadgeProps> = (args) => (
-    <Badge {...args}>
-        <Box />
-    </Badge>
-);
+const meta: Meta<typeof Badge> = {
+    title: 'Data Display/Badge',
+    component: Badge,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Badge shows a small count or status dot, either attached to an element or standalone. Counts above `maxCount` render as `{maxCount}+`.',
+            },
+        },
+    },
+    argTypes: {
+        count: { control: 'number', description: 'Number to display.' },
+        maxCount: {
+            control: 'number',
+            description: 'Cap before showing `{maxCount}+`.',
+            table: { defaultValue: { summary: '99' } },
+        },
+        dot: { control: 'boolean', description: 'Render a dot instead of a count.' },
+        showZero: { control: 'boolean', description: 'Show the badge when count is 0.' },
+        theme: {
+            control: 'select',
+            options: ['primary', 'secondary', 'success', 'info', 'warning', 'danger'],
+            description: 'Brand color theme.',
+            table: { defaultValue: { summary: 'danger' } },
+        },
+    },
+    args: {
+        count: 5,
+        theme: 'danger',
+    },
+    render: (args) => (
+        <Badge {...args}>
+            <Avatar />
+        </Badge>
+    ),
+};
 
-export const Basic = Template.bind({});
-Basic.args = { count: 5 };
+export default meta;
+type Story = StoryObj<typeof Badge>;
 
-export const Overflow = Template.bind({});
-Overflow.args = { count: 120, maxCount: 99 };
+/** A count badge attached to an element. */
+export const Basic: Story = {};
 
-export const Dot = Template.bind({});
-Dot.args = { dot: true, theme: 'primary' };
+/** Counts above `maxCount` overflow to `{maxCount}+`. */
+export const Overflow: Story = {
+    args: { count: 120, maxCount: 99 },
+};
 
-export const Standalone = () => (
-    <div style={{ display: 'flex', gap: '8px' }}>
-        <Badge count={1} theme="primary" />
-        <Badge count={8} theme="success" />
-        <Badge count={99} theme="warning" />
-    </div>
-);
+/** A status dot instead of a number. */
+export const Dot: Story = {
+    args: { dot: true, theme: 'primary' },
+};
+
+/** Standalone badges across themes. */
+export const Standalone: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Badge count={1} theme="primary" />
+            <Badge count={8} theme="success" />
+            <Badge count={99} theme="warning" />
+            <Badge count={120} maxCount={99} theme="danger" />
+        </div>
+    ),
+};

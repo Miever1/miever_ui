@@ -1,43 +1,85 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import Divider from './Divider';
-import { DividerProps } from './interface';
 
-export default {
+const meta: Meta<typeof Divider> = {
     title: 'Layout/Divider',
     component: Divider,
     tags: ['autodocs'],
-    argTypes: {
-        direction: {
-            control: { type: 'radio' },
-            options: ['horizontal', 'vertical'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Divider separates content with a thin line, horizontally or vertically, optionally with centered text.',
+            },
         },
     },
-} as Meta;
+    argTypes: {
+        direction: {
+            control: 'inline-radio',
+            options: ['horizontal', 'vertical'],
+            description: 'Orientation.',
+            table: { defaultValue: { summary: 'horizontal' } },
+        },
+        dashed: {
+            control: 'boolean',
+            description: 'Render a dashed line.',
+            table: { defaultValue: { summary: 'false' } },
+        },
+        children: { control: 'text', description: 'Centered text (horizontal only).' },
+    },
+    decorators: [
+        (Story) => <div style={{ maxWidth: 400 }}>{Story()}</div>,
+    ],
+};
 
-const Template: StoryFn<DividerProps> = (args) => (
-    <div>
-        <p>Content above the divider.</p>
-        <Divider {...args} />
-        <p>Content below the divider.</p>
-    </div>
-);
+export default meta;
+type Story = StoryObj<typeof Divider>;
 
-export const Basic = Template.bind({});
-Basic.args = {};
+/** A plain horizontal divider. */
+export const Basic: Story = {
+    render: (args) => (
+        <div>
+            <p style={{ margin: 0 }}>Content above.</p>
+            <Divider {...args} />
+            <p style={{ margin: 0 }}>Content below.</p>
+        </div>
+    ),
+};
 
-export const WithText = Template.bind({});
-WithText.args = { children: 'Section' };
+/** With centered text. */
+export const WithText: Story = {
+    args: { children: 'Section' },
+    render: (args) => (
+        <div>
+            <p style={{ margin: 0 }}>Content above.</p>
+            <Divider {...args} />
+            <p style={{ margin: 0 }}>Content below.</p>
+        </div>
+    ),
+};
 
-export const Dashed = Template.bind({});
-Dashed.args = { dashed: true, children: 'Dashed' };
+/** Dashed variant. */
+export const Dashed: Story = {
+    args: { dashed: true, children: 'Dashed' },
+    render: (args) => (
+        <div>
+            <p style={{ margin: 0 }}>Content above.</p>
+            <Divider {...args} />
+            <p style={{ margin: 0 }}>Content below.</p>
+        </div>
+    ),
+};
 
-export const Vertical = () => (
-    <div>
-        Home
-        <Divider direction="vertical" />
-        Docs
-        <Divider direction="vertical" />
-        About
-    </div>
-);
+/** Vertical dividers separate inline items. */
+export const Vertical: Story = {
+    render: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            Home
+            <Divider direction="vertical" />
+            Docs
+            <Divider direction="vertical" />
+            About
+        </div>
+    ),
+};

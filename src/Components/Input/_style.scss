@@ -1,29 +1,32 @@
 @use '../../Styles/variables' as inputVars;
 
-.input-wrapper {
+.miever-input-wrapper {
     display: flex;
     width: 100%;
-    margin-bottom: 30px;
     position: relative;
-    .icon-wrapper {
-      position: absolute;
-      height: 100%;
-      width: 36px;
-      justify-content: center;
-      color: inputVars.$input-color;
-      right: 0;
-      top: 0;
-      display: flex;
-      align-items: center;
-      svg {
-        color: inputVars.$input-placeholder-color;
-      }
+
+    .miever-input-icon {
+        position: absolute;
+        height: 100%;
+        width: 36px;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inputVars.$input-color;
+
+        svg {
+            color: inputVars.$input-placeholder-color;
+        }
     }
-  }
-  .icon-wrapper+.input-inner {
+}
+
+.miever-input-icon + .miever-input-inner {
     padding-right: 36px;
-  }
-  .input-inner {
+}
+
+.miever-input-inner {
     width: 100%;
     padding: inputVars.$input-padding-y inputVars.$input-padding-x;
     font-family: inputVars.$input-font-family;
@@ -34,43 +37,40 @@
     background-color: inputVars.$input-bg;
     background-clip: padding-box;
     border: inputVars.$input-border-width solid inputVars.$input-border-color;
-  
-    // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
     border-radius: inputVars.$input-border-radius;
-  
     box-shadow: inputVars.$input-box-shadow;
     transition: inputVars.$input-transition;
-  
+
     &:focus {
-      color: inputVars.$input-focus-color;
-      background-color: inputVars.$input-focus-bg;
-      border-color: inputVars.$input-focus-border-color;
-      outline: 0;
-      // Avoid using mixin so we can pass custom focus shadow properly
+        color: inputVars.$input-focus-color;
+        background-color: inputVars.$input-focus-bg;
+        border-color: inputVars.$input-focus-border-color;
+        box-shadow: 0 0 0 inputVars.$input-focus-width inputVars.$input-focus-shadow-color;
+        outline: 0;
     }
+
     &::placeholder {
-      color: inputVars.$input-placeholder-color;
-      // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
-      opacity: 1;
+        color: inputVars.$input-placeholder-color;
+        opacity: 1;
     }
+
     &:disabled,
     &[readonly] {
-      background-color: inputVars.$input-disabled-bg;
-      border-color: inputVars.$input-disabled-border-color;
-      // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
-      opacity: inputVars.$btn-disabled-opacity;
-      cursor: not-allowed;
+        background-color: inputVars.$input-disabled-bg;
+        border-color: inputVars.$input-disabled-border-color;
+        opacity: inputVars.$btn-disabled-opacity;
+        cursor: not-allowed;
     }
-  }
-  .input-size-sm .input-inner {
+}
+
+.miever-input-size-sm .miever-input-inner {
     padding: inputVars.$input-padding-y-sm inputVars.$input-padding-x-sm;
     font-size: inputVars.$input-font-size-sm;
     border-radius: inputVars.$input-border-radius-sm;
-  }
-  
-  .input-size-lg .input-inner {
+}
+
+.miever-input-size-lg .miever-input-inner {
     padding: inputVars.$input-padding-y-lg inputVars.$input-padding-x-lg;
     font-size: inputVars.$input-font-size-lg;
     border-radius: inputVars.$input-border-radius-lg;
-  }
-  
+}

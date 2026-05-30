@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import AutoComplete from './AutoComplete';
 import { AutoCompleteProps } from './interface';
-import '../../Styles/index.scss';
 
 // 定义常用的数据类型
 interface Product {
