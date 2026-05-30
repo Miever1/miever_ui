@@ -1,0 +1,76 @@
+@use '../../Styles/variables' as vars;
+
+.miever-skeleton {
+    display: flex;
+    gap: 16px;
+}
+
+.miever-skeleton-body {
+    flex: 1;
+}
+
+%miever-skeleton-block {
+    display: block;
+    background: var(--color-bg-disabled);
+    border-radius: vars.$border-radius;
+}
+
+.miever-skeleton-avatar {
+    @extend %miever-skeleton-block;
+    flex: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.miever-skeleton-title {
+    @extend %miever-skeleton-block;
+    width: 40%;
+    height: 16px;
+    margin-bottom: 16px;
+}
+
+.miever-skeleton-paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.miever-skeleton-row {
+    @extend %miever-skeleton-block;
+    width: 100%;
+    height: 12px;
+
+    &:last-child {
+        width: 60%;
+    }
+}
+
+.miever-skeleton-active {
+    .miever-skeleton-avatar,
+    .miever-skeleton-title,
+    .miever-skeleton-row {
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--color-surface-overlay),
+                transparent
+            );
+            animation: miever-skeleton-shimmer 1.4s ease infinite;
+        }
+    }
+}
+
+@keyframes miever-skeleton-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}

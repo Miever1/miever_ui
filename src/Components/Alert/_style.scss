@@ -1,0 +1,75 @@
+@use 'sass:color';
+@use '../../Styles/variables' as vars;
+
+.miever-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: vars.$spacer;
+    border: vars.$border-width solid transparent;
+    border-radius: vars.$border-radius;
+    line-height: vars.$line-height-base;
+}
+
+.miever-alert-icon {
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.miever-alert-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.miever-alert-message {
+    color: var(--color-text-primary);
+}
+
+.miever-alert-description {
+    margin-top: 4px;
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+}
+
+.miever-alert-with-description .miever-alert-message {
+    font-weight: vars.$font-weight-bold;
+}
+
+.miever-alert-close {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity .2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+@mixin alert-variant($color) {
+    background: color.scale($color, $lightness: 88%);
+    border-color: color.scale($color, $lightness: 60%);
+
+    .miever-alert-icon {
+        color: $color;
+    }
+}
+
+.miever-alert-success {
+    @include alert-variant(vars.$success);
+}
+.miever-alert-info {
+    @include alert-variant(vars.$info);
+}
+.miever-alert-warning {
+    @include alert-variant(vars.$warning);
+}
+.miever-alert-error {
+    @include alert-variant(vars.$danger);
+}

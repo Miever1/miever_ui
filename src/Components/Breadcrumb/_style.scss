@@ -1,0 +1,44 @@
+@use '../../Styles/variables' as vars;
+
+.miever-breadcrumb {
+    font-size: vars.$font-size-base;
+}
+
+.miever-breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.miever-breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.miever-breadcrumb-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        color: vars.$primary;
+    }
+}
+
+.miever-breadcrumb-text {
+    color: var(--color-text-secondary);
+
+    &.current {
+        color: var(--color-text-primary);
+        font-weight: vars.$font-weight-bold;
+    }
+}
+
+.miever-breadcrumb-separator {
+    margin: 0 8px;
+    color: var(--color-text-disabled);
+}

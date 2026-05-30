@@ -9,12 +9,28 @@
 @use "animation";
 
 // Component styles
+@use "../Components/Alert/style" as Alert;
 @use "../Components/AutoComplete/style" as AutoComplete;
+@use "../Components/Avatar/style" as Avatar;
 @use "../Components/Badge/style" as Badge;
+@use "../Components/Breadcrumb/style" as Breadcrumb;
 @use "../Components/Button/style" as Button;
 @use "../Components/Card/style" as Card;
+@use "../Components/Collapse/style" as Collapse;
 @use "../Components/Divider/style" as Divider;
+@use "../Components/Drawer/style" as Drawer;
+@use "../Components/Grid/style" as Grid;
 @use "../Components/Icon/style" as Icon;
 @use "../Components/Input/style" as Input;
 @use "../Components/Menu/style" as Menu;
+@use "../Components/Message/style" as Message;
+@use "../Components/Modal/style" as Modal;
+@use "../Components/Pagination/style" as Pagination;
+@use "../Components/Progress/style" as Progress;
+@use "../Components/Skeleton/style" as Skeleton;
+@use "../Components/Spin/style" as Spin;
+@use "../Components/Switch/style" as Switch;
+@use "../Components/Tabs/style" as Tabs;
 @use "../Components/Tag/style" as Tag;
+@use "../Components/Timeline/style" as Timeline;
+@use "../Components/Typography/style" as Typography;

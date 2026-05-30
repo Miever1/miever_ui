@@ -1,0 +1,48 @@
+@use '../../Styles/variables' as vars;
+
+.miever-tabs {
+    display: flex;
+    flex-direction: column;
+}
+
+.miever-tabs-nav {
+    display: flex;
+    gap: 4px;
+    border-bottom: vars.$border-width solid var(--color-border-primary);
+}
+
+.miever-tabs-tab {
+    position: relative;
+    padding: vars.$btn-padding-y vars.$btn-padding-x;
+    margin-bottom: -1px;
+    font-size: vars.$font-size-base;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out;
+
+    &:hover {
+        color: vars.$primary;
+    }
+
+    &.active {
+        color: vars.$primary;
+        border-bottom-color: vars.$primary;
+    }
+
+    &.disabled {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+
+        &:hover {
+            color: var(--color-text-disabled);
+        }
+    }
+}
+
+.miever-tabs-content {
+    padding: vars.$spacer 0;
+    color: var(--color-text-primary);
+}

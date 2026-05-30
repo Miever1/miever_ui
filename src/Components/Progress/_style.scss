@@ -1,0 +1,69 @@
+@use '../../Styles/variables' as vars;
+
+$progress-colors: (
+    'normal': vars.$primary,
+    'success': vars.$success,
+    'warning': vars.$warning,
+    'danger': vars.$danger,
+);
+
+.miever-progress-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.miever-progress-outer {
+    flex: 1;
+    height: 8px;
+    background: var(--color-bg-disabled);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.miever-progress-inner {
+    height: 100%;
+    background: vars.$primary;
+    border-radius: 100px;
+    transition: width .3s ease;
+}
+
+.miever-progress-info {
+    min-width: 36px;
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+    text-align: right;
+}
+
+.miever-progress-circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.miever-progress-circle-trail {
+    stroke: var(--color-bg-disabled);
+}
+
+.miever-progress-circle-path {
+    stroke: vars.$primary;
+    transition: stroke-dashoffset .3s ease;
+}
+
+.miever-progress-circle-info {
+    position: absolute;
+    font-size: vars.$h5-font-size;
+    color: var(--color-text-primary);
+}
+
+@each $status, $color in $progress-colors {
+    .miever-progress-#{$status} {
+        .miever-progress-inner {
+            background: $color;
+        }
+        .miever-progress-circle-path {
+            stroke: $color;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+@use '../../Styles/variables' as vars;
+
+.miever-spin {
+    display: inline-flex;
+}
+
+.miever-spin-indicator {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: vars.$primary;
+}
+
+.miever-spin-dot {
+    display: inline-block;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: miever-spin-rotate 0.8s linear infinite;
+}
+
+.miever-spin-sm .miever-spin-dot {
+    width: 16px;
+    height: 16px;
+}
+
+.miever-spin-md .miever-spin-dot {
+    width: 24px;
+    height: 24px;
+}
+
+.miever-spin-lg .miever-spin-dot {
+    width: 36px;
+    height: 36px;
+    border-width: 3px;
+}
+
+.miever-spin-tip {
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+}
+
+.miever-spin-container {
+    position: relative;
+}
+
+.miever-spin-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface-overlay);
+}
+
+.miever-spin-content.blurred {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+}
+
+@keyframes miever-spin-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
