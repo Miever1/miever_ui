@@ -30,5 +30,8 @@ export * from './Components/Typography';
 export * from './Components/Tooltip';
 export * from './Components/Transition';
 
-// Design tokens (designs, BRAND_COLORS, SPACE_SIZE, SPACE_LIST, SpaceType)
+// Design tokens (designs, BRAND_COLORS, SPACE_SIZE, SPACE_LIST, BREAKPOINTS, …)
 export * from './Designs';
+
+// Hooks
+export * from './Utils/useBreakpoint';

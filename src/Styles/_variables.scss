@@ -5,6 +5,17 @@
 // Component selectors are written as `.miever-*` to stay namespaced and consistent.
 $prefix: miever !default;
 
+// Responsive breakpoints (min-width, px). Mirrors src/Designs/breakpoints.ts —
+// keep both in sync. Use via the media-up/media-down mixins in _mixin.scss.
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;

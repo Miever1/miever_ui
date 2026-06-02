@@ -1,4 +1,5 @@
 import type { SpaceType } from "./types";
+import { BREAKPOINTS, BREAKPOINT_KEYS } from "./breakpoints";
 
 const SPACE_LIST = ["xs", "sm", "md", "lg", "xlg", "xxlg", "xxxlg"];
 
@@ -27,6 +28,7 @@ const designs = {
     SPACE_SIZE,
     SPACE_LIST,
     BRAND_COLORS,
+    BREAKPOINTS,
 };
 
 export {
@@ -34,8 +36,11 @@ export {
     SPACE_SIZE,
     SPACE_LIST,
     BRAND_COLORS,
+    BREAKPOINTS,
+    BREAKPOINT_KEYS,
 };
 
 export type {
     SpaceType,
 };
+export type { Breakpoint } from "./breakpoints";

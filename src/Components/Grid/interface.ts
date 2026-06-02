@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
+import type { Breakpoint } from '../../Designs/breakpoints';
 
 export type FlexJustify =
     | 'start'
@@ -22,8 +23,14 @@ export interface RowProps {
     style?: CSSProperties;
 }
 
-export interface ColProps {
-    /** Number of 24 grid columns to span. */
+/**
+ * Per-breakpoint column span. The base `span` applies from `xs` up; any
+ * breakpoint key (`sm`–`xxl`) overrides it at that width and above.
+ */
+export type ColResponsive = Partial<Record<Breakpoint, number>>;
+
+export interface ColProps extends ColResponsive {
+    /** Number of 24 grid columns to span (base, applies at all widths). */
     span?: number;
     /** Number of columns to offset from the left. */
     offset?: number;

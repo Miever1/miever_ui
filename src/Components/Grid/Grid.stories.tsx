@@ -75,3 +75,19 @@ export const Alignment: Story = {
         </Row>
     ),
 };
+
+/**
+ * Responsive columns. Resize the preview: each cell is full width on phones
+ * (`xs`), half on tablets (`md`), and a third on desktops (`lg`).
+ */
+export const Responsive: Story = {
+    render: () => (
+        <Row gutter={16}>
+            {[1, 2, 3].map((n) => (
+                <Col key={n} xs={24} md={12} lg={8}>
+                    <div style={cell}>xs=24 · md=12 · lg=8</div>
+                </Col>
+            ))}
+        </Row>
+    ),
+};
