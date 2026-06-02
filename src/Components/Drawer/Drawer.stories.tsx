@@ -28,7 +28,7 @@ const DrawerDemo = ({ placement = 'right' }: { placement?: DrawerPlacement }) =>
     const [open, setOpen] = useState(false);
     return (
         <>
-            <Button styleType="primary" onClick={() => setOpen(true)}>
+            <Button type="primary" onClick={() => setOpen(true)}>
                 Open drawer
             </Button>
             <Drawer open={open} placement={placement} title="Navigation" onClose={() => setOpen(false)}>

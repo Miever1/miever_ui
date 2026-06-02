@@ -49,7 +49,7 @@ const BasicDemo = (args: TransitionProps) => {
     const [visible, setVisible] = useState(true);
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
-            <Button styleType="primary" onClick={() => setVisible((v) => !v)}>
+            <Button type="primary" onClick={() => setVisible((v) => !v)}>
                 Toggle
             </Button>
             <Transition {...args} in={visible} unmountOnExit>
@@ -64,7 +64,7 @@ const AllAnimationsDemo = () => {
     const animations = ['zoom-in-top', 'zoom-in-right', 'zoom-in-bottom', 'zoom-in-left'] as const;
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <Button styleType="primary" onClick={() => setVisible((v) => !v)}>
+            <Button type="primary" onClick={() => setVisible((v) => !v)}>
                 Toggle all
             </Button>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>

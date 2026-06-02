@@ -23,12 +23,12 @@ type Story = StoryObj;
 export const Basic: Story = {
     render: () => (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <Button styleType="primary" onClick={() => message.success('Saved successfully')}>
+            <Button type="primary" onClick={() => message.success('Saved successfully')}>
                 Success
             </Button>
             <Button onClick={() => message.info('Heads up, something happened')}>Info</Button>
             <Button onClick={() => message.warning('This is a warning')}>Warning</Button>
-            <Button styleType="danger" onClick={() => message.error('Something went wrong')}>
+            <Button type="danger" onClick={() => message.error('Something went wrong')}>
                 Error
             </Button>
             <Button

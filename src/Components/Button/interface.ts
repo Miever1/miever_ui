@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { BaseProps } from '../../types';
 
 /**
  * Available button sizes.
@@ -6,35 +7,41 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
  * - 'md' - Medium (default)
  * - 'lg' - Large
  */
-export type ButtonSizes = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 /**
- * Available button styles.
+ * Visual / semantic button variants.
  * - 'default' - Default styling
  * - 'primary' - Primary action button
  * - 'danger' - Warning or danger button
  * - 'link' - Link-styled button
  * - 'secondary' - Secondary action button
  */
-export type ButtonStyleTypes = 'default' | 'primary' | 'danger' | 'link' | 'secondary';
+export type ButtonType = 'default' | 'primary' | 'danger' | 'link' | 'secondary';
 
 /**
  * Props for the Button component.
  */
-export interface IButtonProps {
-    /** Additional CSS classes */
-    className?: string;
-    /** Button size: sm, md, or lg */
-    size?: ButtonSizes;
-    /** Styling type for the button */
-    styleType?: ButtonStyleTypes;
-    /** Disabled state of the button */
+export interface IButtonProps extends BaseProps {
+    /** Button size: sm, md, or lg. @default 'md' */
+    size?: ButtonSize;
+    /** Visual / semantic variant of the button. @default 'default' */
+    type?: ButtonType;
+    /**
+     * The native HTML `type` attribute of the underlying `<button>`.
+     * Kept separate from the visual `type` prop (mirrors Ant Design's API).
+     * @default 'button'
+     */
+    htmlType?: 'button' | 'submit' | 'reset';
+    /** Disabled state of the button. */
     disabled?: boolean;
-    /** Child elements within the button */
+    /** Child elements within the button. */
     children?: ReactNode;
 }
 
 /**
- * Combined type for Button component including native HTML button attributes.
+ * Combined type for Button including native HTML button attributes. The native
+ * `type` attribute is replaced by {@link IButtonProps.htmlType}.
  */
-export type NativeButtonProps = IButtonProps & ButtonHTMLAttributes<HTMLElement>;
+export type NativeButtonProps = IButtonProps &
+    Omit<ButtonHTMLAttributes<HTMLElement>, 'type'>;

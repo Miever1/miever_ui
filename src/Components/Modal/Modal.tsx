@@ -55,7 +55,7 @@ const Modal: FunctionComponent<ModalProps> = ({
     const defaultFooter = (
         <>
             <Button onClick={onClose}>{cancelText}</Button>
-            <Button styleType="primary" onClick={onOk}>
+            <Button type="primary" onClick={onOk}>
                 {okText}
             </Button>
         </>

@@ -15,7 +15,7 @@ const meta: Meta<typeof Button> = {
         },
     },
     argTypes: {
-        styleType: {
+        type: {
             control: 'select',
             options: ['default', 'primary', 'secondary', 'danger', 'link'],
             description: 'Visual style of the button.',
@@ -40,7 +40,7 @@ const meta: Meta<typeof Button> = {
     },
     args: {
         children: 'Button',
-        styleType: 'default',
+        type: 'default',
         size: 'md',
         disabled: false,
     },
@@ -56,11 +56,11 @@ export const Playground: Story = {};
 export const StyleTypes: Story = {
     render: () => (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button styleType="default">Default</Button>
-            <Button styleType="primary">Primary</Button>
-            <Button styleType="secondary">Secondary</Button>
-            <Button styleType="danger">Danger</Button>
-            <Button styleType="link">Link</Button>
+            <Button type="default">Default</Button>
+            <Button type="primary">Primary</Button>
+            <Button type="secondary">Secondary</Button>
+            <Button type="danger">Danger</Button>
+            <Button type="link">Link</Button>
         </div>
     ),
 };
@@ -69,13 +69,13 @@ export const StyleTypes: Story = {
 export const Sizes: Story = {
     render: () => (
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <Button size="sm" styleType="primary">
+            <Button size="sm" type="primary">
                 Small
             </Button>
-            <Button size="md" styleType="primary">
+            <Button size="md" type="primary">
                 Medium
             </Button>
-            <Button size="lg" styleType="primary">
+            <Button size="lg" type="primary">
                 Large
             </Button>
         </div>
@@ -87,13 +87,13 @@ export const Disabled: Story = {
     render: () => (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
             <Button disabled>Default</Button>
-            <Button styleType="primary" disabled>
+            <Button type="primary" disabled>
                 Primary
             </Button>
-            <Button styleType="danger" disabled>
+            <Button type="danger" disabled>
                 Danger
             </Button>
-            <Button styleType="link" disabled>
+            <Button type="link" disabled>
                 Link
             </Button>
         </div>

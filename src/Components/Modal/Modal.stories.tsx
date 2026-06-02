@@ -24,7 +24,7 @@ const BasicDemo = () => {
     const [open, setOpen] = useState(false);
     return (
         <>
-            <Button styleType="primary" onClick={() => setOpen(true)}>
+            <Button type="primary" onClick={() => setOpen(true)}>
                 Open modal
             </Button>
             <Modal

@@ -50,7 +50,7 @@ type Story = StoryObj<typeof Tooltip>;
 export const Basic: Story = {
     render: (args) => (
         <Tooltip {...args}>
-            <Button styleType="primary">Hover me</Button>
+            <Button type="primary">Hover me</Button>
         </Tooltip>
     ),
 };
@@ -75,7 +75,7 @@ export const Placements: Story = {
         <div style={{ display: 'flex', gap: 24 }}>
             {(['top', 'right', 'bottom', 'left'] as const).map((placement) => (
                 <Tooltip key={placement} overlay={`Tooltip on ${placement}`} placement={placement}>
-                    <Button styleType="secondary">{placement}</Button>
+                    <Button type="secondary">{placement}</Button>
                 </Tooltip>
             ))}
         </div>

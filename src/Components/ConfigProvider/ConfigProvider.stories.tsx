@@ -41,7 +41,7 @@ const Panel = () => (
             alignItems: 'center',
         }}
     >
-        <Button styleType="primary">Primary</Button>
+        <Button type="primary">Primary</Button>
         <Button>Default</Button>
         <span>Surface follows the scoped theme.</span>
     </div>
