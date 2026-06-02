@@ -1,0 +1,107 @@
+@use '../../Styles/variables' as vars;
+
+.miever-checkbox-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    user-select: none;
+
+    &.disabled {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+    }
+}
+
+.miever-checkbox {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+}
+
+.miever-checkbox-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+}
+
+.miever-checkbox-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    // Checkmark
+    &::after {
+        content: '';
+        width: 5px;
+        height: 9px;
+        margin-top: -1px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg) scale(0);
+        transition: transform 0.15s ease;
+    }
+}
+
+.miever-checkbox-input:focus-visible + .miever-checkbox-box {
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(12, 192, 223, 0.25);
+}
+
+.miever-checkbox-wrapper.checked .miever-checkbox-box {
+    background: var(--color-border-focus);
+    border-color: var(--color-border-focus);
+
+    &::after {
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+.miever-checkbox-wrapper.indeterminate .miever-checkbox-box {
+    background: var(--color-border-focus);
+    border-color: var(--color-border-focus);
+
+    // Horizontal bar instead of a checkmark
+    &::after {
+        width: 10px;
+        height: 0;
+        margin-top: 0;
+        border: none;
+        border-top: 2px solid #fff;
+        transform: none;
+    }
+}
+
+.miever-checkbox-wrapper.disabled .miever-checkbox-box {
+    background: var(--color-bg-disabled);
+    border-color: var(--color-border-primary);
+
+    &::after {
+        border-color: var(--color-text-disabled);
+    }
+}
+
+.miever-checkbox-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+
+    &-vertical {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,90 @@
+@use '../../Styles/variables' as vars;
+
+.miever-radio-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    user-select: none;
+
+    &.disabled {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+    }
+}
+
+.miever-radio {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+}
+
+.miever-radio-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+}
+
+.miever-radio-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--radius-full);
+    transition: border-color 0.15s ease;
+
+    // Inner dot
+    &::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: var(--radius-full);
+        background: var(--color-border-focus);
+        transform: scale(0);
+        transition: transform 0.15s ease;
+    }
+}
+
+.miever-radio-input:focus-visible + .miever-radio-dot {
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(12, 192, 223, 0.25);
+}
+
+.miever-radio-wrapper.checked .miever-radio-dot {
+    border-color: var(--color-border-focus);
+
+    &::after {
+        transform: scale(1);
+    }
+}
+
+.miever-radio-wrapper.disabled .miever-radio-dot {
+    background: var(--color-bg-disabled);
+    border-color: var(--color-border-primary);
+
+    &::after {
+        background: var(--color-text-disabled);
+    }
+}
+
+.miever-radio-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+
+    &-vertical {
+        flex-direction: column;
+    }
+}
