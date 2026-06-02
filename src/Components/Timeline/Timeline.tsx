@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -23,16 +23,16 @@ const prefixCls = getPrefixCls('timeline');
  * />
  * ```
  */
-const Timeline: FunctionComponent<TimelineProps> = ({
+const Timeline = forwardRef<HTMLUListElement, TimelineProps>(({
     items,
     mode = 'left',
     className,
     style,
-}) => {
+}, ref) => {
     const classes = classNames(prefixCls, `${prefixCls}-${mode}`, className);
 
     return (
-        <ul className={classes} style={style}>
+        <ul ref={ref} className={classes} style={style}>
             {items.map((item, index) => {
                 const dotColor =
                     item.color && BRAND_COLORS[item.color] ? BRAND_COLORS[item.color] : undefined;
@@ -51,7 +51,7 @@ const Timeline: FunctionComponent<TimelineProps> = ({
             })}
         </ul>
     );
-};
+});
 
 Timeline.displayName = 'Timeline';
 

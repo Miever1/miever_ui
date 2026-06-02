@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -22,7 +22,7 @@ const sharedClasses = (flags: SharedFlags) => ({
 });
 
 /** A heading (h1–h5). */
-const Title: FunctionComponent<TitleProps> = ({
+const Title = forwardRef<HTMLHeadingElement, TitleProps>(({
     level = 1,
     type,
     align,
@@ -33,8 +33,8 @@ const Title: FunctionComponent<TitleProps> = ({
     children,
     className,
     style,
-}) => {
-    const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
+}, ref) => {
+    const Tag = `h${level}` as React.ElementType;
     const classes = classNames(
         prefixCls,
         `${prefixCls}-title`,
@@ -42,15 +42,15 @@ const Title: FunctionComponent<TitleProps> = ({
         sharedClasses({ type, align, italic, delete: del, underline, disabled })
     );
     return (
-        <Tag className={classes} style={style}>
+        <Tag ref={ref} className={classes} style={style}>
             {children}
         </Tag>
     );
-};
+});
 Title.displayName = 'Typography.Title';
 
 /** Inline text. */
-const Text: FunctionComponent<TextProps> = ({
+const Text = forwardRef<HTMLSpanElement, TextProps>(({
     type,
     align,
     strong,
@@ -61,7 +61,7 @@ const Text: FunctionComponent<TextProps> = ({
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const classes = classNames(
         prefixCls,
         `${prefixCls}-text`,
@@ -69,15 +69,15 @@ const Text: FunctionComponent<TextProps> = ({
         sharedClasses({ type, align, strong, italic, delete: del, underline, disabled })
     );
     return (
-        <span className={classes} style={style}>
+        <span ref={ref} className={classes} style={style}>
             {children}
         </span>
     );
-};
+});
 Text.displayName = 'Typography.Text';
 
 /** A block of text. */
-const Paragraph: FunctionComponent<ParagraphProps> = ({
+const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(({
     type,
     align,
     strong,
@@ -88,7 +88,7 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const classes = classNames(
         prefixCls,
         `${prefixCls}-paragraph`,
@@ -96,15 +96,15 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
         sharedClasses({ type, align, strong, italic, delete: del, underline, disabled })
     );
     return (
-        <p className={classes} style={style}>
+        <p ref={ref} className={classes} style={style}>
             {children}
         </p>
     );
-};
+});
 Paragraph.displayName = 'Typography.Paragraph';
 
 /** An anchor styled to match the typography scale. */
-const Link: FunctionComponent<LinkProps> = ({
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(({
     type,
     align,
     strong,
@@ -116,7 +116,7 @@ const Link: FunctionComponent<LinkProps> = ({
     className,
     style,
     ...restProps
-}) => {
+}, ref) => {
     const classes = classNames(
         prefixCls,
         `${prefixCls}-link`,
@@ -125,6 +125,7 @@ const Link: FunctionComponent<LinkProps> = ({
     );
     return (
         <a
+            ref={ref}
             className={classes}
             style={style}
             aria-disabled={disabled}
@@ -133,7 +134,7 @@ const Link: FunctionComponent<LinkProps> = ({
             {children}
         </a>
     );
-};
+});
 Link.displayName = 'Typography.Link';
 
 const Typography = { Title, Text, Paragraph, Link };

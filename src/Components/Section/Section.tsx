@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -21,7 +21,7 @@ const prefixCls = getPrefixCls('section');
  * </Section>
  * ```
  */
-const Section: FunctionComponent<SectionProps> = ({
+const Section = forwardRef<HTMLElement, SectionProps>(({
     title,
     subtitle,
     align = 'left',
@@ -30,11 +30,11 @@ const Section: FunctionComponent<SectionProps> = ({
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const hasHeader = title !== undefined || subtitle !== undefined;
 
     return (
-        <section className={classNames(prefixCls, className)} style={style}>
+        <section ref={ref} className={classNames(prefixCls, className)} style={style}>
             {hasHeader && (
                 <header className={`${prefixCls}-header`}>
                     {title !== undefined && (
@@ -53,7 +53,7 @@ const Section: FunctionComponent<SectionProps> = ({
             <div className={`${prefixCls}-body`}>{children}</div>
         </section>
     );
-};
+});
 
 Section.displayName = 'Section';
 

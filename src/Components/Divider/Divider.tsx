@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -18,13 +18,13 @@ const prefixCls = getPrefixCls('divider');
  * <Divider direction="vertical" />
  * ```
  */
-const Divider: FunctionComponent<DividerProps> = ({
+const Divider = forwardRef<HTMLDivElement, DividerProps>(({
     direction = 'horizontal',
     dashed = false,
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const hasText = direction === 'horizontal' && children !== undefined && children !== null && children !== '';
 
     const classes = classNames(prefixCls, `${prefixCls}-${direction}`, className, {
@@ -33,11 +33,11 @@ const Divider: FunctionComponent<DividerProps> = ({
     });
 
     return (
-        <div className={classes} style={style} role="separator">
+        <div ref={ref} className={classes} style={style} role="separator">
             {hasText && <span className={`${prefixCls}-text`}>{children}</span>}
         </div>
     );
-};
+});
 
 Divider.displayName = 'Divider';
 

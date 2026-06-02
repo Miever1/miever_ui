@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -25,7 +25,7 @@ const ICON_MAP: Record<AlertType, string> = {
  * <Alert type="warning" message="Heads up" description="More detail here." closable />
  * ```
  */
-const Alert: FunctionComponent<AlertProps> = ({
+const Alert = forwardRef<HTMLDivElement, AlertProps>(({
     type = 'info',
     message,
     description,
@@ -34,7 +34,7 @@ const Alert: FunctionComponent<AlertProps> = ({
     onClose,
     className,
     style,
-}) => {
+}, ref) => {
     const [closed, setClosed] = useState(false);
 
     if (closed) return null;
@@ -49,7 +49,7 @@ const Alert: FunctionComponent<AlertProps> = ({
     });
 
     return (
-        <div className={classes} style={style} role="alert">
+        <div ref={ref} className={classes} style={style} role="alert">
             {showIcon && (
                 <span className={`${prefixCls}-icon`}>
                     <Icon icon={ICON_MAP[type] as never} />
@@ -71,7 +71,7 @@ const Alert: FunctionComponent<AlertProps> = ({
             )}
         </div>
     );
-};
+});
 
 Alert.displayName = 'Alert';
 

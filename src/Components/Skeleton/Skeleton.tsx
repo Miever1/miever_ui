@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -18,7 +18,7 @@ const prefixCls = getPrefixCls('skeleton');
  * </Skeleton>
  * ```
  */
-const Skeleton: FunctionComponent<SkeletonProps> = ({
+const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(({
     avatar = false,
     title = true,
     paragraph = 3,
@@ -27,7 +27,7 @@ const Skeleton: FunctionComponent<SkeletonProps> = ({
     children,
     className,
     style,
-}) => {
+}, ref) => {
     if (!loading) return <>{children}</>;
 
     const classes = classNames(prefixCls, className, {
@@ -35,7 +35,7 @@ const Skeleton: FunctionComponent<SkeletonProps> = ({
     });
 
     return (
-        <div className={classes} style={style} aria-busy="true" aria-live="polite">
+        <div ref={ref} className={classes} style={style} aria-busy="true" aria-live="polite">
             {avatar && <span className={`${prefixCls}-avatar`} />}
             <div className={`${prefixCls}-body`}>
                 {title && <span className={`${prefixCls}-title`} />}
@@ -49,7 +49,7 @@ const Skeleton: FunctionComponent<SkeletonProps> = ({
             </div>
         </div>
     );
-};
+});
 
 Skeleton.displayName = 'Skeleton';
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -18,7 +18,7 @@ const prefixCls = getPrefixCls('badge');
  * <Badge count={120} maxCount={99} />
  * ```
  */
-const Badge: FunctionComponent<BadgeProps> = ({
+const Badge = forwardRef<HTMLSpanElement, BadgeProps>(({
     count,
     maxCount = 99,
     dot = false,
@@ -27,7 +27,7 @@ const Badge: FunctionComponent<BadgeProps> = ({
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const hasCount = count !== undefined && (count !== 0 || showZero);
     const display = count !== undefined && count > maxCount ? `${maxCount}+` : count;
     const themeCls = `${prefixCls}-${theme}`;
@@ -46,19 +46,19 @@ const Badge: FunctionComponent<BadgeProps> = ({
 
     if (!children) {
         return (
-            <span className={classNames(prefixCls, `${prefixCls}-standalone`, className)} style={style}>
+            <span ref={ref} className={classNames(prefixCls, `${prefixCls}-standalone`, className)} style={style}>
                 {indicator}
             </span>
         );
     }
 
     return (
-        <span className={classNames(prefixCls, className)} style={style}>
+        <span ref={ref} className={classNames(prefixCls, className)} style={style}>
             {children}
             {indicator}
         </span>
     );
-};
+});
 
 Badge.displayName = 'Badge';
 

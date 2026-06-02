@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -19,7 +19,7 @@ const prefixCls = getPrefixCls('avatar');
  * <Avatar icon="user" shape="square" />
  * ```
  */
-const Avatar: FunctionComponent<AvatarProps> = ({
+const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(({
     src,
     alt,
     icon,
@@ -28,7 +28,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const [imgFailed, setImgFailed] = useState(false);
 
     const isPresetSize = typeof size === 'string';
@@ -51,11 +51,11 @@ const Avatar: FunctionComponent<AvatarProps> = ({
     };
 
     return (
-        <span className={classes} style={{ ...sizeStyle, ...style }}>
+        <span ref={ref} className={classes} style={{ ...sizeStyle, ...style }}>
             {renderInner()}
         </span>
     );
-};
+});
 
 Avatar.displayName = 'Avatar';
 

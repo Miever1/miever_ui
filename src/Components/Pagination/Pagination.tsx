@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -34,7 +34,7 @@ const getPages = (current: number, totalPages: number): (number | 'prev-ellipsis
  * <Pagination total={195} pageSize={10} onChange={setPage} />
  * ```
  */
-const Pagination: FunctionComponent<PaginationProps> = ({
+const Pagination = forwardRef<HTMLUListElement, PaginationProps>(({
     total,
     pageSize = 10,
     current,
@@ -42,7 +42,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
     onChange,
     className,
     style,
-}) => {
+}, ref) => {
     const totalPages = Math.max(1, Math.ceil(total / pageSize));
     const [internal, setInternal] = useState(defaultCurrent);
     const page = Math.min(current ?? internal, totalPages);
@@ -58,7 +58,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
     const pages = getPages(page, totalPages);
 
     return (
-        <ul className={classNames(prefixCls, className)} style={style}>
+        <ul ref={ref} className={classNames(prefixCls, className)} style={style}>
             <li
                 className={classNames(`${prefixCls}-item`, `${prefixCls}-prev`, {
                     disabled: page === 1,
@@ -95,7 +95,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
             </li>
         </ul>
     );
-};
+});
 
 Pagination.displayName = 'Pagination';
 

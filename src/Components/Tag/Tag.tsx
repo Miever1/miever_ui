@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent, useState } from 'react';
+import React, { forwardRef, MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -19,14 +19,14 @@ const prefixCls = getPrefixCls('tag');
  * <Tag closable onClose={() => {}}>Closable</Tag>
  * ```
  */
-const Tag: FunctionComponent<TagProps> = ({
+const Tag = forwardRef<HTMLSpanElement, TagProps>(({
     theme,
     closable = false,
     onClose,
     children,
     className,
     style,
-}) => {
+}, ref) => {
     const [visible, setVisible] = useState(true);
 
     const handleClose = (e: MouseEvent<HTMLElement>) => {
@@ -41,7 +41,7 @@ const Tag: FunctionComponent<TagProps> = ({
     });
 
     return (
-        <span className={classes} style={style}>
+        <span ref={ref} className={classes} style={style}>
             <span className={`${prefixCls}-text`}>{children}</span>
             {closable && (
                 <span
@@ -55,7 +55,7 @@ const Tag: FunctionComponent<TagProps> = ({
             )}
         </span>
     );
-};
+});
 
 Tag.displayName = 'Tag';
 

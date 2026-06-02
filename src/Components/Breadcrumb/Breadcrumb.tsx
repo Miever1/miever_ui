@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -22,13 +22,13 @@ const prefixCls = getPrefixCls('breadcrumb');
  * />
  * ```
  */
-const Breadcrumb: FunctionComponent<BreadcrumbProps> = ({
+const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(({
     items,
     separator = '/',
     className,
     style,
-}) => (
-    <nav className={classNames(prefixCls, className)} style={style} aria-label="Breadcrumb">
+}, ref) => (
+    <nav ref={ref} className={classNames(prefixCls, className)} style={style} aria-label="Breadcrumb">
         <ol className={`${prefixCls}-list`}>
             {items.map((item, index) => {
                 const isLast = index === items.length - 1;
@@ -61,7 +61,7 @@ const Breadcrumb: FunctionComponent<BreadcrumbProps> = ({
             })}
         </ol>
     </nav>
-);
+));
 
 Breadcrumb.displayName = 'Breadcrumb';
 

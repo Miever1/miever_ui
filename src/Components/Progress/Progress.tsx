@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -20,7 +20,7 @@ const clamp = (n: number) => Math.max(0, Math.min(100, n));
  * <Progress type="circle" percent={90} status="success" />
  * ```
  */
-const Progress: FunctionComponent<ProgressProps> = ({
+const Progress = forwardRef<HTMLDivElement, ProgressProps>(({
     percent,
     type = 'line',
     status = 'normal',
@@ -29,7 +29,7 @@ const Progress: FunctionComponent<ProgressProps> = ({
     size = 120,
     className,
     style,
-}) => {
+}, ref) => {
     const value = clamp(percent);
     const classes = classNames(prefixCls, `${prefixCls}-${type}`, `${prefixCls}-${status}`, className);
 
@@ -39,7 +39,7 @@ const Progress: FunctionComponent<ProgressProps> = ({
         const circumference = 2 * Math.PI * radius;
         const offset = circumference * (1 - value / 100);
         return (
-            <div className={classes} style={{ width: size, height: size, ...style }}>
+            <div ref={ref} className={classes} style={{ width: size, height: size, ...style }}>
                 <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
                     <circle
                         className={`${prefixCls}-circle-trail`}
@@ -68,7 +68,7 @@ const Progress: FunctionComponent<ProgressProps> = ({
     }
 
     return (
-        <div className={classes} style={style}>
+        <div ref={ref} className={classes} style={style}>
             <div className={`${prefixCls}-outer`}>
                 <div
                     className={`${prefixCls}-inner`}
@@ -82,7 +82,7 @@ const Progress: FunctionComponent<ProgressProps> = ({
             {showInfo && <span className={`${prefixCls}-info`}>{value}%</span>}
         </div>
     );
-};
+});
 
 Progress.displayName = 'Progress';
 
