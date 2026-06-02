@@ -89,13 +89,14 @@ $theme-colors:
   --color-bg-primary: #{$gray-900};
   --color-bg-secondary: #{$gray-800};
   --color-bg-disabled: #{$gray-700};
-  
-  --color-text-primary: #{$gray-500};
-  --color-text-secondary: #{$gray-300};
-  --color-text-disabled: #{$gray-100};
-  
-  --color-border-primary: #{$gray-800};
-  --color-border-secondary: #{$gray-500};
+
+  // Light-on-dark: primary is the brightest, stepping down to disabled.
+  --color-text-primary: #{$gray-100};
+  --color-text-secondary: #{$gray-400};
+  --color-text-disabled: #{$gray-600};
+
+  --color-border-primary: #{$gray-700};
+  --color-border-secondary: #{$gray-600};
   --color-border-focus: #{$primary};
   
   --color-surface-elevated: #{$gray-800};
