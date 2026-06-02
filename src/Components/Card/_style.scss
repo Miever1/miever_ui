@@ -1,39 +1,158 @@
-@use '../../Styles/variables' as cardVars;
+@use '../../Styles/variables' as vars;
 
 .miever-card {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     color: var(--color-text-primary);
-    background: cardVars.$card-bg;
-    border: cardVars.$border-width solid cardVars.$card-border-color;
-    border-radius: cardVars.$border-radius-lg;
-    box-shadow: cardVars.$box-shadow-sm;
-    transition: cardVars.$btn-transition;
+    background: var(--color-bg-primary);
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.miever-card-hover {
-    &:hover,
-    &.hover {
-        cursor: pointer;
-        border-color: transparent;
-        box-shadow: cardVars.$box-shadow;
-    }
+a.miever-card {
+    color: inherit;
+}
+
+/* ── Surface variants ─────────────────────────────────────────────── */
+.miever-card-outlined {
+    border-color: var(--color-border-primary);
+}
+
+.miever-card-elevated {
+    box-shadow: var(--shadow-sm);
+}
+
+/* ── Hover / clickable ────────────────────────────────────────────── */
+.miever-card-clickable {
+    cursor: pointer;
+}
+
+.miever-card-hoverable:hover {
+    transform: translateY(-4px);
+    border-color: transparent;
+    box-shadow: var(--shadow-lg);
+}
+
+.miever-card-hoverable:hover .miever-card-cover > * {
+    transform: scale(1.04);
+}
+
+.miever-card-hoverable:hover .miever-card-title {
+    color: var(--color-border-focus);
+}
+
+/* ── Cover ────────────────────────────────────────────────────────── */
+.miever-card-cover {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
+}
+
+.miever-card-cover > *,
+.miever-card-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.miever-card:not(.miever-card-horizontal) .miever-card-cover {
+    aspect-ratio: 16 / 9;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────── */
+.miever-card-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    min-width: 0;
 }
 
 .miever-card-header {
-    padding: cardVars.$spacer;
-    font-size: cardVars.$h4-font-size;
-    font-weight: cardVars.$headings-font-weight;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
 }
 
-.miever-card-content {
-    padding: cardVars.$spacer;
-    color: var(--color-text-secondary);
+.miever-card-heading {
+    min-width: 0;
+}
+
+.miever-card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text-primary);
+    transition: color 0.2s ease;
 }
 
 .miever-card-subtitle {
-    margin: 0 4px;
-    color: cardVars.$primary;
-    font-weight: 600;
-    font-size: cardVars.$font-size-sm;
+    margin-top: var(--space-1);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-border-focus);
+}
+
+.miever-card-meta {
+    margin-top: var(--space-1);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-disabled);
+}
+
+.miever-card-extra {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.miever-card-content {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+}
+
+.miever-card-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--card-clamp, 3);
+    line-clamp: var(--card-clamp, 3);
+    overflow: hidden;
+}
+
+.miever-card-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-1);
+}
+
+/* ── Horizontal layout ────────────────────────────────────────────── */
+.miever-card-horizontal {
+    flex-direction: row;
+}
+
+.miever-card-horizontal .miever-card-cover {
+    flex: 0 0 38%;
+    align-self: stretch;
+    min-height: 100%;
+}
+
+@media (max-width: 639.98px) {
+    .miever-card-horizontal {
+        flex-direction: column;
+    }
+    .miever-card-horizontal .miever-card-cover {
+        flex: none;
+        aspect-ratio: 16 / 9;
+    }
 }
