@@ -3,7 +3,6 @@ import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
 import { NativeInputProps } from './interface';
-import Box from '../Box';
 import Icon from '../Icon';
 
 const prefixCls = getPrefixCls('input');
@@ -32,18 +31,18 @@ const Input: FunctionComponent<NativeInputProps> = ({
     });
 
     return (
-        <Box className={classes} style={style}>
+        <div className={classes} style={style}>
             {icon && (
-                <Box className={`${prefixCls}-icon`}>
+                <span className={`${prefixCls}-icon`}>
                     <Icon icon={icon} size={size === 'lg' ? 'lg' : 'sm'} />
-                </Box>
+                </span>
             )}
             <input
                 disabled={disabled}
                 className={`${prefixCls}-inner`}
                 {...(restProps as React.InputHTMLAttributes<HTMLInputElement>)}
             />
-        </Box>
+        </div>
     );
 };
 

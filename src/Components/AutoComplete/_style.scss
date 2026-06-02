@@ -27,6 +27,7 @@
     background: vars.$autocomplete-bg;
     border: vars.$autocomplete-border-width solid vars.$autocomplete-border-color;
     border-radius: 0 0 vars.$autocomplete-border-radius vars.$autocomplete-border-radius;
+    border-top: none;
     box-shadow: vars.$box-shadow;
     max-height: 240px;
     overflow-y: auto;

@@ -102,7 +102,7 @@ export const Controlled: Story = {
 };
 
 /** A custom filter that only matches options starting with the input. */
-export const CustomFilter: Story = {
+export const CustomFilter: StoryObj<typeof AutoComplete<string>> = {
     args: {
         options: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'Rust', 'Ruby', 'Kotlin'],
         placeholder: 'Type to search (starts with)...',
