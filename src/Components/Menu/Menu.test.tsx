@@ -98,4 +98,17 @@ describe('test Menu and MenuItem components', () => {
         expect(menuElement).toHaveClass('miever-menu miever-menu-vertical');
     });
 
+    test('reflects a controlled activeKey and updates when it changes', () => {
+        cleanup();
+        const wrapper = render(generateMenu({ ...testProps, activeKey: 'active' }));
+        expect(wrapper.getByText('active')).toHaveClass('active');
+        // Clicking does not move the highlight while controlled...
+        fireEvent.click(wrapper.getByText('click'));
+        expect(wrapper.getByText('click')).not.toHaveClass('active');
+        // ...but a new activeKey does.
+        wrapper.rerender(generateMenu({ ...testProps, activeKey: 'click' }));
+        expect(wrapper.getByText('click')).toHaveClass('active');
+        expect(wrapper.getByText('active')).not.toHaveClass('active');
+    });
+
 });

@@ -24,18 +24,23 @@ const Menu: React.FunctionComponent<IMenuProps> = ({
     style,
     items,
     defaultKey = '0',
+    activeKey,
     onSelect = () => {},
     prefix,
     suffix,
 }) => {
-    const [currentKey, setCurrentKey] = useState(defaultKey);
+    const [internalKey, setInternalKey] = useState(defaultKey);
+    // Controlled when `activeKey` is supplied, so the highlight tracks the route.
+    const currentKey = activeKey ?? internalKey;
     const classes = classNames(prefixCls, className, {
         [`${prefixCls}-vertical`]: mode === 'vertical',
         [`${prefixCls}-horizontal`]: mode !== 'vertical',
     });
 
     const handleClick = (key: string) => {
-        setCurrentKey(key);
+        if (activeKey === undefined) {
+            setInternalKey(key);
+        }
         onSelect?.(key);
     };
 

@@ -4,7 +4,13 @@ type MenuMode = 'horizontal' | 'vertical';
 type SelectCallback = (selectedIndex: string) => void;
 
 export interface IMenuProps {
+    /** Initial active item key (uncontrolled). */
     defaultKey?: string;
+    /**
+     * Controlled active item key. When provided, the menu always reflects this
+     * value — pass the current route key so the highlight follows navigation.
+     */
+    activeKey?: string;
     className?: string;
     mode?: MenuMode;
     style?: CSSProperties;
