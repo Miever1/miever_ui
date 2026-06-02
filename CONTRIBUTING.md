@@ -11,6 +11,52 @@ npm run storybook   # develop components interactively
 npm test            # run unit tests
 npm run lint        # lint
 npm run build       # full build (types + bundle + css)
+npm run watch       # rebuild dist (js + css + types) on every change
+```
+
+## Developing against a local app (e.g. miever.net)
+
+To iterate on the library while seeing changes live in a consuming app, link
+it locally instead of publishing to npm.
+
+**1. Register the library as a global link (run once, in this repo):**
+
+```bash
+npm run build      # make sure dist/ exists
+npm link
+```
+
+**2. Point the app at the local library (in the app repo, e.g. miever.net):**
+
+```bash
+npm link miever_ui
+```
+
+`node_modules/miever_ui` becomes a symlink to this repo.
+
+**3. Run both watchers side by side:**
+
+```bash
+# terminal A — in miever_ui: rebuild dist on every change
+npm run watch
+
+# terminal B — in the app: start the dev server
+npm run develop
+```
+
+Edits here rebuild `dist/`, and the app's dev server picks them up on reload.
+
+**Gotcha — duplicate React.** A linked package resolves `react` from its own
+`node_modules`, creating a second React instance ("Invalid hook call"). The
+consuming app must alias `react`/`react-dom` to its own copy. For Gatsby this
+is done in `gatsby-node.ts` via `onCreateWebpackConfig` (see miever.net).
+Vite/CRA/Next have equivalent `resolve.alias` settings.
+
+**Unlinking** (back to the published npm version):
+
+```bash
+# in the app repo
+npm unlink miever_ui && npm install
 ```
 
 ## Conventions
