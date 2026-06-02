@@ -20,7 +20,7 @@
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 1050;
+    z-index: var(--z-dropdown);
     margin-top: -1px;
     padding: 4px 0;
     color: vars.$autocomplete-list-color;

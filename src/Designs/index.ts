@@ -44,3 +44,7 @@ export type {
     SpaceType,
 };
 export type { Breakpoint } from "./breakpoints";
+
+// Full design-token system (palette, typography, spacing, radius, shadow,
+// z-index). Mirrored on the SCSS side as maps + CSS custom properties.
+export * from "./tokens";
