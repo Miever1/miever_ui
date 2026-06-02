@@ -20,6 +20,7 @@ export * from './Components/Input';
 export * from './Components/Menu';
 export * from './Components/Message';
 export * from './Components/Modal';
+export * from './Components/PageHeader';
 export * from './Components/Pagination';
 export * from './Components/Progress';
 export * from './Components/Radio';
