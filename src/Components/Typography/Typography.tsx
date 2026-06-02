@@ -8,11 +8,12 @@ const prefixCls = getPrefixCls('typography');
 
 type SharedFlags = Pick<
     TextProps,
-    'type' | 'strong' | 'italic' | 'delete' | 'underline' | 'disabled'
+    'type' | 'align' | 'strong' | 'italic' | 'delete' | 'underline' | 'disabled'
 >;
 
 const sharedClasses = (flags: SharedFlags) => ({
     [`${prefixCls}-${flags.type}`]: flags.type,
+    [`${prefixCls}-align-${flags.align}`]: flags.align,
     [`${prefixCls}-strong`]: flags.strong,
     [`${prefixCls}-italic`]: flags.italic,
     [`${prefixCls}-delete`]: flags.delete,
@@ -24,6 +25,7 @@ const sharedClasses = (flags: SharedFlags) => ({
 const Title: FunctionComponent<TitleProps> = ({
     level = 1,
     type,
+    align,
     italic,
     delete: del,
     underline,
@@ -37,7 +39,7 @@ const Title: FunctionComponent<TitleProps> = ({
         prefixCls,
         `${prefixCls}-title`,
         className,
-        sharedClasses({ type, italic, delete: del, underline, disabled })
+        sharedClasses({ type, align, italic, delete: del, underline, disabled })
     );
     return (
         <Tag className={classes} style={style}>
@@ -50,6 +52,7 @@ Title.displayName = 'Typography.Title';
 /** Inline text. */
 const Text: FunctionComponent<TextProps> = ({
     type,
+    align,
     strong,
     italic,
     delete: del,
@@ -63,7 +66,7 @@ const Text: FunctionComponent<TextProps> = ({
         prefixCls,
         `${prefixCls}-text`,
         className,
-        sharedClasses({ type, strong, italic, delete: del, underline, disabled })
+        sharedClasses({ type, align, strong, italic, delete: del, underline, disabled })
     );
     return (
         <span className={classes} style={style}>
@@ -76,6 +79,7 @@ Text.displayName = 'Typography.Text';
 /** A block of text. */
 const Paragraph: FunctionComponent<ParagraphProps> = ({
     type,
+    align,
     strong,
     italic,
     delete: del,
@@ -89,7 +93,7 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
         prefixCls,
         `${prefixCls}-paragraph`,
         className,
-        sharedClasses({ type, strong, italic, delete: del, underline, disabled })
+        sharedClasses({ type, align, strong, italic, delete: del, underline, disabled })
     );
     return (
         <p className={classes} style={style}>
@@ -102,6 +106,7 @@ Paragraph.displayName = 'Typography.Paragraph';
 /** An anchor styled to match the typography scale. */
 const Link: FunctionComponent<LinkProps> = ({
     type,
+    align,
     strong,
     italic,
     delete: del,
@@ -116,7 +121,7 @@ const Link: FunctionComponent<LinkProps> = ({
         prefixCls,
         `${prefixCls}-link`,
         className,
-        sharedClasses({ type, strong, italic, delete: del, underline, disabled })
+        sharedClasses({ type, align, strong, italic, delete: del, underline, disabled })
     );
     return (
         <a

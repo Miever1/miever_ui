@@ -1,0 +1,26 @@
+@use '../../Styles/variables' as vars;
+
+.miever-section {
+    margin: 0 0 calc(#{vars.$spacer} * 2.5);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.miever-section-header {
+    margin-bottom: vars.$spacer;
+}
+
+.miever-section-title {
+    margin-bottom: 0.25em;
+}
+
+.miever-section-subtitle {
+    display: block;
+    line-height: vars.$line-height-base;
+}
+
+.miever-section-body {
+    color: var(--color-text-primary);
+}

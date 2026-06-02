@@ -5,6 +5,9 @@
     word-break: break-word;
 
     // Variants
+    &.miever-typography-primary {
+        color: vars.$primary;
+    }
     &.miever-typography-secondary {
         color: var(--color-text-secondary);
     }
@@ -21,6 +24,20 @@
         color: var(--color-text-disabled);
         cursor: not-allowed;
         user-select: none;
+    }
+
+    // Alignment
+    &.miever-typography-align-left {
+        display: block;
+        text-align: left;
+    }
+    &.miever-typography-align-center {
+        display: block;
+        text-align: center;
+    }
+    &.miever-typography-align-right {
+        display: block;
+        text-align: right;
     }
 
     // Decorations

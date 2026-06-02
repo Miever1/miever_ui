@@ -1,10 +1,13 @@
 import { CSSProperties, ReactNode } from 'react';
 
-export type TextType = 'secondary' | 'success' | 'warning' | 'danger';
+export type TextType = 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+export type TextAlign = 'left' | 'center' | 'right';
 
 export interface BaseTextProps {
     /** Semantic color variant. */
     type?: TextType;
+    /** Text alignment. */
+    align?: TextAlign;
     /** Bold text. */
     strong?: boolean;
     /** Italic text. */

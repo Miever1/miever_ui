@@ -20,6 +20,7 @@ export * from './Components/Message';
 export * from './Components/Modal';
 export * from './Components/Pagination';
 export * from './Components/Progress';
+export * from './Components/Section';
 export * from './Components/Skeleton';
 export * from './Components/Spin';
 export * from './Components/Switch';
