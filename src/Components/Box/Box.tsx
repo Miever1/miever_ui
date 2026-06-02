@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -33,7 +33,7 @@ const resolveSize = (value?: string | number): string | undefined => {
  * </Box>
  * ```
  */
-const Box: FunctionComponent<BoxProps> = ({
+const Box = forwardRef<HTMLDivElement, BoxProps>(({
     flexBox,
     direction,
     justifyContent,
@@ -47,7 +47,7 @@ const Box: FunctionComponent<BoxProps> = ({
     style,
     children,
     ...restProps
-}) => {
+}, ref) => {
     const computedStyle: React.CSSProperties = {
         display: flexBox ? 'flex' : 'block',
         flexDirection: direction,
@@ -68,6 +68,7 @@ const Box: FunctionComponent<BoxProps> = ({
 
     return (
         <div
+            ref={ref}
             className={classNames(prefixCls, className)}
             style={{ ...computedStyle, ...style }}
             {...restProps}
@@ -75,7 +76,7 @@ const Box: FunctionComponent<BoxProps> = ({
             {children}
         </div>
     );
-};
+});
 
 Box.displayName = 'Box';
 

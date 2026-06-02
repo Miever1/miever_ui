@@ -2,7 +2,7 @@ import React, { ReactNode, HTMLAttributes } from "react";
 import type { SpaceType } from "../../Designs";
 
 // Interface defining the basic properties for the Box component
-interface BasicBoxProps {
+export interface BasicBoxProps {
     // Determines if the Box is a flex container. When true, flex properties can be applied to its children.
     flexBox?: boolean;
     // The children elements to be rendered inside the Box
@@ -23,8 +23,6 @@ interface BasicBoxProps {
     alignItems?: "center" | "flex-start" | "flex-end" | "stretch";
     // Justify content within the flex container
     justifyContent?: "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "stretch";
-    // Reference to the underlying HTMLDivElement
-    ref?: React.Ref<HTMLDivElement>;
     // Additional inline styles for the Box
     style?: React.CSSProperties;
     // Custom class name for styling

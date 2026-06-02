@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -19,20 +19,20 @@ const prefixCls = getPrefixCls('card');
  * </Card>
  * ```
  */
-const Card: FunctionComponent<ICardProps> = ({
+const Card = forwardRef<HTMLDivElement, ICardProps>(({
     title,
     subTitle,
     children,
     style,
     className,
     hoverable = false,
-}) => {
+}, ref) => {
     const classes = classNames(prefixCls, className, {
         [`${prefixCls}-hover`]: hoverable,
     });
 
     return (
-        <Box className={classes} style={style}>
+        <Box ref={ref} className={classes} style={style}>
             <Box className={`${prefixCls}-header`}>
                 <Box>{title}</Box>
                 {subTitle && <Box className={`${prefixCls}-subtitle`}>{subTitle}</Box>}
@@ -40,7 +40,7 @@ const Card: FunctionComponent<ICardProps> = ({
             <Box className={`${prefixCls}-content`}>{children}</Box>
         </Box>
     );
-};
+});
 
 Card.displayName = 'Card';
 
