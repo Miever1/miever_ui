@@ -10,6 +10,7 @@ export * from './Components/Breadcrumb';
 export * from './Components/Button';
 export * from './Components/Card';
 export * from './Components/Collapse';
+export * from './Components/ConfigProvider';
 export * from './Components/Divider';
 export * from './Components/Drawer';
 export * from './Components/Grid';

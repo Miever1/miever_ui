@@ -195,8 +195,15 @@ $z-index: (
 }
 
 // 应用主题
+// Static tokens + light theme live on :root. The `[data-theme]` selectors also
+// emit their theme vars so a theme can be *scoped* to any subtree (e.g. a
+// ConfigProvider wrapper), not just toggled globally on <html>.
 :root {
   @include design-tokens;
+  @include light-theme;
+}
+
+[data-theme="light"] {
   @include light-theme;
 }
 
