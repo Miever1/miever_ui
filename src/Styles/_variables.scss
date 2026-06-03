@@ -77,7 +77,11 @@ $theme-colors:
   --color-border-primary: #{$gray-300};
   --color-border-secondary: #{$gray-400};
   --color-border-focus: #{$primary};
-  
+
+  // Accent used for *text* — a darker cyan that meets WCAG AA on light
+  // surfaces (the bright brand cyan only reaches ~2:1 as text on white).
+  --color-text-accent: #0e7490;
+
   --color-surface-elevated: #{$white};
   --color-surface-overlay: rgba(0, 0, 0, 0.1);
 }
@@ -98,7 +102,10 @@ $theme-colors:
   --color-border-primary: #{$gray-700};
   --color-border-secondary: #{$gray-600};
   --color-border-focus: #{$primary};
-  
+
+  // On dark surfaces the bright brand cyan already passes AA as text.
+  --color-text-accent: #{$primary};
+
   --color-surface-elevated: #{$gray-800};
   --color-surface-overlay: rgba(255, 255, 255, 0.1);
 }

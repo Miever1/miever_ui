@@ -41,7 +41,7 @@ a.miever-card {
 }
 
 .miever-card-hoverable:hover .miever-card-title {
-    color: var(--color-border-focus);
+    color: var(--color-text-accent);
 }
 
 /* ── Cover ────────────────────────────────────────────────────────── */
@@ -98,7 +98,7 @@ a.miever-card {
     margin-top: var(--space-1);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
-    color: var(--color-border-focus);
+    color: var(--color-text-accent);
 }
 
 .miever-card-meta {
