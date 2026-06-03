@@ -1,0 +1,55 @@
+@use '../../Styles/variables' as vars;
+
+.miever-pagination {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.miever-pagination-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 6px;
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+    border: vars.$border-width solid var(--color-border-primary);
+    border-radius: vars.$border-radius;
+    cursor: pointer;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
+
+    &:hover {
+        color: vars.$primary;
+        border-color: vars.$primary;
+    }
+
+    &.active {
+        color: vars.$white;
+        background: vars.$primary;
+        border-color: vars.$primary;
+    }
+
+    &.disabled {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+
+        &:hover {
+            color: var(--color-text-disabled);
+            border-color: var(--color-border-primary);
+        }
+    }
+}
+
+.miever-pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    color: var(--color-text-disabled);
+}

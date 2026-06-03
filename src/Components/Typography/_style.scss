@@ -1,0 +1,91 @@
+@use '../../Styles/variables' as vars;
+
+.miever-typography {
+    color: var(--color-text-primary);
+    word-break: break-word;
+
+    // Variants
+    &.miever-typography-primary {
+        color: vars.$primary;
+    }
+    &.miever-typography-secondary {
+        color: var(--color-text-secondary);
+    }
+    &.miever-typography-success {
+        color: vars.$success;
+    }
+    &.miever-typography-warning {
+        color: vars.$warning;
+    }
+    &.miever-typography-danger {
+        color: vars.$danger;
+    }
+    &.miever-typography-disabled {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+        user-select: none;
+    }
+
+    // Alignment
+    &.miever-typography-align-left {
+        display: block;
+        text-align: left;
+    }
+    &.miever-typography-align-center {
+        display: block;
+        text-align: center;
+    }
+    &.miever-typography-align-right {
+        display: block;
+        text-align: right;
+    }
+
+    // Decorations
+    &.miever-typography-strong {
+        font-weight: vars.$font-weight-bold;
+    }
+    &.miever-typography-italic {
+        font-style: italic;
+    }
+    &.miever-typography-delete {
+        text-decoration: line-through;
+    }
+    &.miever-typography-underline {
+        text-decoration: underline;
+    }
+}
+
+.miever-typography-title {
+    margin: 0 0 0.5em;
+    font-weight: vars.$headings-font-weight;
+    line-height: vars.$headings-line-height;
+
+    &h1 { font-size: vars.$h1-font-size; }
+    &h2 { font-size: vars.$h2-font-size; }
+    &h3 { font-size: vars.$h3-font-size; }
+    &h4 { font-size: vars.$h4-font-size; }
+    &h5 { font-size: vars.$h5-font-size; }
+}
+
+.miever-typography-paragraph {
+    margin: 0 0 1em;
+    line-height: vars.$line-height-base;
+}
+
+.miever-typography-link {
+    color: vars.$primary;
+    text-decoration: none;
+    transition: color .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        color: vars.$link-hover-color;
+        text-decoration: underline;
+    }
+
+    &.miever-typography-disabled {
+        color: var(--color-text-disabled);
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+}

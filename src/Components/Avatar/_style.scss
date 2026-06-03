@@ -1,0 +1,49 @@
+@use '../../Styles/variables' as vars;
+
+.miever-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: vars.$white;
+    background: vars.$primary;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.miever-avatar-circle {
+    border-radius: 50%;
+}
+
+.miever-avatar-square {
+    border-radius: vars.$border-radius;
+}
+
+.miever-avatar-sm {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+.miever-avatar-md {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.miever-avatar-lg {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 28px;
+}

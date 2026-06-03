@@ -1,66 +1,101 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import Button from './index';
-import { IButtonProps } from './interface';
+import type { Meta, StoryObj } from '@storybook/react';
+import Button from './Button';
 
-export default {
-  title: 'General/Button',
-  component: Button,
-  tags: ['autodocs'],
-  argTypes: {
-    size: {
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
-      description: 'Controls the button size',
+const meta: Meta<typeof Button> = {
+    title: 'General/Button',
+    component: Button,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Buttons trigger an action or event. They come in several style types and three sizes, and accept all native `<button>` attributes.',
+            },
+        },
     },
-    styleType: {
-      control: { type: 'select' },
-      options: ['default', 'primary', 'danger', 'link', 'secondary'],
-      description: 'Determines the button style',
+    argTypes: {
+        type: {
+            control: 'select',
+            options: ['default', 'primary', 'secondary', 'danger', 'link'],
+            description: 'Visual style of the button.',
+            table: { defaultValue: { summary: 'default' } },
+        },
+        size: {
+            control: 'inline-radio',
+            options: ['sm', 'md', 'lg'],
+            description: 'Button size.',
+            table: { defaultValue: { summary: 'md' } },
+        },
+        disabled: {
+            control: 'boolean',
+            description: 'Disables the button.',
+            table: { defaultValue: { summary: 'false' } },
+        },
+        children: {
+            control: 'text',
+            description: 'Button content.',
+        },
+        onClick: { action: 'clicked', table: { category: 'Events' } },
     },
-  },
-} as Meta;
-
-// Basic Button Story
-const Template: StoryFn<IButtonProps> = (args) => <Button {...args}>Button</Button>;
-
-export const Basic = Template.bind({});
-Basic.args = {
-  size: 'md',
-  styleType: 'default',
+    args: {
+        children: 'Button',
+        type: 'default',
+        size: 'md',
+        disabled: false,
+    },
 };
 
-// Button Styles Variations
-export const StyleVariations = () => (
-  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-    <Button styleType="default">Default</Button>
-    <Button styleType="primary">Primary</Button>
-    <Button styleType="secondary">Secondary</Button>
-    <Button styleType="danger">Danger</Button>
-    <Button disabled>Disabled</Button>
-    <Button styleType="link">Link</Button>
-  </div>
-);
-StyleVariations.parameters = {
-  docs: {
-    description: {
-      story: 'Showcases all the different button styles supported by the `Button` component.',
-    },
-  },
+export default meta;
+type Story = StoryObj<typeof Button>;
+
+/** The default playground. Use the controls panel to explore every prop. */
+export const Playground: Story = {};
+
+/** All five style types side by side. */
+export const StyleTypes: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button type="default">Default</Button>
+            <Button type="primary">Primary</Button>
+            <Button type="secondary">Secondary</Button>
+            <Button type="danger">Danger</Button>
+            <Button type="link">Link</Button>
+        </div>
+    ),
 };
 
-// Button Size Variations
-export const SizeVariations = () => (
-  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-    <Button size="sm" style={{ flex: 'none' }}>Small</Button>
-    <Button size="md" style={{ flex: 'none' }}>Medium</Button>
-    <Button size="lg" style={{ flex: 'none' }}>Large</Button>
-  </div>
-);
-SizeVariations.parameters = {
-  docs: {
-    description: {
-      story: 'Displays buttons in small, medium, and large sizes.',
-    },
-  },
+/** The three available sizes. */
+export const Sizes: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <Button size="sm" type="primary">
+                Small
+            </Button>
+            <Button size="md" type="primary">
+                Medium
+            </Button>
+            <Button size="lg" type="primary">
+                Large
+            </Button>
+        </div>
+    ),
+};
+
+/** Disabled state across style types. */
+export const Disabled: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button disabled>Default</Button>
+            <Button type="primary" disabled>
+                Primary
+            </Button>
+            <Button type="danger" disabled>
+                Danger
+            </Button>
+            <Button type="link" disabled>
+                Link
+            </Button>
+        </div>
+    ),
 };

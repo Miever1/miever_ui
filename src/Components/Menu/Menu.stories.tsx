@@ -1,124 +1,66 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import Menu from './index';
-import Box from '../Box';
-import '../../Styles/index.scss';
+import type { Meta, StoryObj } from '@storybook/react';
+import Menu from './Menu';
 
-export default {
-  title: 'Navigation/Menu',
-  component: Menu,
-  tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <Box style={{ height: '300px', padding: '20px', border: '1px solid #ddd', borderRadius: '4px' }}>
-        {Story()}
-      </Box>
-    ),
-  ],
-  argTypes: {
-    mode: {
-      control: 'select',
-      options: ['horizontal', 'vertical'],
-      description: 'Specifies the layout mode of the menu: horizontal or vertical.',
-    },
-    defaultKey: {
-      control: 'text',
-      description: 'The key of the menu item that should be selected by default.',
-    },
-    onSelect: {
-      action: 'selected',
-      description: 'Callback function when a menu item is selected.',
-    },
-    prefix: {
-      control: 'text',
-      description: 'Content to be displayed as the prefix (left side of the menu).',
-    },
-    suffix: {
-      control: 'text',
-      description: 'Content to be displayed as the suffix (right side of the menu).',
-    },
-    items: {
-      control: 'object',
-      description: 'Array of menu items to be rendered.',
-    },
-  },
-} as Meta;
-
-const Template: StoryFn = (args) => (
-  <Menu
-    {...args}
-    items={[
-      { label: 'Active', key: 'active' },
-      { label: 'Disabled', key: 'disabled', disabled: true },
-      { label: 'Click Me', key: 'click' },
-      { label: 'Dropdown', key: 'drop1' },
-    ]}
-  />
-);
-
-// Basic Menu (Default Horizontal Menu)
-export const Basic = Template.bind({});
-Basic.args = {
-  mode: 'horizontal',
-  defaultKey: 'active',
-  onSelect: (value: string) => console.log('Selected item key:', value),
-};
-
-// Vertical Menu
-export const VerticalMenu = Template.bind({});
-VerticalMenu.args = {
-  mode: 'vertical',
-  defaultKey: 'click',
-  onSelect: (value: string) => console.log('Selected item key:', value),
-};
-
-// Menu with Prefix and Suffix
-export const MenuWithPrefixSuffix = Template.bind({});
-MenuWithPrefixSuffix.args = {
-  mode: 'horizontal',
-  prefix: 'Prefix Content', // Example for prefix content
-  suffix: 'Suffix Content', // Example for suffix content
-  defaultKey: 'click',
-  onSelect: (value: string) => console.log('Selected item key:', value),
-};
-
-// Menu with Disabled Item (Showcase disabled state for a menu item)
-export const MenuWithDisabledItem = Template.bind({});
-MenuWithDisabledItem.args = {
-  mode: 'horizontal',
-  defaultKey: 'active',
-  items: [
-    { label: 'Active', key: 'active' },
-    { label: 'Disabled', key: 'disabled', disabled: true }, // Disabled menu item
-    { label: 'Click Me', key: 'click' },
-  ],
-  onSelect: (value: string) => console.log('Selected item key:', value),
-};
-
-// Menu with Multiple Dropdowns (Submenus)
-export const MenuWithSubMenus = Template.bind({});
-MenuWithSubMenus.args = {
-  mode: 'horizontal',
-  defaultKey: 'click',
-  items: [
+const ITEMS = [
     { label: 'Home', key: 'home' },
+    { label: 'Pricing', key: 'pricing' },
+    { label: 'Archived', key: 'archived', disabled: true },
     {
-      label: 'Products',
-      key: 'products',
-      children: [
-        { label: 'Product A', key: 'productA' },
-        { label: 'Product B', key: 'productB' },
-      ],
+        label: 'Products',
+        key: 'products',
+        children: [
+            { label: 'Product A', key: 'a' },
+            { label: 'Product B', key: 'b' },
+        ],
     },
-    {
-      label: 'Services',
-      key: 'services',
-      children: [
-        { label: 'Service A', key: 'serviceA' },
-        { label: 'Service B', key: 'serviceB' },
-      ],
+];
+
+const meta: Meta<typeof Menu> = {
+    title: 'Navigation/Menu',
+    component: Menu,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Menu provides horizontal or vertical navigation with support for submenus, a default selected key, disabled items, and prefix/suffix slots.',
+            },
+        },
     },
-  ],
-  onSelect: (value: string) => console.log('Selected item key:', value),
+    argTypes: {
+        mode: {
+            control: 'inline-radio',
+            options: ['horizontal', 'vertical'],
+            description: 'Layout direction.',
+            table: { defaultValue: { summary: 'horizontal' } },
+        },
+        defaultKey: { control: 'text', description: 'Key of the initially active item.' },
+        onSelect: { action: 'selected', table: { category: 'Events' } },
+    },
+    args: {
+        mode: 'horizontal',
+        defaultKey: 'home',
+        items: ITEMS,
+    },
+    decorators: [(Story) => <div style={{ minHeight: 220 }}>{Story()}</div>],
 };
-MenuWithSubMenus.storyName = 'Menu with Submenus';
+
+export default meta;
+type Story = StoryObj<typeof Menu>;
+
+/** Horizontal menu with a submenu — hover "Products". */
+export const Horizontal: Story = {};
+
+/** Vertical menu, e.g. for a sidebar. */
+export const Vertical: Story = {
+    args: { mode: 'vertical', defaultKey: 'pricing' },
+};
+
+/** Prefix and suffix slots for branding and actions. */
+export const WithPrefixSuffix: Story = {
+    args: {
+        prefix: <strong style={{ padding: '0 8px' }}>Miever</strong>,
+        suffix: <span style={{ padding: '0 8px' }}>Sign in</span>,
+    },
+};

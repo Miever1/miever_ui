@@ -1,0 +1,140 @@
+@use '../../Styles/variables' as vars;
+
+.miever-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    outline: none;
+
+    &-sm {
+        font-size: var(--font-size-sm);
+    }
+    &-lg {
+        font-size: var(--font-size-lg);
+    }
+}
+
+.miever-select-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    min-height: 38px;
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    .miever-select-sm & {
+        min-height: 32px;
+        padding: var(--space-1) var(--space-2);
+    }
+    .miever-select-lg & {
+        min-height: 44px;
+        padding: var(--space-3) var(--space-4);
+    }
+}
+
+.miever-select:focus-visible .miever-select-selector,
+.miever-select-open .miever-select-selector {
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(12, 192, 223, 0.18);
+}
+
+.miever-select-value {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.miever-select-placeholder {
+    color: var(--color-text-disabled);
+}
+
+.miever-select-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-text-secondary);
+}
+
+.miever-select-arrow {
+    font-size: 0.75em;
+    transition: transform 0.2s ease;
+
+    .miever-select-open & {
+        transform: rotate(180deg);
+    }
+}
+
+.miever-select-clear {
+    display: inline-flex;
+    padding: 0;
+    color: var(--color-text-disabled);
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--color-text-secondary);
+    }
+}
+
+.miever-select-disabled {
+    cursor: not-allowed;
+
+    .miever-select-selector {
+        background: var(--color-bg-disabled);
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+    }
+}
+
+.miever-select-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: var(--z-dropdown);
+    max-height: 256px;
+    margin: 0;
+    padding: var(--space-1);
+    overflow-y: auto;
+    list-style: none;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+}
+
+.miever-select-option {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.12s ease;
+
+    &-active {
+        background: var(--color-bg-secondary);
+    }
+
+    &-selected {
+        color: var(--color-text-accent);
+        font-weight: var(--font-weight-medium);
+    }
+
+    &-disabled {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+    }
+}
+
+.miever-select-empty {
+    padding: var(--space-3);
+    color: var(--color-text-disabled);
+    text-align: center;
+}

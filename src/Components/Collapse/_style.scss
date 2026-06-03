@@ -1,0 +1,64 @@
+@use '../../Styles/variables' as vars;
+
+.miever-collapse {
+    border: vars.$border-width solid var(--color-border-primary);
+    border-radius: vars.$border-radius;
+    overflow: hidden;
+}
+
+.miever-collapse-item {
+    border-bottom: vars.$border-width solid var(--color-border-primary);
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &.disabled .miever-collapse-header {
+        color: var(--color-text-disabled);
+        cursor: not-allowed;
+    }
+}
+
+.miever-collapse-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: vars.$btn-padding-y vars.$spacer;
+    font-size: vars.$font-size-base;
+    color: var(--color-text-primary);
+    text-align: left;
+    background: var(--color-bg-secondary);
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+
+    &:hover {
+        background: var(--color-bg-disabled);
+    }
+}
+
+.miever-collapse-arrow {
+    display: inline-flex;
+    transition: transform .2s ease-in-out;
+}
+
+.miever-collapse-item.active .miever-collapse-arrow {
+    transform: rotate(90deg);
+}
+
+.miever-collapse-content {
+    background: var(--color-bg-primary);
+    animation: miever-collapse-expand 0.2s ease;
+}
+
+.miever-collapse-body {
+    padding: vars.$spacer;
+    color: var(--color-text-secondary);
+    line-height: vars.$line-height-base;
+}
+
+@keyframes miever-collapse-expand {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}

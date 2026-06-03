@@ -1,92 +1,83 @@
-import { Meta, StoryFn } from '@storybook/react';
-import '../../Styles/index.scss';
-import Tooltip from './index';
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import Tooltip from './Tooltip';
 import Button from '../Button';
 
-export default {
-  title: 'General/Tooltip',
-  component: Tooltip,
-  tags: ['autodocs'],
-  argTypes: {
-    overlay: {
-      control: 'text',
-      description: 'Content to be displayed inside the tooltip.',
-      defaultValue: 'This is a tooltip!',
+const meta: Meta<typeof Tooltip> = {
+    title: 'Data Display/Tooltip',
+    component: Tooltip,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Tooltip displays contextual information on hover, focus or click. It is a thin wrapper around [rc-tooltip](https://github.com/react-component/tooltip).',
+            },
+        },
     },
-    placement: {
-      control: { type: 'select' },
-      options: ['top', 'right', 'bottom', 'left'],
-      description: 'Position of the tooltip relative to the target.',
-      defaultValue: 'right',
+    argTypes: {
+        overlay: { control: 'text', description: 'Content rendered inside the tooltip.' },
+        placement: {
+            control: 'select',
+            options: ['top', 'right', 'bottom', 'left'],
+            description: 'Tooltip position relative to the target.',
+            table: { defaultValue: { summary: 'top' } },
+        },
+        trigger: {
+            control: 'select',
+            options: ['hover', 'click', 'focus'],
+            description: 'What triggers the tooltip.',
+            table: { defaultValue: { summary: 'hover' } },
+        },
     },
-    trigger: {
-      control: { type: 'select' },
-      options: ['hover', 'click', 'focus', 'contextMenu'],
-      description: 'Defines the trigger for the tooltip.',
-      defaultValue: 'hover',
+    args: {
+        overlay: 'Helpful contextual information.',
+        placement: 'top',
     },
-  },
-} as Meta<typeof Tooltip>;
-
-interface TooltipStoryProps extends React.ComponentProps<typeof Tooltip> {
-  buttonText?: string;
-}
-
-const Template: StoryFn<TooltipStoryProps> = ({
-  buttonText = 'Hover Me',
-  ...args
-}) => (
-  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-    <Tooltip {...args}>
-      <Button styleType='primary'>
-        {buttonText}
-      </Button>
-    </Tooltip>
-  </div>
-);
-
-export const Basic = Template.bind({});
-Basic.args = {
-  overlay: 'This is a tooltip with detailed information.',
-  placement: 'right',
+    decorators: [
+        (Story) => (
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '60px 0' }}>
+                {Story()}
+            </div>
+        ),
+    ],
 };
 
-export const TopPlacement = Template.bind({});
-TopPlacement.args = {
-  overlay: 'Tooltip shown on the top.',
-  placement: 'top',
+export default meta;
+type Story = StoryObj<typeof Tooltip>;
+
+/** Hover the button to reveal the tooltip. */
+export const Basic: Story = {
+    render: (args) => (
+        <Tooltip {...args}>
+            <Button type="primary">Hover me</Button>
+        </Tooltip>
+    ),
 };
 
-export const ClickTrigger = Template.bind({});
-ClickTrigger.args = {
-  overlay: 'This tooltip is triggered by clicking.',
-  placement: 'bottom',
-  trigger: 'click',
-  buttonText: 'Click Me'
+/** Triggered by click instead of hover. */
+export const ClickTrigger: Story = {
+    args: {
+        overlay: 'Triggered by clicking.',
+        placement: 'bottom',
+        trigger: ['click'],
+    },
+    render: (args) => (
+        <Tooltip {...args}>
+            <Button>Click me</Button>
+        </Tooltip>
+    ),
 };
 
-export const MultipleExamples = () => (
-  <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '50px' }}>
-    <Tooltip overlay="Tooltip on Top" placement="top">
-      <Button styleType='primary'>
-        Top
-      </Button>
-    </Tooltip>
-    <Tooltip overlay="Tooltip on Right" placement="right">
-      <Button styleType='secondary'>
-        Right
-      </Button>
-    </Tooltip>
-    <Tooltip overlay="Tooltip on Bottom" placement="bottom">
-      <Button styleType='danger'>
-        Bottom
-      </Button>
-    </Tooltip>
-    <Tooltip overlay="Tooltip on Left" placement="left">
-      <Button styleType='primary'>
-        Left
-      </Button>
-    </Tooltip>
-  </div>
-);
-MultipleExamples.storyName = 'Tooltip Positions Example';
+/** All four placements. */
+export const Placements: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 24 }}>
+            {(['top', 'right', 'bottom', 'left'] as const).map((placement) => (
+                <Tooltip key={placement} overlay={`Tooltip on ${placement}`} placement={placement}>
+                    <Button type="secondary">{placement}</Button>
+                </Tooltip>
+            ))}
+        </div>
+    ),
+};

@@ -1,5 +1,46 @@
 @use "sass:color";
+@use "sass:map";
 @use 'variables' as *;
+
+// ── Responsive helpers ──────────────────────────────────────────────
+// Apply styles at or above a breakpoint (mobile-first):
+//   @include media-up(md) { ... }   // ≥ 768px
+@mixin media-up($name) {
+  $min: map.get($breakpoints, $name);
+  @if $min == null {
+    @error "Unknown breakpoint `#{$name}`. Valid: #{map.keys($breakpoints)}.";
+  }
+  @if $min == 0 {
+    @content;
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+}
+
+// Apply styles below a breakpoint:
+//   @include media-down(md) { ... } // < 768px
+@mixin media-down($name) {
+  $min: map.get($breakpoints, $name);
+  @if $min == null {
+    @error "Unknown breakpoint `#{$name}`. Valid: #{map.keys($breakpoints)}.";
+  }
+  @media (max-width: ($min - 0.02px)) {
+    @content;
+  }
+}
+
+// Apply styles between two breakpoints [lower, upper):
+//   @include media-between(sm, lg) { ... } // 576px–991px
+@mixin media-between($lower, $upper) {
+  $min: map.get($breakpoints, $lower);
+  $max: map.get($breakpoints, $upper);
+  @media (min-width: $min) and (max-width: ($max - 0.02px)) {
+    @content;
+  }
+}
+// ────────────────────────────────────────────────────────────────────
 
 @mixin button-size($padding-y, $padding-x, $font-size, $border-raduis) {
     padding: $padding-y $padding-x;

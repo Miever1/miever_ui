@@ -1,0 +1,86 @@
+@use '../../Styles/variables' as vars;
+
+.miever-modal-root {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+}
+
+.miever-modal-mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    animation: miever-modal-fade 0.2s ease;
+}
+
+.miever-modal-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 80px 16px 16px;
+    overflow: auto;
+}
+
+.miever-modal {
+    position: relative;
+    max-width: 100%;
+    background: var(--color-surface-elevated);
+    color: var(--color-text-primary);
+    border-radius: vars.$border-radius-lg;
+    box-shadow: vars.$box-shadow-lg;
+    animation: miever-modal-zoom 0.2s ease;
+}
+
+.miever-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: vars.$spacer;
+    border-bottom: vars.$border-width solid var(--color-border-primary);
+}
+
+.miever-modal-title {
+    font-size: vars.$h5-font-size;
+    font-weight: vars.$headings-font-weight;
+}
+
+.miever-modal-close {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity .2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.miever-modal-body {
+    padding: vars.$spacer;
+    line-height: vars.$line-height-base;
+}
+
+.miever-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: vars.$spacer;
+    border-top: vars.$border-width solid var(--color-border-primary);
+}
+
+@keyframes miever-modal-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes miever-modal-zoom {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}

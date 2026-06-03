@@ -1,0 +1,89 @@
+@use '../../Styles/variables' as vars;
+
+.miever-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--color-text-primary);
+}
+
+.miever-timeline-item {
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 24px;
+
+    &:last-child {
+        padding-bottom: 0;
+
+        .miever-timeline-tail {
+            display: none;
+        }
+    }
+}
+
+.miever-timeline-tail {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    height: 100%;
+    border-left: 2px solid var(--color-border-primary);
+}
+
+.miever-timeline-dot {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
+    background: var(--color-bg-primary);
+    border-radius: 50%;
+}
+
+.miever-timeline-dot-default {
+    width: 10px;
+    height: 10px;
+    background: vars.$primary;
+    border-radius: 50%;
+}
+
+.miever-timeline-label {
+    margin-bottom: 2px;
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+}
+
+.miever-timeline-content {
+    line-height: vars.$line-height-base;
+}
+
+// Alternate layout: labels and content on opposite sides of a centered line.
+.miever-timeline-alternate {
+    .miever-timeline-item {
+        padding-left: 0;
+    }
+
+    .miever-timeline-tail {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .miever-timeline-dot {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .miever-timeline-label {
+        position: absolute;
+        left: 0;
+        width: calc(50% - 24px);
+        text-align: right;
+    }
+
+    .miever-timeline-content {
+        width: calc(50% - 24px);
+        margin-left: calc(50% + 24px);
+    }
+}

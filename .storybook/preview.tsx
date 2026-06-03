@@ -4,6 +4,9 @@ import { themes } from '@storybook/theming';
 import { addons } from '@storybook/preview-api';
 import { DocsContainer } from './DocsContainer';
 
+// Load the library's compiled styles once for every story.
+import '../src/Styles/index.scss';
+
 const channel = addons.getChannel();
 
 const getThemeFromDOM = (): boolean => {

@@ -1,0 +1,64 @@
+@use '../../Styles/variables' as vars;
+
+.miever-message-root {
+    position: fixed;
+    top: 16px;
+    left: 0;
+    right: 0;
+    z-index: var(--z-message);
+    pointer-events: none;
+}
+
+.miever-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.miever-message-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--color-surface-elevated);
+    color: var(--color-text-primary);
+    border: vars.$border-width solid var(--color-border-primary);
+    border-radius: vars.$border-radius;
+    box-shadow: vars.$box-shadow;
+    pointer-events: auto;
+    animation: miever-message-enter 0.2s ease;
+}
+
+.miever-message-icon {
+    display: inline-flex;
+
+    &.spin {
+        animation: miever-message-spin 0.8s linear infinite;
+    }
+}
+
+.miever-message-success .miever-message-icon {
+    color: vars.$success;
+}
+.miever-message-info .miever-message-icon {
+    color: vars.$info;
+}
+.miever-message-warning .miever-message-icon {
+    color: vars.$warning;
+}
+.miever-message-error .miever-message-icon {
+    color: vars.$danger;
+}
+.miever-message-loading .miever-message-icon {
+    color: vars.$primary;
+}
+
+@keyframes miever-message-enter {
+    from { opacity: 0; transform: translateY(-100%); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes miever-message-spin {
+    to { transform: rotate(360deg); }
+}

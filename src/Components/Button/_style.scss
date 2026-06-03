@@ -1,7 +1,7 @@
 @use '../../Styles/variables' as buttonVars;
 @use '../../Styles/mixin' as mixin;
 
-.btn {
+.miever-btn {
     position: relative;
     display: inline-block;
     font-weight: buttonVars.$btn-font-weight;
@@ -16,6 +16,7 @@
     cursor: pointer;
     transition: buttonVars.$btn-transition;
     @include mixin.button-size(buttonVars.$btn-padding-y, buttonVars.$btn-padding-x, buttonVars.$btn-font-size, buttonVars.$btn-border-radius);
+
     &.disabled,
     &[disabled] {
         cursor: not-allowed;
@@ -25,37 +26,38 @@
     }
 }
 
-.btn-lg {
+.miever-btn-lg {
     @include mixin.button-size(buttonVars.$btn-padding-y-lg, buttonVars.$btn-padding-x-lg, buttonVars.$btn-font-size-lg, buttonVars.$btn-border-radius-lg);
 }
 
-.btn-sm {
+.miever-btn-sm {
     @include mixin.button-size(buttonVars.$btn-padding-y-sm, buttonVars.$btn-padding-x-sm, buttonVars.$btn-font-size-sm, buttonVars.$btn-border-radius-sm);
 }
 
-.btn-danger {
+.miever-btn-danger {
     @include mixin.button-style(buttonVars.$danger, buttonVars.$danger, buttonVars.$white);
 }
 
-.btn-primary {
+.miever-btn-primary {
     @include mixin.button-style(buttonVars.$primary, buttonVars.$primary, buttonVars.$white);
 }
 
-.btn-default {
-    @include mixin.button-style(buttonVars.$btn-default-bg, buttonVars.$btn-default-border-color, buttonVars.$btn-default-color, buttonVars.$btn-default-hover-bg ,buttonVars.$primary, buttonVars.$primary);
+.miever-btn-default {
+    @include mixin.button-style(buttonVars.$btn-default-bg, buttonVars.$btn-default-border-color, buttonVars.$btn-default-color, buttonVars.$btn-default-hover-bg, buttonVars.$primary, buttonVars.$primary);
 }
 
-.btn-secondary {
+.miever-btn-secondary {
     @include mixin.button-style(buttonVars.$secondary, buttonVars.$secondary, buttonVars.$white);
 }
 
-.btn-link {
+.miever-btn-link {
     font-weight: buttonVars.$font-weight-normal;
     color: buttonVars.$primary;
     text-decoration: buttonVars.$link-decoration;
     border: none;
     background: none;
     box-shadow: none;
+
     &:hover,
     &.hover {
         &::after {
@@ -71,21 +73,24 @@
             background: buttonVars.$primary;
         }
     }
+
     &:focus,
     &.focus {
-      box-shadow: none;
-      &::after {
-        height: 2px;
-        width: calc(100% - #{buttonVars.$btn-padding-x-lg});
-        content: "";
-        position: absolute;
-        transform: translateX(-50%);
-        left: 50%;
-        margin-top: 2rem;
-        bottom: 0.1em;
-        background: buttonVars.$primary;
+        box-shadow: none;
+
+        &::after {
+            height: 2px;
+            width: calc(100% - #{buttonVars.$btn-padding-x-lg});
+            content: "";
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+            margin-top: 2rem;
+            bottom: 0.1em;
+            background: buttonVars.$primary;
+        }
     }
-    }
+
     &:disabled,
     &.disabled {
         color: buttonVars.$btn-link-disabled-color;
@@ -93,5 +98,4 @@
         pointer-events: none;
         cursor: not-allowed;
     }
-  }
-
+}

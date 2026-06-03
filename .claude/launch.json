@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "storybook",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "storybook", "--", "--ci", "--quiet", "-p", "6008"],
+      "port": 6008
+    },
+    {
+      "name": "miever-net",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd /Users/aerman/Documents/Practice/miever.net && npm run develop -- --port 8000"],
+      "port": 8000
+    }
+  ]
+}

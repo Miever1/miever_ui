@@ -1,79 +1,115 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import Card from './Card';
-import '../../Styles/index.scss';
+import Button from '../Button/Button';
 
-export default {
-  title: 'General/Card',
-  component: Card,
-  tags: ['autodocs', 'examples'],
-  argTypes: {
-    title: {
-      control: 'text',
-      description: 'Main title of the card.',
-    },
-    subTitle: {
-      control: 'text',
-      description: 'Optional subtitle displayed below the title.',
-    },
-    hoverable: {
-      control: 'boolean',
-      description: 'If true, the card will have hover effects.',
-    },
-  },
-} as Meta;
-
-// Template for reusable story creation
-const Template: StoryFn = (args) => (
-  <Card {...args} style={{ width: '300px', padding: '16px' }}>
-    {args.children || 'This is the content of the card.'}
-  </Card>
+const cover = (seed: string) => (
+    <img src={`https://picsum.photos/seed/${seed}/640/360`} alt="" />
 );
 
-// Basic Card Example
-export const Basic = Template.bind({});
-Basic.args = {
-  title: 'Card Title',
-  subTitle: 'Card Subtitle',
+const meta: Meta<typeof Card> = {
+    title: 'Data Display/Card',
+    component: Card,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'A structured content container with an optional cover, header (title / subtitle / ' +
+                    'meta / extra), body and footer. Supports vertical and horizontal layouts, an outlined ' +
+                    'or elevated surface, and a hover lift with cover zoom. Adapts to light and dark themes.',
+            },
+        },
+    },
+    argTypes: {
+        variant: { control: 'inline-radio', options: ['outlined', 'elevated'] },
+        orientation: { control: 'inline-radio', options: ['vertical', 'horizontal'] },
+        hoverable: { control: 'boolean' },
+        clamp: { control: 'number' },
+    },
+    args: {
+        variant: 'outlined',
+        orientation: 'vertical',
+        hoverable: true,
+        title: 'Designing for clarity',
+        subTitle: 'Essay',
+        meta: 'May 2026 · 6 min read',
+        children:
+            'A short, friendly description of the article that explains what the reader will get out of it.',
+    },
+    render: (args) => (
+        <Card {...args} cover={cover('clarity')} style={{ width: 340 }} />
+    ),
 };
 
-// Hoverable Card Example
-export const Hoverable = Template.bind({});
-Hoverable.args = {
-  title: 'Hoverable Card',
-  subTitle: 'Card with hover effect',
-  hoverable: true,
+export default meta;
+type Story = StoryObj<typeof Card>;
+
+/** The default playground. Use the controls to explore every prop. */
+export const Playground: Story = {};
+
+/** Outlined vs elevated surfaces. */
+export const Variants: Story = {
+    render: () => (
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <Card variant="outlined" title="Outlined" meta="1px border" cover={cover('a')} style={{ width: 260 }}>
+                A bordered surface with no shadow.
+            </Card>
+            <Card variant="elevated" title="Elevated" meta="Soft shadow" cover={cover('b')} style={{ width: 260 }}>
+                A shadowed surface with no border.
+            </Card>
+        </div>
+    ),
 };
 
-// Card with Long Content Example
-export const WithLongContent = Template.bind({});
-WithLongContent.args = {
-  title: 'Card with Long Content',
-  subTitle: 'Long content example',
-  children: (
-    <div>
-      <p>This is an example of a card with more content than usual.</p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-      </p>
-      <p>
-        Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
-      </p>
-    </div>
-  ),
+/** A horizontal media card — cover beside the body, stacking on small screens. */
+export const Horizontal: Story = {
+    args: {
+        orientation: 'horizontal',
+        title: 'Three years on a cloud console',
+        subTitle: 'Case study',
+        meta: 'UCloud · Frontend',
+        clamp: 3,
+        children:
+            'Frontend engineering on a large-scale cloud console — networking products, monitoring components, and system-level consistency across a sprawling product surface.',
+        footer: (
+            <>
+                <Button size="sm" type="primary">
+                    Live demo
+                </Button>
+                <Button size="sm" type="link">
+                    GitHub
+                </Button>
+            </>
+        ),
+    },
+    render: (args) => <Card {...args} cover={cover('console')} style={{ maxWidth: 560 }} />,
 };
 
-// Multiple Cards Example
-export const MultipleCards = () => (
-  <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-    <Card title="Card 1" subTitle="Subtitle 1" hoverable>
-      Content for card 1
-    </Card>
-    <Card title="Card 2" subTitle="Subtitle 2">
-      Content for card 2
-    </Card>
-    <Card title="Card 3" subTitle="Subtitle 3" hoverable>
-      Content for card 3
-    </Card>
-  </div>
-);
+/** A responsive grid of vertical cards. */
+export const CardGrid: Story = {
+    render: () => (
+        <div
+            style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+                gap: 20,
+            }}
+        >
+            {['react', 'design', 'travel'].map((s) => (
+                <Card
+                    key={s}
+                    hoverable
+                    cover={cover(s)}
+                    title={`Story about ${s}`}
+                    meta="May 2026"
+                    clamp={2}
+                    href="#"
+                >
+                    A clamped description that keeps every card the same height regardless of how
+                    much text it contains.
+                </Card>
+            ))}
+        </div>
+    ),
+};

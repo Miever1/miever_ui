@@ -1,0 +1,77 @@
+@use '../../Styles/variables' as vars;
+
+.miever-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: 44px;
+    height: 22px;
+    padding: 0;
+    background: var(--color-border-secondary);
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+    vertical-align: middle;
+
+    &.checked {
+        background: vars.$primary;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.miever-switch-handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: vars.$white;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: left .2s ease-in-out;
+}
+
+.miever-switch.checked .miever-switch-handle {
+    left: calc(100% - 20px);
+}
+
+.miever-switch-inner {
+    display: inline-block;
+    margin: 0 6px 0 24px;
+    font-size: vars.$font-size-sm;
+    color: vars.$white;
+}
+
+.miever-switch.checked .miever-switch-inner {
+    margin: 0 24px 0 6px;
+}
+
+// Small size
+.miever-switch-sm {
+    min-width: 32px;
+    height: 16px;
+
+    .miever-switch-handle {
+        width: 12px;
+        height: 12px;
+    }
+
+    &.checked .miever-switch-handle {
+        left: calc(100% - 14px);
+    }
+
+    .miever-switch-inner {
+        font-size: 12px;
+        margin: 0 4px 0 18px;
+    }
+
+    &.checked .miever-switch-inner {
+        margin: 0 18px 0 4px;
+    }
+}

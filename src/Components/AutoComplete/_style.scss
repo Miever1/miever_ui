@@ -1,54 +1,69 @@
 @use '../../Styles/variables' as vars;
 
-.options-list {
-    color: vars.$autocomplete-list-color;
-    background: vars.$autocomplete-bg;
-    border: vars.$autocomplete-border-width solid vars.$autocomplete-focus-border-color;
-    border-top: none;
-    border-radius: 0 0 vars.$autocomplete-border-radius vars.$autocomplete-border-radius;
-    max-height: 200px;
-    overflow-y: auto;
+.miever-autocomplete {
+    position: relative;
+    display: inline-block;
+    width: 100%;
 }
 
-.autocompelete-input {
+// Keep the input's own bottom margin out of the way; the options panel floats below.
+.miever-autocomplete-input {
     margin-bottom: 0;
-}
 
-.autocompelete-input > .input-inner {
-    &:focus {
+    > .miever-input-inner:focus {
         border-radius: vars.$autocomplete-border-radius vars.$autocomplete-border-radius 0 0;
     }
 }
 
-.option-item {
-    padding: 0 vars.$autocomplete-padding-x;
+.miever-autocomplete-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: var(--z-dropdown);
+    margin-top: -1px;
+    padding: 4px 0;
+    color: vars.$autocomplete-list-color;
+    background: vars.$autocomplete-bg;
+    border: vars.$autocomplete-border-width solid vars.$autocomplete-border-color;
+    border-radius: 0 0 vars.$autocomplete-border-radius vars.$autocomplete-border-radius;
+    border-top: none;
+    box-shadow: vars.$box-shadow;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.miever-autocomplete-option {
+    padding: 0.5rem 0.75rem;
+    line-height: vars.$line-height-base;
+    cursor: pointer;
+    transition: background-color .15s ease-in-out, color .15s ease-in-out;
 
     &:hover,
     &.highlight {
-        cursor: pointer;
         background-color: vars.$primary;
-        color: vars.$white; 
+        color: vars.$white;
     }
 
     &.disabled {
-        color: vars.$input-disabled-bg;
-        cursor: not-allowed;
+        color: vars.$text-muted;
+        cursor: default;
+
+        &:hover {
+            background-color: transparent;
+            color: vars.$text-muted;
+        }
     }
 }
 
-.option-item-active {
-    background-color: vars.$primary;
-    color: vars.$white;
-}
-
-  .auto-complete-sm .input-inner {
+.miever-autocomplete-sm .miever-input-inner {
     padding: vars.$input-padding-y-sm vars.$input-padding-x-sm;
     font-size: vars.$input-font-size-sm;
     border-radius: vars.$input-border-radius-sm;
-  }
-  
-  .auto-complete-lg .input-inner {
+}
+
+.miever-autocomplete-lg .miever-input-inner {
     padding: vars.$input-padding-y-lg vars.$input-padding-x-lg;
     font-size: vars.$input-font-size-lg;
     border-radius: vars.$input-border-radius-lg;
-  }
+}

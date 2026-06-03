@@ -55,10 +55,10 @@ let  wrapper: RenderResult, menuElement: HTMLElement, activeElement: HTMLElement
 
 const createStyleFile = () => {
     const cssFile: string = `
-        .submenu {
+        .miever-submenu {
             display: none;
         }
-        .submenu.submenu-visible {
+        .miever-submenu.miever-submenu-visible {
             display: block;
         }
     `;
@@ -77,9 +77,9 @@ describe('test Menu and MenuItem components', () => {
     });
     test('should render correct Menu and MenuItem based on default props', () => {
         expect(menuElement).toBeInTheDocument();
-        expect(menuElement).toHaveClass('menu test');
+        expect(menuElement).toHaveClass('miever-menu test');
         expect(menuElement.querySelectorAll(':scope > li').length).toEqual(3);
-        expect(activeElement).toHaveClass('menu-item active');
+        expect(activeElement).toHaveClass('miever-menu-item active');
     });
 
     test('click items should change active and call the right callback', () => {
@@ -95,7 +95,20 @@ describe('test Menu and MenuItem components', () => {
         cleanup();
         const wrapper = render(generateMenu(testVerticalProps));
         const menuElement = wrapper.getByTestId('test-menu');
-        expect(menuElement).toHaveClass('menu menu-vertical');
+        expect(menuElement).toHaveClass('miever-menu miever-menu-vertical');
+    });
+
+    test('reflects a controlled activeKey and updates when it changes', () => {
+        cleanup();
+        const wrapper = render(generateMenu({ ...testProps, activeKey: 'active' }));
+        expect(wrapper.getByText('active')).toHaveClass('active');
+        // Clicking does not move the highlight while controlled...
+        fireEvent.click(wrapper.getByText('click'));
+        expect(wrapper.getByText('click')).not.toHaveClass('active');
+        // ...but a new activeKey does.
+        wrapper.rerender(generateMenu({ ...testProps, activeKey: 'click' }));
+        expect(wrapper.getByText('click')).toHaveClass('active');
+        expect(wrapper.getByText('active')).not.toHaveClass('active');
     });
 
 });

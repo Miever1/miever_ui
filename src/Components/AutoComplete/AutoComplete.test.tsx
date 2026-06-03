@@ -14,7 +14,7 @@ describe('AutoComplete Component', () => {
     };
 
     const wrapper = render(<AutoComplete {...defaultProps} />);
-    const autoCompleteComponent = wrapper.container.querySelector('.auto-complete');
+    const autoCompleteComponent = wrapper.container.querySelector('.miever-autocomplete');
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -22,7 +22,7 @@ describe('AutoComplete Component', () => {
 
     it('test basic rendering', () => {
         expect(autoCompleteComponent).toBeInTheDocument();
-        expect(autoCompleteComponent).toHaveClass('auto-complete-md');
+        expect(autoCompleteComponent).toHaveClass('miever-autocomplete-md');
     });
 
     test('displays initial value correctly', () => {

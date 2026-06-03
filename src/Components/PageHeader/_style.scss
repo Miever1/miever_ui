@@ -1,0 +1,60 @@
+@use '../../Styles/variables' as vars;
+
+.miever-page-header {
+    margin-bottom: var(--space-10);
+}
+
+.miever-page-header-center {
+    text-align: center;
+}
+
+.miever-page-header-eyebrow {
+    display: inline-block;
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+    color: var(--color-text-accent);
+}
+
+.miever-page-header-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.miever-page-header-center .miever-page-header-row {
+    justify-content: center;
+}
+
+.miever-page-header-heading {
+    min-width: 0;
+}
+
+.miever-page-header-title {
+    margin: 0;
+    font-size: clamp(2rem, 3vw + 1rem, 2.75rem);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tighter);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.miever-page-header-subtitle {
+    margin: var(--space-3) 0 0;
+    max-width: 62ch;
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+}
+
+.miever-page-header-center .miever-page-header-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.miever-page-header-actions {
+    flex: 0 0 auto;
+}

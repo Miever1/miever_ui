@@ -3,57 +3,46 @@ import React, {
     useRef,
     useMemo,
     useEffect,
-    KeyboardEvent
+    KeyboardEvent,
 } from 'react';
 import classNames from 'classnames';
 
+import { getPrefixCls } from '../../Utils/getPrefixCls';
 import { AutoCompleteProps } from './interface';
 import Box from '../Box';
 import Input from '../Input';
 import Transition from '../Transition';
 
+const prefixCls = getPrefixCls('autocomplete');
+
 /**
- * AutoComplete is a flexible input component that provides real-time suggestions based on user input.
- * It supports both simple string arrays and complex object arrays with customizable filtering and rendering.
+ * AutoComplete is a flexible input that provides real-time suggestions based on
+ * user input. It supports both simple string arrays and complex object arrays
+ * with customizable filtering and rendering.
+ *
  * ### Basic Usage
- * 
  * ```jsx
- * import { AutoComplete } from 'miever_components';
- * 
- * // Simple string array
+ * import { AutoComplete } from 'miever_ui';
+ *
  * <AutoComplete
- *   options={["Apple", "Banana", "Cherry"]}
+ *   options={['Apple', 'Banana', 'Cherry']}
  *   placeholder="Search fruits..."
  *   onSelect={(option) => console.log('Selected:', option)}
  * />
  * ```
- * 
+ *
  * ### Advanced Usage
  * ```jsx
- * // Object array with custom filtering
- * const users = [
- *   { id: 1, name: "John Doe", email: "john@example.com" },
- *   { id: 2, name: "Jane Smith", email: "jane@example.com" }
- * ];
- * 
  * <AutoComplete
  *   options={users}
- *   filterFunction={(input, options) => 
- *     options.filter(user => 
- *       user.name.toLowerCase().includes(input.toLowerCase())
- *     )
+ *   filterFunction={(input, options) =>
+ *     options.filter((u) => u.name.toLowerCase().includes(input.toLowerCase()))
  *   }
- *   renderOption={(user) => (
- *     <div>
- *       <div style={{ fontWeight: 'bold' }}>{user.name}</div>
- *       <div style={{ fontSize: '12px', color: '#666' }}>{user.email}</div>
- *     </div>
- *   )}
+ *   renderOption={(user) => <div>{user.name}</div>}
  *   onSelect={(user) => console.log('Selected user:', user)}
  * />
  * ```
  */
-
 const AutoComplete = <T,>({
     value = '',
     size = 'md',
@@ -97,21 +86,19 @@ const AutoComplete = <T,>({
         return String(option);
     };
 
-    const defaultFilterFunction = (input: string, options: T[]): T[] => {
+    const defaultFilterFunction = (input: string, opts: T[]): T[] => {
         const inputStr = String(input || '');
-        if (!inputStr.trim()) return options;
-        
+        if (!inputStr.trim()) return opts;
         const searchTerm = inputStr.toLowerCase();
-        
-        return options.filter(option => {
-            const optionLabel = defaultGetOptionLabel(option);
-            return optionLabel.toLowerCase().includes(searchTerm);
-        });
+        return opts.filter((option) =>
+            defaultGetOptionLabel(option).toLowerCase().includes(searchTerm)
+        );
     };
 
     const filteredOptions = useMemo(() => {
         const filterFn = filterFunction || defaultFilterFunction;
         return filterFn(inputValue, options);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputValue, options, filterFunction]);
 
     const handleSelect = (selectedOption: T) => {
@@ -143,8 +130,8 @@ const AutoComplete = <T,>({
                 break;
             case 'ArrowUp':
                 e.preventDefault();
-                setHighlightIndex((prev) =>
-                    (prev - 1 + filteredOptions.length) % filteredOptions.length
+                setHighlightIndex(
+                    (prev) => (prev - 1 + filteredOptions.length) % filteredOptions.length
                 );
                 break;
             case 'Enter':
@@ -159,16 +146,12 @@ const AutoComplete = <T,>({
         }
     };
 
-    const renderTemplate = (option: T, index: number) => {
-        if (renderOption) {
-            return renderOption(option, index);
-        }
-        return defaultGetOptionLabel(option);
-    };
+    const renderTemplate = (option: T, index: number) =>
+        renderOption ? renderOption(option, index) : defaultGetOptionLabel(option);
 
-    const classes = classNames('auto-complete', className, {
-        [`auto-complete-${size}`]: size,
-        'disabled': disabled
+    const classes = classNames(prefixCls, className, {
+        [`${prefixCls}-${size}`]: size,
+        disabled,
     });
 
     return (
@@ -180,23 +163,18 @@ const AutoComplete = <T,>({
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder={placeholder}
-                className="autocompelete-input"
+                className={`${prefixCls}-input`}
                 disabled={disabled}
             />
-            <Transition
-                in={showOptions && filteredOptions.length >= 0}
-                timeout={200}
-                animation="zoom-in-top"
-                unmountOnExit
-            >
-                <Box className="options-list">
+            <Transition in={showOptions} timeout={200} animation="zoom-in-top" unmountOnExit>
+                <Box className={`${prefixCls}-options`}>
                     {filteredOptions.length > 0 ? (
                         filteredOptions.map((option, index) => (
                             <Box
                                 key={index}
-                                className={`option-item ${
-                                    highlightIndex === index ? 'highlight' : ''
-                                }`}
+                                className={classNames(`${prefixCls}-option`, {
+                                    highlight: highlightIndex === index,
+                                })}
                                 onMouseDown={() => {
                                     isSelecting.current = true;
                                 }}
@@ -206,7 +184,9 @@ const AutoComplete = <T,>({
                             </Box>
                         ))
                     ) : (
-                        <Box className="option-item disabled">No matching result</Box>
+                        <Box className={classNames(`${prefixCls}-option`, 'disabled')}>
+                            No matching result
+                        </Box>
                     )}
                 </Box>
             </Transition>
@@ -217,5 +197,3 @@ const AutoComplete = <T,>({
 AutoComplete.displayName = 'AutoComplete';
 
 export default AutoComplete;
-
-    

@@ -1,10 +1,11 @@
 import type { SpaceType } from "./types";
+import { BREAKPOINTS, BREAKPOINT_KEYS } from "./breakpoints";
 
 const SPACE_LIST = ["xs", "sm", "md", "lg", "xlg", "xxlg", "xxxlg"];
 
 const BRAND_COLORS = {
     primary: "#0CC0DF",
-    secondary: "#12aa9c",
+    secondary: "#3B82F6",
     success: "#20c997",
     info: "#17a2b8",
     warning: "#fadb14",
@@ -27,6 +28,7 @@ const designs = {
     SPACE_SIZE,
     SPACE_LIST,
     BRAND_COLORS,
+    BREAKPOINTS,
 };
 
 export {
@@ -34,8 +36,15 @@ export {
     SPACE_SIZE,
     SPACE_LIST,
     BRAND_COLORS,
+    BREAKPOINTS,
+    BREAKPOINT_KEYS,
 };
 
 export type {
     SpaceType,
 };
+export type { Breakpoint } from "./breakpoints";
+
+// Full design-token system (palette, typography, spacing, radius, shadow,
+// z-index). Mirrored on the SCSS side as maps + CSS custom properties.
+export * from "./tokens";
