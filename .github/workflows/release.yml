@@ -1,0 +1,60 @@
+# Manual release. Run it from the Actions tab when you actually want to publish.
+# - "none"  : publish the version currently in package.json as-is
+# - patch/minor/major : bump that part, commit + tag, then publish
+#
+# Publishing uses npm Trusted Publishing (OIDC) — no NPM_TOKEN needed. Set the
+# package's Trusted Publisher on npmjs.com to: GitHub Actions, repo
+# Miever1/miever_ui, workflow file release.yml.
+#
+# This replaces the old "bump on every push to master + publish" flow, so
+# ordinary commits to master no longer create version-bump commits or publishes.
+
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-type:
+        description: 'Version bump before publishing'
+        required: true
+        default: 'none'
+        type: choice
+        options:
+          - none
+          - patch
+          - minor
+          - major
+
+jobs:
+  release:
+    name: "Publish to npm"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # push the version bump commit + tag
+      id-token: write    # npm Trusted Publishing (OIDC)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      # Trusted Publishing (OIDC) requires npm >= 11.5.1; Node 20 ships npm 10.
+      - run: npm install -g npm@latest
+      - run: npm install
+      # lint + test + build (produces dist/, which is what `files` publishes).
+      - run: npm run prepublish
+
+      - name: Bump version
+        if: ${{ inputs.version-type != 'none' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ inputs.version-type }} -m "chore(release): %s"
+          git push --follow-tags
+
+      # No NODE_AUTH_TOKEN: auth comes from OIDC via the Trusted Publisher config.
+      - name: Publish
+        run: npm publish --access public
