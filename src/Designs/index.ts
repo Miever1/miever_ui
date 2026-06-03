@@ -5,7 +5,7 @@ const SPACE_LIST = ["xs", "sm", "md", "lg", "xlg", "xxlg", "xxxlg"];
 
 const BRAND_COLORS = {
     primary: "#0CC0DF",
-    secondary: "#12aa9c",
+    secondary: "#3B82F6",
     success: "#20c997",
     info: "#17a2b8",
     warning: "#fadb14",

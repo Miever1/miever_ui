@@ -51,7 +51,7 @@ const tile = (i: number): React.CSSProperties => ({
     padding: 16,
     color: '#fff',
     borderRadius: 4,
-    background: ['#0CC0DF', '#12aa9c', '#20c997'][i % 3],
+    background: ['#0CC0DF', '#3B82F6', '#20c997'][i % 3],
 });
 
 /** A plain block-level box. */

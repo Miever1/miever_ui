@@ -32,7 +32,7 @@ export const GRAY = {
 /** Brand / semantic accent colors. */
 export const BRAND = {
   primary: '#0CC0DF',
-  secondary: '#12aa9c',
+  secondary: '#3B82F6',
   success: '#20c997',
   info: '#17a2b8',
   warning: '#fadb14',
