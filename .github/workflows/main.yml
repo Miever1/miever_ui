@@ -1,29 +1,30 @@
+# Builds Storybook on push to master and deploys it to the components host.
+
 name: Deploy Storybook
 
 on:
   workflow_dispatch: {}
   push:
-    branches: 
-      - master 
+    branches:
+      - master
 
 jobs:
   deploy-storybook:
     name: "Deploy Storybook"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'npm'
       - run: npm install
-      - run: npm run-script build-storybook
+      - run: npm run build-storybook
 
-      - uses: wlixcc/SFTP-Deploy-Action@v1.0 
-        with:  
-          username: 'ubuntu'   #ssh user name
-          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
-          local_path: './storybook-static/*'  # 对应我们项目build的文件夹路径
+      - uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: 'ubuntu'
+          server: '${{ secrets.SERVER_IP }}'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './storybook-static/*'
           remote_path: '/home/ubuntu/components'
-
-

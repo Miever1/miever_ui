@@ -1,5 +1,5 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+# Publishes the package to npm after BumpVersion has bumped the version on
+# master. Runs only when that bump actually succeeded.
 
 name: Publish to NPM
 
@@ -12,15 +12,21 @@ jobs:
   publish-npm:
     name: "Publish to npm"
     runs-on: ubuntu-latest
+    # Don't publish if the version bump failed (workflow_run also fires on failure).
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2-beta
+      # Check out master so we publish the version BumpVersion just committed.
+      - uses: actions/checkout@v4
         with:
-          node-version: 18
+          ref: master
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - run: npm run-script build
-      - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./package.json
+      # lint + test + build (produces dist/, which is what `files` publishes).
+      - run: npm run prepublish
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

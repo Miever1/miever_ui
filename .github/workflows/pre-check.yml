@@ -1,19 +1,23 @@
+# Sanity checks on every feature branch push: lint, test, build, and a
+# Storybook build to catch story breakage early.
+
 name: Pre Check
 
 on:
   push:
-    branches: 
+    branches:
       - 'feature/**'
 
 jobs:
-  deploy-storybook:
+  pre-check:
     name: "Pre Check"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'npm'
       - run: npm install
-      - run: npm run-script prepublish
-      - run: npm run-script build-storybook
+      - run: npm run prepublish      # lint + test + build
+      - run: npm run build-storybook
