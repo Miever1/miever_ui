@@ -49,7 +49,10 @@ const Box = forwardRef<HTMLDivElement, BoxProps>(({
     ...restProps
 }, ref) => {
     const computedStyle: React.CSSProperties = {
-        display: flexBox ? 'flex' : 'block',
+        // Only force a display value when Box is actually doing flex layout.
+        // Otherwise leave it unset so the element's own CSS (e.g. `display:
+        // grid` from a className) is respected. A div defaults to block anyway.
+        display: flexBox ? 'flex' : undefined,
         flexDirection: direction,
         justifyContent,
         alignItems,
