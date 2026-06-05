@@ -12,8 +12,12 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-a.miever-card {
+a.miever-card,
+a.miever-card:hover,
+a.miever-card:focus {
     color: inherit;
+    /* Beat the global `a:hover` underline (a card link is a surface, not text). */
+    text-decoration: none;
 }
 
 /* ── Surface variants ─────────────────────────────────────────────── */
