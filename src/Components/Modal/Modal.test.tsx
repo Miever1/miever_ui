@@ -44,4 +44,48 @@ describe('Modal Component', () => {
         fireEvent.click(document.querySelector('.miever-modal-mask') as HTMLElement);
         expect(onClose).toHaveBeenCalled();
     });
+
+    it('labels the dialog with the title via aria-labelledby', () => {
+        render(
+            <Modal open title="Confirm delete">
+                body
+            </Modal>
+        );
+        const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
+        const labelledBy = dialog.getAttribute('aria-labelledby');
+        expect(labelledBy).toBeTruthy();
+        const title = document.getElementById(labelledBy as string);
+        expect(title).toHaveTextContent('Confirm delete');
+    });
+
+    it('omits aria-labelledby when there is no title', () => {
+        render(<Modal open>body</Modal>);
+        const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
+        expect(dialog).not.toHaveAttribute('aria-labelledby');
+    });
+
+    it('traps initial focus inside the dialog and restores it on close', () => {
+        const trigger = document.createElement('button');
+        document.body.appendChild(trigger);
+        trigger.focus();
+        expect(document.activeElement).toBe(trigger);
+
+        const { rerender } = render(
+            <Modal open title="t">
+                body
+            </Modal>
+        );
+        const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
+        // Focus moved into the dialog (to the first focusable child or the dialog itself).
+        expect(dialog.contains(document.activeElement)).toBe(true);
+
+        rerender(
+            <Modal open={false} title="t">
+                body
+            </Modal>
+        );
+        // Focus returns to the element that opened the modal.
+        expect(document.activeElement).toBe(trigger);
+        document.body.removeChild(trigger);
+    });
 });

@@ -2,6 +2,7 @@ import React, {
     forwardRef,
     useCallback,
     useEffect,
+    useId,
     useImperativeHandle,
     useRef,
     useState,
@@ -53,6 +54,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     ) => {
         const rootRef = useRef<HTMLDivElement>(null);
         useImperativeHandle(ref, () => rootRef.current as HTMLDivElement, []);
+
+        const listboxId = useId();
+        const getOptionId = (index: number) => `${listboxId}-option-${index}`;
 
         const [open, setOpen] = useState(false);
         const [internal, setInternal] = useState<SelectValue | undefined>(defaultValue);
@@ -157,6 +161,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 role="combobox"
                 aria-expanded={open}
                 aria-disabled={disabled}
+                aria-haspopup="listbox"
+                aria-controls={open ? listboxId : undefined}
+                aria-activedescendant={
+                    open && highlight >= 0 ? getOptionId(highlight) : undefined
+                }
                 tabIndex={disabled ? -1 : 0}
                 onKeyDown={handleKeyDown}
             >
@@ -187,15 +196,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 </div>
 
                 <Transition in={open} timeout={200} animation="zoom-in-top" unmountOnExit>
-                    <ul className={`${prefixCls}-dropdown`} role="listbox">
+                    <ul className={`${prefixCls}-dropdown`} role="listbox" id={listboxId}>
                         {options.length === 0 && (
                             <li className={`${prefixCls}-empty`}>{notFoundContent}</li>
                         )}
                         {options.map((option, index) => (
                             <li
                                 key={option.value}
+                                id={getOptionId(index)}
                                 role="option"
                                 aria-selected={option.value === selectedValue}
+                                aria-disabled={option.disabled || undefined}
                                 className={classNames(`${prefixCls}-option`, {
                                     [`${prefixCls}-option-selected`]:
                                         option.value === selectedValue,

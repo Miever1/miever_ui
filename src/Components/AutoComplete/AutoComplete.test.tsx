@@ -36,7 +36,7 @@ describe('AutoComplete Component', () => {
         const user = userEvent.setup();
         render(<AutoComplete {...defaultProps} />);
         
-        const input = screen.getByRole('textbox');
+        const input = screen.getByRole('combobox');
         await user.type(input, 'a');
         
         expect(screen.getByText('Apple')).toBeInTheDocument();
@@ -49,11 +49,30 @@ describe('AutoComplete Component', () => {
         const user = userEvent.setup();
         render(<AutoComplete {...defaultProps} />);
         
-        const input = screen.getByRole('textbox');
+        const input = screen.getByRole('combobox');
         await user.click(input);
         
         defaultProps.options.forEach(option => {
             expect(screen.getByText(option)).toBeInTheDocument();
         });
+    });
+
+    test('exposes combobox/listbox a11y wiring', async () => {
+        const user = userEvent.setup();
+        render(<AutoComplete {...defaultProps} />);
+
+        const input = screen.getByRole('combobox');
+        expect(input).toHaveAttribute('aria-autocomplete', 'list');
+        expect(input).toHaveAttribute('aria-expanded', 'false');
+
+        await user.click(input);
+        expect(input).toHaveAttribute('aria-expanded', 'true');
+        const listbox = screen.getByRole('listbox');
+        expect(input).toHaveAttribute('aria-controls', listbox.id);
+
+        await user.keyboard('{ArrowDown}');
+        const activeId = input.getAttribute('aria-activedescendant');
+        expect(activeId).toBeTruthy();
+        expect(document.getElementById(activeId as string)).toHaveAttribute('role', 'option');
     });
 });

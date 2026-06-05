@@ -3,6 +3,7 @@ import React, {
     useRef,
     useMemo,
     useEffect,
+    useId,
     KeyboardEvent,
 } from 'react';
 import classNames from 'classnames';
@@ -60,6 +61,9 @@ const AutoComplete = <T,>({
     const [showOptions, setShowOptions] = useState(false);
     const [highlightIndex, setHighlightIndex] = useState(-1);
     const isSelecting = useRef(false);
+
+    const listboxId = useId();
+    const getOptionId = (index: number) => `${listboxId}-option-${index}`;
 
     useEffect(() => {
         setInputValue(String(value || ''));
@@ -165,13 +169,25 @@ const AutoComplete = <T,>({
                 placeholder={placeholder}
                 className={`${prefixCls}-input`}
                 disabled={disabled}
+                role="combobox"
+                aria-expanded={showOptions}
+                aria-autocomplete="list"
+                aria-controls={showOptions ? listboxId : undefined}
+                aria-activedescendant={
+                    showOptions && highlightIndex >= 0
+                        ? getOptionId(highlightIndex)
+                        : undefined
+                }
             />
             <Transition in={showOptions} timeout={200} animation="zoom-in-top" unmountOnExit>
-                <Box className={`${prefixCls}-options`}>
+                <Box className={`${prefixCls}-options`} role="listbox" id={listboxId}>
                     {filteredOptions.length > 0 ? (
                         filteredOptions.map((option, index) => (
                             <Box
                                 key={index}
+                                id={getOptionId(index)}
+                                role="option"
+                                aria-selected={highlightIndex === index}
                                 className={classNames(`${prefixCls}-option`, {
                                     highlight: highlightIndex === index,
                                 })}

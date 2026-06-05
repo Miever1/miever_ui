@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
+import { useFocusTrap } from '../../Utils/useFocusTrap';
 import Button from '../Button';
 import Icon from '../Icon';
 import { ModalProps } from './interface';
@@ -36,6 +37,10 @@ const Modal: FunctionComponent<ModalProps> = ({
     className,
     style,
 }) => {
+    const dialogRef = useRef<HTMLDivElement>(null);
+    const titleId = useId();
+    useFocusTrap(dialogRef, open);
+
     useEffect(() => {
         if (!open) return;
         const onKeyDown = (e: KeyboardEvent) => {
@@ -67,14 +72,23 @@ const Modal: FunctionComponent<ModalProps> = ({
                 className={`${prefixCls}-mask`}
                 onClick={maskClosable ? onClose : undefined}
             />
-            <div className={`${prefixCls}-wrap`} role="dialog" aria-modal="true">
+            <div
+                ref={dialogRef}
+                className={`${prefixCls}-wrap`}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={title ? titleId : undefined}
+                tabIndex={-1}
+            >
                 <div
                     className={classNames(`${prefixCls}`, className)}
                     style={{ width, ...style }}
                 >
                     {(title || closable) && (
                         <div className={`${prefixCls}-header`}>
-                            <div className={`${prefixCls}-title`}>{title}</div>
+                            <div className={`${prefixCls}-title`} id={titleId}>
+                                {title}
+                            </div>
                             {closable && (
                                 <button
                                     type="button"
