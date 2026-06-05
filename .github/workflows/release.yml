@@ -43,10 +43,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       # Trusted Publishing (OIDC) requires npm >= 11.5.1; Node 20 ships npm 10.
       - run: npm install -g npm@latest
-      - run: npm install
-      # lint + test + build (produces dist/, which is what `files` publishes).
-      - run: npm run prepublish
 
+      # Bump FIRST, on the pristine checkout. `npm version` aborts if the git
+      # tree is dirty, and both `npm install` (rewrites package-lock.json) and
+      # the build would dirty it — so the version bump, commit, tag and push
+      # all happen before anything touches the working tree.
       - name: Bump version
         if: ${{ inputs.version-type != 'none' }}
         run: |
@@ -54,6 +55,10 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           npm version ${{ inputs.version-type }} -m "chore(release): %s"
           git push --follow-tags
+
+      - run: npm install
+      # lint + test + build (produces dist/, which is what `files` publishes).
+      - run: npm run prepublish
 
       # No NODE_AUTH_TOKEN: auth comes from OIDC via the Trusted Publisher config.
       - name: Publish
