@@ -1,36 +1,29 @@
-# Manual release. Run it from the Actions tab when you actually want to publish.
-# - "none"  : publish the version currently in package.json as-is
-# - patch/minor/major : bump that part, commit + tag, then publish
+# Manual release. Run it from the Actions tab when you want to publish the
+# version currently in package.json.
 #
-# Publishing uses npm Trusted Publishing (OIDC) — no NPM_TOKEN needed. Set the
-# package's Trusted Publisher on npmjs.com to: GitHub Actions, repo
+# Versioning is done in a normal commit/PR (bump package.json + package-lock),
+# NOT here — so this workflow never commits, tags or pushes to master, and
+# there's no "git tree must be clean" coupling that can break the run.
+#
+# To cut a release:
+#   1. npm version <patch|minor|major> --no-git-tag-version
+#   2. commit the bump (package.json + package-lock.json) via a PR, merge to master
+#   3. run this workflow from the Actions tab
+#
+# Publishing uses npm Trusted Publishing (OIDC) — no NPM_TOKEN needed. The
+# package's Trusted Publisher on npmjs.com is set to: GitHub Actions, repo
 # Miever1/miever_ui, workflow file release.yml.
-#
-# This replaces the old "bump on every push to master + publish" flow, so
-# ordinary commits to master no longer create version-bump commits or publishes.
 
 name: Release
 
 on:
   workflow_dispatch:
-    inputs:
-      version-type:
-        description: 'Version bump before publishing'
-        required: true
-        default: 'none'
-        type: choice
-        options:
-          - none
-          - patch
-          - minor
-          - major
 
 jobs:
   release:
     name: "Publish to npm"
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # push the version bump commit + tag
       id-token: write    # npm Trusted Publishing (OIDC)
     steps:
       - uses: actions/checkout@v4
@@ -46,15 +39,5 @@ jobs:
       - run: npm install
       # lint + test + build (produces dist/, which is what `files` publishes).
       - run: npm run prepublish
-
-      - name: Bump version
-        if: ${{ inputs.version-type != 'none' }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          npm version ${{ inputs.version-type }} -m "chore(release): %s"
-          git push --follow-tags
-
       # No NODE_AUTH_TOKEN: auth comes from OIDC via the Trusted Publisher config.
-      - name: Publish
-        run: npm publish --access public
+      - run: npm publish --access public
