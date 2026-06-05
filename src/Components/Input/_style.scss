@@ -1,5 +1,20 @@
 @use '../../Styles/variables' as inputVars;
 
+.miever-input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    width: 100%;
+}
+
+.miever-input-label {
+    font-family: inputVars.$input-font-family;
+    font-size: inputVars.$input-font-size-sm;
+    font-weight: 500;
+    line-height: inputVars.$input-line-height;
+    color: inputVars.$input-color;
+}
+
 .miever-input-wrapper {
     display: flex;
     width: 100%;

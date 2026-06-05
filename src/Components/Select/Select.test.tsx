@@ -76,4 +76,22 @@ describe('Select', () => {
         render(<Select ref={ref} options={options} />);
         expect(ref.current).toBeInstanceOf(HTMLDivElement);
     });
+
+    it('exposes combobox/listbox wiring for assistive tech', () => {
+        render(<Select options={options} placeholder="Pick" />);
+        const combo = screen.getByRole('combobox');
+        expect(combo).toHaveAttribute('aria-haspopup', 'listbox');
+        // controls is only present while open.
+        expect(combo).not.toHaveAttribute('aria-controls');
+
+        fireEvent.click(screen.getByText('Pick'));
+        const listbox = screen.getByRole('listbox');
+        expect(combo).toHaveAttribute('aria-controls', listbox.id);
+
+        // Highlighting an option points aria-activedescendant at its id.
+        fireEvent.keyDown(combo, { key: 'ArrowDown' });
+        const activeId = combo.getAttribute('aria-activedescendant');
+        expect(activeId).toBeTruthy();
+        expect(document.getElementById(activeId as string)).toHaveAttribute('role', 'option');
+    });
 });

@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
+import { useFocusTrap } from '../../Utils/useFocusTrap';
 import Icon from '../Icon';
 import { DrawerProps } from './interface';
 
@@ -33,6 +34,10 @@ const Drawer: FunctionComponent<DrawerProps> = ({
     className,
     style,
 }) => {
+    const panelRef = useRef<HTMLDivElement>(null);
+    const titleId = useId();
+    useFocusTrap(panelRef, open);
+
     useEffect(() => {
         if (!open) return;
         const onKeyDown = (e: KeyboardEvent) => {
@@ -59,14 +64,19 @@ const Drawer: FunctionComponent<DrawerProps> = ({
                 onClick={maskClosable ? onClose : undefined}
             />
             <div
+                ref={panelRef}
                 className={classNames(prefixCls, `${prefixCls}-${placement}`, className)}
                 style={{ ...panelStyle, ...style }}
                 role="dialog"
                 aria-modal="true"
+                aria-labelledby={title ? titleId : undefined}
+                tabIndex={-1}
             >
                 {(title || closable) && (
                     <div className={`${prefixCls}-header`}>
-                        <div className={`${prefixCls}-title`}>{title}</div>
+                        <div className={`${prefixCls}-title`} id={titleId}>
+                            {title}
+                        </div>
                         {closable && (
                             <button
                                 type="button"

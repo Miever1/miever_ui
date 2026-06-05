@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
@@ -19,14 +19,18 @@ const prefixCls = getPrefixCls('input');
  * ```
  */
 const Input = forwardRef<HTMLInputElement, NativeInputProps>(
-    ({ className, size, disabled, style, icon, ...restProps }, ref) => {
-        const classes = classNames(`${prefixCls}-wrapper`, className, {
+    ({ className, size, disabled, style, icon, label, id, ...restProps }, ref) => {
+        const generatedId = useId();
+        // Only allocate an id when we actually need one to link a <label>.
+        const inputId = id ?? (label ? generatedId : undefined);
+
+        const classes = classNames(`${prefixCls}-wrapper`, !label && className, {
             [`${prefixCls}-size-${size}`]: size,
             disabled,
         });
 
-        return (
-            <div className={classes} style={style}>
+        const field = (
+            <div className={classes} style={label ? undefined : style}>
                 {icon && (
                     <span className={`${prefixCls}-icon`}>
                         <Icon icon={icon} size={size === 'lg' ? 'lg' : 'sm'} />
@@ -34,10 +38,22 @@ const Input = forwardRef<HTMLInputElement, NativeInputProps>(
                 )}
                 <input
                     ref={ref}
+                    id={inputId}
                     disabled={disabled}
                     className={`${prefixCls}-inner`}
                     {...(restProps as React.InputHTMLAttributes<HTMLInputElement>)}
                 />
+            </div>
+        );
+
+        if (!label) return field;
+
+        return (
+            <div className={classNames(`${prefixCls}-field`, className)} style={style}>
+                <label className={`${prefixCls}-label`} htmlFor={inputId}>
+                    {label}
+                </label>
+                {field}
             </div>
         );
     },
