@@ -1,0 +1,113 @@
+@use '../../Styles/variables' as vars;
+
+.miever-steps {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: vars.$spacer;
+}
+
+.miever-steps-vertical {
+    flex-direction: column;
+}
+
+.miever-steps-item {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(#{vars.$spacer} * 0.5);
+    flex: 1;
+    position: relative;
+
+    // connector line
+    &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        background: var(--color-border-primary);
+    }
+}
+
+.miever-steps-horizontal .miever-steps-item:not(:last-child)::after {
+    top: 0.875rem;
+    left: 2.25rem;
+    right: calc(-#{vars.$spacer} + 0.25rem);
+    height: vars.$border-width;
+}
+
+.miever-steps-vertical .miever-steps-item {
+    padding-bottom: vars.$spacer;
+
+    &:not(:last-child)::after {
+        top: 2rem;
+        bottom: 0.25rem;
+        left: 0.875rem;
+        width: vars.$border-width;
+    }
+}
+
+.miever-steps-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: vars.$font-size-sm;
+    font-weight: 600;
+    border-radius: 50%;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    border: vars.$border-width solid var(--color-border-primary);
+    transition:
+        background 0.2s ease-in-out,
+        color 0.2s ease-in-out,
+        border-color 0.2s ease-in-out;
+}
+
+.miever-steps-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+}
+
+.miever-steps-title {
+    font-size: vars.$font-size-sm;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    line-height: 1.75rem;
+}
+
+.miever-steps-description {
+    font-size: calc(#{vars.$font-size-sm} * 0.9);
+    color: var(--color-text-secondary);
+}
+
+.miever-steps-item-process {
+    .miever-steps-dot {
+        color: vars.$white;
+        background: vars.$primary;
+        border-color: vars.$primary;
+    }
+
+    .miever-steps-title {
+        color: var(--color-text-primary);
+        font-weight: 600;
+    }
+}
+
+.miever-steps-item-finish .miever-steps-dot {
+    color: vars.$primary;
+    background: transparent;
+    border-color: vars.$primary;
+}
+
+.miever-steps-item-error .miever-steps-dot {
+    color: vars.$white;
+    background: vars.$danger;
+    border-color: vars.$danger;
+}
+
+.miever-steps-item-error .miever-steps-title {
+    color: vars.$danger;
+}

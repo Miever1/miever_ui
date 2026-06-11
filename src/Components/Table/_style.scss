@@ -1,0 +1,89 @@
+@use '../../Styles/variables' as vars;
+
+.miever-table {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    background: var(--color-bg-primary);
+    border: vars.$border-width solid var(--color-border-primary);
+    border-radius: vars.$border-radius-lg;
+}
+
+.miever-table-inner {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-primary);
+
+    th,
+    td {
+        padding: calc(#{vars.$spacer} * 0.75) vars.$spacer;
+        text-align: left;
+        border-bottom: vars.$border-width solid var(--color-border-primary);
+        white-space: nowrap;
+    }
+
+    th {
+        font-weight: 600;
+        color: var(--color-text-secondary);
+        background: var(--color-bg-secondary);
+        user-select: none;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr {
+        transition: background 0.15s ease-in-out;
+    }
+}
+
+.miever-table-sm .miever-table-inner {
+    th,
+    td {
+        padding: calc(#{vars.$spacer} * 0.4) calc(#{vars.$spacer} * 0.75);
+    }
+}
+
+.miever-table-sortable {
+    cursor: pointer;
+
+    &:hover {
+        color: var(--color-text-primary);
+    }
+}
+
+.miever-table-th-content {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(#{vars.$spacer} * 0.35);
+}
+
+.miever-table-sort-icon {
+    color: var(--color-text-disabled);
+    line-height: 1;
+
+    &.miever-table-sort-active {
+        color: vars.$primary;
+    }
+}
+
+.miever-table-row-clickable {
+    cursor: pointer;
+
+    &:hover {
+        background: var(--color-bg-secondary);
+    }
+}
+
+.miever-table-empty {
+    padding: vars.$spacer;
+}
+
+.miever-table-spin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(#{vars.$spacer} * 2.5);
+}

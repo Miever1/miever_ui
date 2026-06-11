@@ -22,6 +22,7 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
@@ -103,7 +104,4 @@
     "vite": "^6.0.5",
     "vite-plugin-dts": "^4.3.0"
   },
-  "overrides": {
-    "esbuild": "0.24.2"
-  }
-}
+  "overr

@@ -1,0 +1,25 @@
+@use '../../Styles/variables' as vars;
+
+.miever-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(#{vars.$spacer} * 0.5);
+    padding: calc(#{vars.$spacer} * 2) vars.$spacer;
+    text-align: center;
+}
+
+.miever-empty-image {
+    color: var(--color-text-disabled);
+    line-height: 1;
+}
+
+.miever-empty-description {
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+}
+
+.miever-empty-footer {
+    margin-top: calc(#{vars.$spacer} * 0.5);
+}
