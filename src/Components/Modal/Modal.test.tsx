@@ -88,4 +88,26 @@ describe('Modal Component', () => {
         expect(document.activeElement).toBe(trigger);
         document.body.removeChild(trigger);
     });
+
+    it('disables the OK button via okDisabled and okLoading', () => {
+        const onOk = jest.fn();
+        const { rerender } = render(
+            <Modal open onOk={onOk} okDisabled>
+                content
+            </Modal>
+        );
+        const ok = document.querySelector('.miever-modal-footer .miever-btn-primary') as HTMLButtonElement;
+        expect(ok.disabled).toBeTruthy();
+        fireEvent.click(ok);
+        expect(onOk).not.toBeCalled();
+
+        rerender(
+            <Modal open onOk={onOk} okLoading>
+                content
+            </Modal>
+        );
+        const okLoading = document.querySelector('.miever-modal-footer .miever-btn-primary') as HTMLButtonElement;
+        expect(okLoading.disabled).toBeTruthy();
+        expect(okLoading).toHaveClass('miever-btn-loading');
+    });
 });

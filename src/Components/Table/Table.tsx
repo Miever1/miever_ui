@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
+import Checkbox from '../Checkbox';
 import Empty from '../Empty';
 import Icon from '../Icon';
 import Spin from '../Spin';
@@ -40,6 +41,7 @@ function Table<T>({
     loading = false,
     emptyText = 'No data',
     onRowClick,
+    rowSelection,
     className,
     style,
 }: TableProps<T>) {
@@ -47,6 +49,32 @@ function Table<T>({
 
     const getRowKey = (record: T): string =>
         typeof rowKey === 'function' ? rowKey(record) : String(record[rowKey]);
+
+    const selectableRows = rowSelection
+        ? dataSource.filter((record) => !rowSelection.getDisabled?.(record))
+        : [];
+    const selectableKeys = selectableRows.map(getRowKey);
+    const allSelected =
+        selectableKeys.length > 0 &&
+        selectableKeys.every((key) => rowSelection?.selectedKeys.includes(key));
+    const someSelected =
+        !allSelected &&
+        selectableKeys.some((key) => rowSelection?.selectedKeys.includes(key));
+
+    const toggleAll = () => {
+        if (!rowSelection) return;
+        rowSelection.onChange(allSelected ? [] : selectableKeys);
+    };
+
+    const toggleRow = (key: string) => {
+        if (!rowSelection) return;
+        const { selectedKeys, onChange } = rowSelection;
+        onChange(
+            selectedKeys.includes(key)
+                ? selectedKeys.filter((k) => k !== key)
+                : [...selectedKeys, key],
+        );
+    };
 
     const sortedData = useMemo(() => {
         if (!sort) return dataSource;
@@ -73,6 +101,16 @@ function Table<T>({
             <table className={`${prefixCls}-inner`}>
                 <thead>
                     <tr>
+                        {rowSelection && (
+                            <th className={`${prefixCls}-selection`}>
+                                <Checkbox
+                                    checked={allSelected}
+                                    indeterminate={someSelected}
+                                    aria-label="Select all rows"
+                                    onChange={toggleAll}
+                                />
+                            </th>
+                        )}
                         {columns.map((column) => {
                             const sortable = Boolean(column.sorter);
                             const active = sort?.key === column.key ? sort.order : undefined;
@@ -125,9 +163,26 @@ function Table<T>({
                             key={getRowKey(record)}
                             className={classNames({
                                 [`${prefixCls}-row-clickable`]: Boolean(onRowClick),
+                                [`${prefixCls}-row-selected`]:
+                                    rowSelection?.selectedKeys.includes(getRowKey(record)),
                             })}
                             onClick={onRowClick ? () => onRowClick(record) : undefined}
                         >
+                            {rowSelection && (
+                                <td
+                                    className={`${prefixCls}-selection`}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <Checkbox
+                                        checked={rowSelection.selectedKeys.includes(
+                                            getRowKey(record),
+                                        )}
+                                        disabled={rowSelection.getDisabled?.(record)}
+                                        aria-label="Select row"
+                                        onChange={() => toggleRow(getRowKey(record))}
+                                    />
+                                </td>
+                            )}
                             {columns.map((column) => (
                                 <td key={column.key} style={{ textAlign: column.align }}>
                                     {column.render

@@ -46,6 +46,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             size = 'md',
             allowClear = false,
             notFoundContent = 'No options',
+            showSearch = false,
+            searchPlaceholder = 'Search…',
+            filterOption,
             className,
             style,
             onChange,
@@ -61,15 +64,37 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         const [open, setOpen] = useState(false);
         const [internal, setInternal] = useState<SelectValue | undefined>(defaultValue);
         const [highlight, setHighlight] = useState(-1);
+        const [search, setSearch] = useState('');
+        const searchRef = useRef<HTMLInputElement>(null);
 
         const selectedValue = value ?? internal;
         const selectedOption =
             options.find((o) => o.value === selectedValue) ?? null;
 
+        const defaultFilter = useCallback((input: string, option: SelectOption) => {
+            const haystack =
+                option.searchText ??
+                (typeof option.label === 'string' ? option.label : String(option.value));
+            return haystack.toLowerCase().includes(input.toLowerCase());
+        }, []);
+
+        const visibleOptions =
+            showSearch && search
+                ? options.filter((option) => (filterOption ?? defaultFilter)(search, option))
+                : options;
+
         const close = useCallback(() => {
             setOpen(false);
             setHighlight(-1);
+            setSearch('');
         }, []);
+
+        // Focus the search box as soon as the dropdown opens.
+        useEffect(() => {
+            if (open && showSearch) {
+                searchRef.current?.focus();
+            }
+        }, [open, showSearch]);
 
         // Dismiss on outside click.
         useEffect(() => {
@@ -105,17 +130,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
         const moveHighlight = useCallback(
             (dir: 1 | -1) => {
-                if (!options.length) return;
+                if (!visibleOptions.length) return;
                 setHighlight((prev) => {
                     let next = prev;
-                    for (let i = 0; i < options.length; i += 1) {
-                        next = (next + dir + options.length) % options.length;
-                        if (!options[next].disabled) return next;
+                    for (let i = 0; i < visibleOptions.length; i += 1) {
+                        next = (next + dir + visibleOptions.length) % visibleOptions.length;
+                        if (!visibleOptions[next].disabled) return next;
                     }
                     return prev;
                 });
             },
-            [options],
+            [visibleOptions],
         );
 
         const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -132,8 +157,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     break;
                 case 'Enter':
                     e.preventDefault();
-                    if (open && highlight >= 0) commit(options[highlight]);
-                    else setOpen(true);
+                    if (open && highlight >= 0 && visibleOptions[highlight]) {
+                        commit(visibleOptions[highlight]);
+                    } else if (!open) {
+                        setOpen(true);
+                    }
                     break;
                 case 'Escape':
                     if (open) {
@@ -173,13 +201,34 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     className={`${prefixCls}-selector`}
                     onClick={() => !disabled && setOpen((o) => !o)}
                 >
-                    <span
-                        className={classNames(`${prefixCls}-value`, {
-                            [`${prefixCls}-placeholder`]: !selectedOption,
-                        })}
-                    >
-                        {selectedOption ? selectedOption.label : placeholder}
-                    </span>
+                    {showSearch && open ? (
+                        // While open, the trigger doubles as the search box.
+                        <input
+                            ref={searchRef}
+                            type="text"
+                            className={`${prefixCls}-search-input`}
+                            value={search}
+                            placeholder={
+                                selectedOption && typeof selectedOption.label === 'string'
+                                    ? selectedOption.label
+                                    : searchPlaceholder
+                            }
+                            aria-label={searchPlaceholder}
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setHighlight(0);
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    ) : (
+                        <span
+                            className={classNames(`${prefixCls}-value`, {
+                                [`${prefixCls}-placeholder`]: !selectedOption,
+                            })}
+                        >
+                            {selectedOption ? selectedOption.label : placeholder}
+                        </span>
+                    )}
                     <span className={`${prefixCls}-icons`}>
                         {showClear && (
                             <button
@@ -197,10 +246,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
                 <Transition in={open} timeout={200} animation="zoom-in-top" unmountOnExit>
                     <ul className={`${prefixCls}-dropdown`} role="listbox" id={listboxId}>
-                        {options.length === 0 && (
+                        {visibleOptions.length === 0 && (
                             <li className={`${prefixCls}-empty`}>{notFoundContent}</li>
                         )}
-                        {options.map((option, index) => (
+                        {visibleOptions.map((option, index) => (
                             <li
                                 key={option.value}
                                 id={getOptionId(index)}

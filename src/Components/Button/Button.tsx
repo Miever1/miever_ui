@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
+import Icon from '../Icon';
 import { NativeButtonProps } from './interface';
 
 const prefixCls = getPrefixCls('btn');
@@ -23,16 +24,19 @@ const Button = forwardRef<HTMLButtonElement, NativeButtonProps>(
             type = 'default',
             htmlType = 'button',
             disabled = false,
+            loading = false,
             children,
             className,
             ...restProps
         },
         ref,
     ) => {
+        const isDisabled = disabled || loading;
         const classes = classNames(prefixCls, className, {
             [`${prefixCls}-${type}`]: type,
             [`${prefixCls}-${size}`]: size,
-            disabled,
+            [`${prefixCls}-loading`]: loading,
+            disabled: isDisabled,
         });
 
         return (
@@ -40,9 +44,18 @@ const Button = forwardRef<HTMLButtonElement, NativeButtonProps>(
                 ref={ref}
                 type={htmlType}
                 className={classes}
-                disabled={disabled}
+                disabled={isDisabled}
+                aria-busy={loading || undefined}
                 {...restProps}
             >
+                {loading && (
+                    <Icon
+                        icon="spinner"
+                        spin
+                        className={`${prefixCls}-loading-icon`}
+                        data-testid="btn-loading-icon"
+                    />
+                )}
                 {children}
             </button>
         );

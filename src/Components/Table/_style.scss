@@ -77,6 +77,19 @@
     }
 }
 
+.miever-table-selection {
+    width: 40px;
+    text-align: center;
+
+    .miever-checkbox-wrapper {
+        vertical-align: middle;
+    }
+}
+
+.miever-table-row-selected {
+    background: rgba(12, 192, 223, 0.06);
+}
+
 .miever-table-empty {
     padding: vars.$spacer;
 }

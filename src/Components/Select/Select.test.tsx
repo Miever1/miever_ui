@@ -94,4 +94,22 @@ describe('Select', () => {
         expect(activeId).toBeTruthy();
         expect(document.getElementById(activeId as string)).toHaveAttribute('role', 'option');
     });
+
+    it('filters options via the search box when showSearch is set', () => {
+        const onChange = jest.fn();
+        render(<Select options={options} placeholder="Pick" showSearch onChange={onChange} />);
+        fireEvent.click(screen.getByText('Pick'));
+        const input = screen.getByPlaceholderText('Search…');
+        fireEvent.change(input, { target: { value: 'ban' } });
+        expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+        fireEvent.click(screen.getByText('Banana'));
+        expect(onChange).toHaveBeenCalledWith('banana', expect.objectContaining({ value: 'banana' }));
+    });
+
+    it('shows notFoundContent when the search matches nothing', () => {
+        render(<Select options={options} placeholder="Pick" showSearch />);
+        fireEvent.click(screen.getByText('Pick'));
+        fireEvent.change(screen.getByPlaceholderText('Search…'), { target: { value: 'zzz' } });
+        expect(screen.getByText('No options')).toBeInTheDocument();
+    });
 });

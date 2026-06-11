@@ -67,4 +67,25 @@ describe('Table Component', () => {
         );
         expect(getByText('ALICE')).toBeInTheDocument();
     });
+
+    it('selects rows via rowSelection checkboxes', () => {
+        const onChange = jest.fn();
+        const { container } = render(
+            <Table
+                rowKey="id"
+                columns={[{ key: 'name', title: 'Name', dataIndex: 'name' }]}
+                dataSource={[
+                    { id: '1', name: 'Alpha' },
+                    { id: '2', name: 'Beta' },
+                ]}
+                rowSelection={{ selectedKeys: [], onChange }}
+            />
+        );
+        const boxes = container.querySelectorAll('.miever-table-selection input[type="checkbox"]');
+        expect(boxes).toHaveLength(3); // header + 2 rows
+        fireEvent.click(boxes[1]);
+        expect(onChange).toHaveBeenCalledWith(['1']);
+        fireEvent.click(boxes[0]);
+        expect(onChange).toHaveBeenCalledWith(['1', '2']);
+    });
 });

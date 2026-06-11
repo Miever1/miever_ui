@@ -22,22 +22,25 @@
     // connector line
     &:not(:last-child)::after {
         content: '';
-        position: absolute;
         background: var(--color-border-primary);
     }
 }
 
+// Horizontal: the connector is a flex filler that takes the free space AFTER
+// the title/description, so it never strikes through the text.
 .miever-steps-horizontal .miever-steps-item:not(:last-child)::after {
-    top: 0.875rem;
-    left: 2.25rem;
-    right: calc(-#{vars.$spacer} + 0.25rem);
+    flex: 1;
+    align-self: flex-start;
+    min-width: 1rem;
     height: vars.$border-width;
+    margin-top: 0.875rem; // vertically centered on the 1.75rem dot
 }
 
 .miever-steps-vertical .miever-steps-item {
     padding-bottom: vars.$spacer;
 
     &:not(:last-child)::after {
+        position: absolute;
         top: 2rem;
         bottom: 0.25rem;
         left: 0.875rem;
