@@ -46,7 +46,7 @@
     "build-storybook": "storybook build",
     "clean-build": "rimraf ./dist",
     "prepublish": "npm run lint && npm run test && npm run build",
-    "prepare": "husky install"
+    "prepare": "husky install || exit 0"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -104,4 +104,3 @@
     "vite": "^6.0.5",
     "vite-plugin-dts": "^4.3.0"
   },
-  "overr
