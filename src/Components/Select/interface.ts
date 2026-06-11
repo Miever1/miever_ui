@@ -10,6 +10,11 @@ export interface SelectOption {
     value: SelectValue;
     /** Disable this option. */
     disabled?: boolean;
+    /**
+     * Text used by `showSearch` filtering when `label` is not a plain string
+     * (e.g. a styled node).
+     */
+    searchText?: string;
 }
 
 export interface SelectProps extends BaseProps {
@@ -29,6 +34,15 @@ export interface SelectProps extends BaseProps {
     allowClear?: boolean;
     /** Content shown when there are no options. @default 'No options' */
     notFoundContent?: ReactNode;
+    /** Show a search box inside the dropdown to filter options. */
+    showSearch?: boolean;
+    /** Placeholder for the search box. @default 'Search…' */
+    searchPlaceholder?: string;
+    /**
+     * Custom option filter for `showSearch`. Defaults to a case-insensitive
+     * substring match against `searchText`, string labels, or the value.
+     */
+    filterOption?: (input: string, option: SelectOption) => boolean;
     /** Fired with the next value and its option (null when cleared). */
     onChange?: (value: SelectValue | undefined, option: SelectOption | null) => void;
 }

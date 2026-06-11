@@ -53,3 +53,13 @@
     height: 32px;
     color: var(--color-text-disabled);
 }
+
+.miever-pagination-size-changer {
+    margin-left: 8px;
+    cursor: default;
+
+    .miever-select {
+        width: 120px;
+        font-size: inherit;
+    }
+}

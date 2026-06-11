@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Pagination from './Pagination';
 
@@ -31,5 +31,20 @@ describe('Pagination Component', () => {
     it('disables prev on the first page', () => {
         const { container } = render(<Pagination total={30} pageSize={10} />);
         expect(container.querySelector('.miever-pagination-prev')).toHaveClass('disabled');
+    });
+
+    it('renders a page-size selector and reports changes', () => {
+        const onPageSizeChange = jest.fn();
+        render(
+            <Pagination
+                total={100}
+                pageSize={10}
+                pageSizeOptions={[10, 20, 50]}
+                onPageSizeChange={onPageSizeChange}
+            />
+        );
+        fireEvent.click(screen.getByText('10 / page'));
+        fireEvent.click(screen.getByText('20 / page'));
+        expect(onPageSizeChange).toHaveBeenCalledWith(20);
     });
 });

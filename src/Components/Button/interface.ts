@@ -35,6 +35,11 @@ export interface IButtonProps extends BaseProps {
     htmlType?: 'button' | 'submit' | 'reset';
     /** Disabled state of the button. */
     disabled?: boolean;
+    /**
+     * Loading state — shows a spinner and disables the button.
+     * @default false
+     */
+    loading?: boolean;
     /** Child elements within the button. */
     children?: ReactNode;
 }

@@ -65,5 +65,17 @@ describe('test Button Components', () => {
         const wrapper = render(<Button htmlType="submit">Submit</Button>);
         expect(wrapper.getByText('Submit')).toHaveAttribute('type', 'submit');
     });
+
+    test('shows a spinner and disables the button when loading', () => {
+        const onClick = jest.fn();
+        const wrapper = render(<Button loading onClick={onClick}>Loading</Button>);
+        const element = wrapper.getByText('Loading') as HTMLButtonElement;
+        expect(element.disabled).toBeTruthy();
+        expect(element).toHaveClass('miever-btn-loading');
+        expect(element).toHaveAttribute('aria-busy', 'true');
+        expect(wrapper.getByTestId('btn-loading-icon')).toBeInTheDocument();
+        fireEvent.click(element);
+        expect(onClick).not.toBeCalled();
+    });
 })
 

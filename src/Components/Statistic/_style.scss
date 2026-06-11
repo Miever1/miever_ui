@@ -1,0 +1,71 @@
+@use '../../Styles/variables' as vars;
+
+.miever-statistic {
+    display: flex;
+    flex-direction: column;
+    gap: calc(#{vars.$spacer} * 0.25);
+}
+
+.miever-statistic-title {
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+}
+
+.miever-statistic-content {
+    display: flex;
+    align-items: baseline;
+    gap: calc(#{vars.$spacer} * 0.25);
+    font-size: calc(#{vars.$font-size-base} * 1.75);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.miever-statistic-prefix,
+.miever-statistic-suffix {
+    font-size: vars.$font-size-base;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+.miever-statistic-loading {
+    width: 4.5rem;
+    height: calc(#{vars.$font-size-base} * 1.75 * 1.2);
+    border-radius: vars.$border-radius;
+    background: var(--color-bg-secondary);
+    animation: miever-statistic-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes miever-statistic-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.miever-statistic-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(#{vars.$spacer} * 0.25);
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-secondary);
+}
+
+.miever-statistic-trend-up {
+    color: vars.$success;
+}
+
+.miever-statistic-trend-down {
+    color: vars.$danger;
+}
+
+@each $key, $val in vars.$theme-colors {
+    .miever-statistic-content.miever-statistic-#{$key} {
+        color: $val;
+    }
+}

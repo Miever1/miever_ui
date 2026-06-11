@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import { getPrefixCls } from '../../Utils/getPrefixCls';
 import Icon from '../Icon';
+import Select from '../Select';
 import { PaginationProps } from './interface';
 
 const prefixCls = getPrefixCls('pagination');
@@ -40,6 +41,8 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(({
     current,
     defaultCurrent = 1,
     onChange,
+    pageSizeOptions,
+    onPageSizeChange,
     className,
     style,
 }, ref) => {
@@ -93,6 +96,22 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(({
             >
                 <Icon icon="angle-right" />
             </li>
+            {pageSizeOptions && pageSizeOptions.length > 0 && (
+                <li className={`${prefixCls}-size-changer`}>
+                    <Select
+                        size="sm"
+                        options={pageSizeOptions.map((n) => ({
+                            label: `${n} / page`,
+                            value: n,
+                        }))}
+                        value={pageSize}
+                        onChange={(next) => {
+                            if (typeof next === 'number') onPageSizeChange?.(next);
+                        }}
+                        aria-label="Items per page"
+                    />
+                </li>
+            )}
         </ul>
     );
 });

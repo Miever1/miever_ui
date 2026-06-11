@@ -26,6 +26,14 @@
     }
 }
 
+.miever-btn-loading {
+    pointer-events: none;
+
+    .miever-btn-loading-icon {
+        margin-right: 0.4em;
+    }
+}
+
 .miever-btn-lg {
     @include mixin.button-size(buttonVars.$btn-padding-y-lg, buttonVars.$btn-padding-x-lg, buttonVars.$btn-font-size-lg, buttonVars.$btn-border-radius-lg);
 }

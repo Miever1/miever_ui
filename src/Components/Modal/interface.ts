@@ -15,6 +15,10 @@ export interface ModalProps {
     cancelText?: ReactNode;
     /** Called when the OK button is clicked. */
     onOk?: () => void;
+    /** Show a loading spinner on the OK button and disable it. */
+    okLoading?: boolean;
+    /** Disable the OK button. */
+    okDisabled?: boolean;
     /** Called when the modal requests to close (cancel, overlay, Esc, close icon). */
     onClose?: () => void;
     /** Close when the overlay is clicked. */

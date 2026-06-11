@@ -30,6 +30,8 @@ const Modal: FunctionComponent<ModalProps> = ({
     okText = 'OK',
     cancelText = 'Cancel',
     onOk,
+    okLoading = false,
+    okDisabled = false,
     onClose,
     maskClosable = true,
     closable = true,
@@ -60,7 +62,12 @@ const Modal: FunctionComponent<ModalProps> = ({
     const defaultFooter = (
         <>
             <Button onClick={onClose}>{cancelText}</Button>
-            <Button type="primary" onClick={onOk}>
+            <Button
+                type="primary"
+                onClick={onOk}
+                loading={okLoading}
+                disabled={okDisabled}
+            >
                 {okText}
             </Button>
         </>

@@ -11,6 +11,10 @@ export interface PaginationProps {
     defaultCurrent?: number;
     /** Called when the page changes. */
     onChange?: (page: number) => void;
+    /** Show a page-size selector with these options (e.g. [10, 20, 50]). */
+    pageSizeOptions?: number[];
+    /** Called when the user picks a different page size. */
+    onPageSizeChange?: (pageSize: number) => void;
     /** Additional CSS classes. */
     className?: string;
     /** Inline styles for the pagination root. */
